@@ -1,0 +1,11 @@
+framework module KakaoPartnerSDKFriend {
+  umbrella header "KakaoPartnerSDKFriend.h"
+
+  export *
+  module * { export * }
+}
+
+module KakaoPartnerSDKFriend.Swift {
+    header "KakaoPartnerSDKFriend-Swift.h"
+    requires objc
+}
