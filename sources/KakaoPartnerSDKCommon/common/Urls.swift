@@ -44,7 +44,6 @@ extension Hosts {
                       kauth: "alpha-kauth.kakao.com",
                       talkAuth: "alphakompassauth",
                       channel: "alpha-pf.kakao.com",
-                      webnavi: "alpha-kakaonavi-wguide.kakao.com",
                       talkLink: "alphalink",
                       talkLinkVersion: "alphatalk-5.9.7",
                       sharerLink: "alpha-sharer.devel.kakao.com")
@@ -55,7 +54,6 @@ extension Hosts {
                       kauth: "sandbox-kauth.kakao.com",
                       talkAuth: "alphakompassauth",
                       channel: "sandbox-pf.kakao.com",
-                      webnavi: "sandbox-kakaonavi-wguide.kakao.com",
                       talkLink: "alphalink",
                       talkLinkVersion: "alphatalk-5.9.7",
                       sharerLink: "sandbox-sharer.devel.kakao.com")
@@ -66,7 +64,6 @@ extension Hosts {
                       kauth: "beta-kauth.kakao.com",
                       talkAuth: "kakaokompassauth",
                       channel: "beta-pf.kakao.com",
-                      webnavi: "kakaonavi-wguide.kakao.com",
                       talkLink: "kakaolink",
                       talkLinkVersion: "kakaotalk-5.9.7",
                       sharerLink: "beta-sharer.devel.kakao.com")

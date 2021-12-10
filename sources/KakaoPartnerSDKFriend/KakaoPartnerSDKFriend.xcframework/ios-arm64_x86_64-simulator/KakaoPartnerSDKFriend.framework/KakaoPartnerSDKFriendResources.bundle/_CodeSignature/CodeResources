@@ -6,17 +6,17 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		NcVI0Gnr3g3G6UvKzMDb/3yc7PY=
+		vV9wYvc4e4rmc0rBBr8X1LB/IV0=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		MQ7O7gv9iwCUfweEmDVYswvBJK8=
+		0H7ilySw8SgJD+Gr5nrjqJEYLhM=
 		</data>
 		<key>en.lproj/KakaoPartnerSDKFriendLocalizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			05GEzKXOWG3Vz3PKPFqhHuPVlkM=
+			lyiOQQyvPjjYqxeowf/Fmp8/Pnk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -25,7 +25,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G4sa0y7CXNfzqd0mZEfs908UcLs=
+			HDaM4vxsOQprqq9Cxi6WY2Gyudo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -34,7 +34,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JPavSkfhhkmpyVTuVjxK5jX+NyA=
+			TH0XOzXeZY/GzHotjWS5rC0Xpag=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -46,14 +46,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			q58zxH/QYEgtMyis3c4pT0O/7bbEwz2e7+HccMENZls=
+			6NiTQ3Avh/+qmOvCbXIoQ1qx8/uWULazDLjmWi03dhs=
 			</data>
 		</dict>
 		<key>en.lproj/KakaoPartnerSDKFriendLocalizable.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NkFxHZENNH7HKKQcTCz65loLltLZz8iHOwCR2mKiYPM=
+			7GL/53pZnPxibssQXT9mx9XYxpnyeqFEV+rt9aj8Ix4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -62,7 +62,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7vl60sDN502NH7nP47SFmT51v7ZY6WbAqQvJjRs/Blk=
+			9Bciv4dpvqodkhQePPIcSiNmH0OVE3dGJmf6y+RGbvk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -71,7 +71,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qwJoNrXo10NIIHHvnN9uhI7deClX/roDO7l6HvL6Baw=
+			Vj4Wb6qBwjmYOkzZktiLonOaW67+0/K2c3EFlisgYv4=
 			</data>
 			<key>optional</key>
 			<true/>

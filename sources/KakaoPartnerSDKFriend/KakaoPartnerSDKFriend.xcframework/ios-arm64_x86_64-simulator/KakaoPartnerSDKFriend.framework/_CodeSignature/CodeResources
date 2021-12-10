@@ -14,29 +14,29 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		7dw0S81zDkH9q9uYR9bl04CoS80=
+		l1rgFato+lM9CAJWFx4Y09Cw18w=
 		</data>
 		<key>KakaoPartnerSDKFriendResources.bundle/Assets.car</key>
 		<data>
-		NcVI0Gnr3g3G6UvKzMDb/3yc7PY=
+		vV9wYvc4e4rmc0rBBr8X1LB/IV0=
 		</data>
 		<key>KakaoPartnerSDKFriendResources.bundle/Info.plist</key>
 		<data>
-		MQ7O7gv9iwCUfweEmDVYswvBJK8=
+		0H7ilySw8SgJD+Gr5nrjqJEYLhM=
 		</data>
 		<key>KakaoPartnerSDKFriendResources.bundle/KakaoPartnerSDKFriendResources</key>
 		<data>
-		IwRz0n7NjCKy2EjSRYWdteKAqBc=
+		D+HFANXdIwEbYtYSpLJLxk/RliU=
 		</data>
 		<key>KakaoPartnerSDKFriendResources.bundle/_CodeSignature/CodeResources</key>
 		<data>
-		mjqXv9eHrzk3OhYeRFhWz7t+N4g=
+		C+K3Rr0j2fCmwqAAolTJh9ffChw=
 		</data>
 		<key>KakaoPartnerSDKFriendResources.bundle/en.lproj/KakaoPartnerSDKFriendLocalizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			05GEzKXOWG3Vz3PKPFqhHuPVlkM=
+			lyiOQQyvPjjYqxeowf/Fmp8/Pnk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -45,7 +45,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G4sa0y7CXNfzqd0mZEfs908UcLs=
+			HDaM4vxsOQprqq9Cxi6WY2Gyudo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -54,7 +54,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JPavSkfhhkmpyVTuVjxK5jX+NyA=
+			TH0XOzXeZY/GzHotjWS5rC0Xpag=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -69,7 +69,7 @@
 		</data>
 		<key>Modules/KakaoPartnerSDKFriend.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		agfxrkCEsfZzGP9yFv1c5YrC7a8=
+		BOKPFi1ZcVcO6RITCzHpgo2KpYI=
 		</data>
 		<key>Modules/KakaoPartnerSDKFriend.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -81,7 +81,7 @@
 		</data>
 		<key>Modules/KakaoPartnerSDKFriend.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		agfxrkCEsfZzGP9yFv1c5YrC7a8=
+		BOKPFi1ZcVcO6RITCzHpgo2KpYI=
 		</data>
 		<key>Modules/KakaoPartnerSDKFriend.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -93,7 +93,7 @@
 		</data>
 		<key>Modules/KakaoPartnerSDKFriend.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		zxdMMFagy+yPab5kJUSGXi8PwVM=
+		UQKCDYWC91FSpryvss9TY5gmwb4=
 		</data>
 		<key>Modules/KakaoPartnerSDKFriend.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -105,7 +105,7 @@
 		</data>
 		<key>Modules/KakaoPartnerSDKFriend.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		zxdMMFagy+yPab5kJUSGXi8PwVM=
+		UQKCDYWC91FSpryvss9TY5gmwb4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -132,35 +132,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			q58zxH/QYEgtMyis3c4pT0O/7bbEwz2e7+HccMENZls=
+			6NiTQ3Avh/+qmOvCbXIoQ1qx8/uWULazDLjmWi03dhs=
 			</data>
 		</dict>
 		<key>KakaoPartnerSDKFriendResources.bundle/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			M4QxKYCtyZjU+aefztghNjvUUMOexeEkUzn2Y6NYkQc=
+			2W564ROMFbdWNRFlc+YviHIZTKP5JGRg6aBFX8/zBc8=
 			</data>
 		</dict>
 		<key>KakaoPartnerSDKFriendResources.bundle/KakaoPartnerSDKFriendResources</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			MsUH7oDxI6kY5dTcG/q1wfNOn3FNtb6gH6IozADS0uw=
+			7OJJTq5vGoMt0b3Mxb6WbT+hHLZslVxlhzKayvgz8s0=
 			</data>
 		</dict>
 		<key>KakaoPartnerSDKFriendResources.bundle/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/VMXFE9DA9zSnT3AKKuWhvUvs9WNaMIhM8KkCegxFQE=
+			5YxNmEyY25aUXmJX3zeXkVED5Fl9Lme9SkO9nG5TYWg=
 			</data>
 		</dict>
 		<key>KakaoPartnerSDKFriendResources.bundle/en.lproj/KakaoPartnerSDKFriendLocalizable.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NkFxHZENNH7HKKQcTCz65loLltLZz8iHOwCR2mKiYPM=
+			7GL/53pZnPxibssQXT9mx9XYxpnyeqFEV+rt9aj8Ix4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -169,7 +169,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7vl60sDN502NH7nP47SFmT51v7ZY6WbAqQvJjRs/Blk=
+			9Bciv4dpvqodkhQePPIcSiNmH0OVE3dGJmf6y+RGbvk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -178,7 +178,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qwJoNrXo10NIIHHvnN9uhI7deClX/roDO7l6HvL6Baw=
+			Vj4Wb6qBwjmYOkzZktiLonOaW67+0/K2c3EFlisgYv4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -201,7 +201,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			i8Qv8te/cCXLF7NCya6J7p8UBAP4lvBLDAU6j8Lvqxg=
+			Wqk/ef0RwtWISUEy6RnXo8fiOCv8C2qJhYtQG1dzVPE=
 			</data>
 		</dict>
 		<key>Modules/KakaoPartnerSDKFriend.swiftmodule/arm64.swiftdoc</key>
@@ -222,7 +222,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			i8Qv8te/cCXLF7NCya6J7p8UBAP4lvBLDAU6j8Lvqxg=
+			Wqk/ef0RwtWISUEy6RnXo8fiOCv8C2qJhYtQG1dzVPE=
 			</data>
 		</dict>
 		<key>Modules/KakaoPartnerSDKFriend.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -243,7 +243,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sm9GowM1Yd8/+B/zZmMD1Fb/UTy9aEG3i8RkFPgcOfE=
+			G7uGQGwcMC8JLhbIOHSg5XN7G0H9oWY2r1J7W2CzOTE=
 			</data>
 		</dict>
 		<key>Modules/KakaoPartnerSDKFriend.swiftmodule/x86_64.swiftdoc</key>
@@ -264,7 +264,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sm9GowM1Yd8/+B/zZmMD1Fb/UTy9aEG3i8RkFPgcOfE=
+			G7uGQGwcMC8JLhbIOHSg5XN7G0H9oWY2r1J7W2CzOTE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
