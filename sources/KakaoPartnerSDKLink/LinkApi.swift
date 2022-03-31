@@ -34,10 +34,12 @@ extension LinkApi {
                                              "target_app_key":targetAppKey].filterNil(),
                                 headers: ["Authorization":"KakaoAK \(try! KakaoSDK.shared.appKey())"],
                                 sessionType: .Api,
-                                apiType: .KApi) { [weak self] (response, data, error) in
-                                    let strongSelf = self
-                                    
-            strongSelf?.transformResponseToLinkResult(response: response, data: data, targetAppKey:targetAppKey, serverCallbackArgs: serverCallbackArgs) { (linkResult, error) in
+                                apiType: .KApi) { [unowned self] (response, data, error) in
+                                if let error = error {
+                                    completion(nil, error)
+                                }
+                                else {
+                                    self.transformResponseToLinkResult(response: response, data: data, targetAppKey:targetAppKey, serverCallbackArgs: serverCallbackArgs) { (linkResult, error) in
                                         if let error = error {
                                             completion(nil, error)
                                         }
@@ -50,6 +52,7 @@ extension LinkApi {
                                             }
                                         }
                                     }
+                                }
         }
     }
     
@@ -100,10 +103,12 @@ extension LinkApi {
                                     .filterNil(),
                                 headers: ["Authorization":"KakaoAK \(try! KakaoSDK.shared.appKey())"],
                                 sessionType: .Api,
-                                apiType: .KApi) { [weak self] (response, data, error) in
-                                    let strongSelf = self
-                                    
-                                    strongSelf?.transformResponseToLinkResult(response: response, data: data, targetAppKey:targetAppKey, serverCallbackArgs: serverCallbackArgs) { (linkResult, error) in
+                                apiType: .KApi) { [unowned self] (response, data, error) in
+                                if let error = error {
+                                    completion(nil, error)
+                                }
+                                else {
+                                    self.transformResponseToLinkResult(response: response, data: data, targetAppKey:targetAppKey, serverCallbackArgs: serverCallbackArgs) { (linkResult, error) in
                                         if let error = error {
                                             completion(nil, error)
                                         }
@@ -116,7 +121,7 @@ extension LinkApi {
                                             }
                                         }
                                     }
-                                    
+                                }
         }
     }
     
@@ -137,10 +142,12 @@ extension LinkApi {
                                     .filterNil(),
                                 headers: ["Authorization":"KakaoAK \(try! KakaoSDK.shared.appKey())"],
                                 sessionType: .Api,
-                                apiType: .KApi ) { [weak self] (response, data, error) in
-                                    let strongSelf = self
-                                    
-                                    strongSelf?.transformResponseToLinkResult(response: response, data: data, targetAppKey:targetAppKey, serverCallbackArgs: serverCallbackArgs) { (linkResult, error) in
+                                apiType: .KApi ) { [unowned self] (response, data, error) in
+                                if let error = error {
+                                    completion(nil, error)
+                                }
+                                else {
+                                    self.transformResponseToLinkResult(response: response, data: data, targetAppKey:targetAppKey, serverCallbackArgs: serverCallbackArgs) { (linkResult, error) in
                                         if let error = error {
                                             completion(nil, error)
                                         }
@@ -153,6 +160,7 @@ extension LinkApi {
                                             }
                                         }
                                     }
+                                }
         }
     }
     
