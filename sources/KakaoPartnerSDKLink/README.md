@@ -1,6 +1,6 @@
 # KakaoPartnerSDKLink
 
-파트너용 카카오링크 모듈입니다. `KakaoSDKLink` 모듈에 의존합니다.
+파트너용 카카오링크 모듈입니다.
 
 ## Requirements
 - Xcode 11.0

@@ -1,6 +1,6 @@
 # KakaoPartnerSDKAuth
 
-파트너용 사용자 인증 및 토큰 관리 모듈입니다. `KakaoSDKAuth` 모듈에 의존합니다.
+파트너용 사용자 인증 및 토큰 관리 모듈입니다.
 
 ## Requirements
 - Xcode 11.0
