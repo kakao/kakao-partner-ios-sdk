@@ -1,7 +1,7 @@
 // swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-// sdk-version:2.10.1
+// sdk-version:2.11.0
 
 import PackageDescription
 
@@ -13,7 +13,7 @@ let package = Package(
     products: [
         .library(
             name: "KakaoPartnerSDK",
-            targets: ["KakaoPartnerSDKCommon", "KakaoPartnerSDKAuth", "KakaoPartnerSDKUser", "KakaoPartnerSDKTalk", "KakaoPartnerSDKLink"]),
+            targets: ["KakaoPartnerSDKCommon", "KakaoPartnerSDKAuth", "KakaoPartnerSDKUser", "KakaoPartnerSDKTalk", "KakaoPartnerSDKShare"]),
         .library(
             name: "KakaoPartnerSDKCommon",
             targets: ["KakaoPartnerSDKCommon"]),
@@ -27,13 +27,13 @@ let package = Package(
             name: "KakaoPartnerSDKTalk",
             targets: ["KakaoPartnerSDKTalk"]),
         .library(
-            name: "KakaoPartnerSDKLink",
-            targets: ["KakaoPartnerSDKLink"])
+            name: "KakaoPartnerSDKShare",
+            targets: ["KakaoPartnerSDKShare"])
     ],
     dependencies: [
         .package(name: "KakaoOpenSDK",
                  url: "https://github.com/kakao/kakao-ios-sdk.git",
-                 .exact("2.10.1")
+                 .exact("2.11.0")
                 )
     ],
     targets: [
@@ -69,10 +69,10 @@ let package = Package(
             exclude: ["Info.plist", "README.md"]
         ),
         .target(
-            name: "KakaoPartnerSDKLink",
+            name: "KakaoPartnerSDKShare",
             dependencies: [
                 .target(name: "KakaoPartnerSDKCommon"),
-                .product(name: "KakaoSDKLink", package: "KakaoOpenSDK"),
+                .product(name: "KakaoSDKShare", package: "KakaoOpenSDK"),
             ],
             exclude: ["Info.plist", "README.md"]
         )

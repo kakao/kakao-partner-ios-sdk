@@ -1,4 +1,4 @@
-# KakaoPartnerSDKLink
+# KakaoPartnerSDKShare
 
 파트너용 카카오톡 공유 모듈입니다.
 
@@ -9,17 +9,17 @@
 - CocoaPods 1.8.0
 
 ## Dependencies
-- KakaoSDKLink
+- KakaoSDKShare
 - KakaoPartnerSDKCommon
 
 ## Installation
 ```
-pod 'KakaoPartnerSDKLink'
+pod 'KakaoPartnerSDKShare'
 ```
 
 ## Import
 ```
-import KakaoPartnerSDKLink
+import KakaoPartnerSDKShare
 ```
 
 ## Usage
