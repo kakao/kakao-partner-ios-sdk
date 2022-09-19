@@ -22,3 +22,20 @@ extension ApprovalType {
         self.type = type
     }
 }
+
+extension SdkIdentifier {        
+    public convenience init(infos customInfos:[String:String]? = nil) {
+        var tempIdentifier : String? = nil
+        if let customInfos = customInfos {
+            customInfos.keys.forEach { key in
+                tempIdentifier = tempIdentifier != nil ? "\(tempIdentifier!) \(key)/\(customInfos[key]!)" : "\(key)/\(customInfos[key]!)"
+            }
+            self.init(tempIdentifier)
+            SdkLog.d("customIdentifier: \(customIdentifier!)")
+        }
+        else {
+            self.init(nil)
+        }
+    }
+}
+
