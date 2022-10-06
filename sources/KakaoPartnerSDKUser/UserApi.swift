@@ -23,13 +23,28 @@ import KakaoPartnerSDKAuth
 /// 사용자관리 API 호출을 담당하는 클래스입니다.
 extension UserApi {
     // MARK: Login with Kakao Account
+
+    ///:nodoc:
+    public func loginWithKakaoAccount(accountParameters: [String:String]? = nil, completion: @escaping (OAuthToken?, Error?) -> Void) {
+        AuthController.shared._authorizeWithAuthenticationSession(accountParameters: accountParameters,
+                                                                  completion:completion)
+    }
     
-    /// 카카오계정 페이지에서 로그인합니다. 이 API는 기본 브라우저의 쿠키 유무를 확인하지 않고 카카오계정 페이지를 호출하며, 추가 파라미터 "accountParameters"를 지원합니다.
-    /// 현재 카카오계정 페이지 호출 시 자동 채우기(fill-in)를 위한 "email" 키를 사용할 수 있습니다.
-    public func loginWithKakaoAccount(accountParameters: [String:String], completion: @escaping (OAuthToken?, Error?) -> Void) {
-        AuthController.shared.authorizeWithAuthenticationSession(accountParameters: accountParameters,
-                                                                 completion:completion)
-    } 
+    ///:nodoc:
+    public func loginWithKakaoAccount(prompts : [Prompt]? = nil,
+                                      loginHint: String? = nil,
+                                      nonce: String? = nil,
+                                      accountsSkipIntro: Bool? = nil,
+                                      accountsTalkLoginVisible: Bool? = nil,
+                                      completion: @escaping (OAuthToken?, Error?) -> Void) {
+        AuthController.shared._authorizeWithAuthenticationSession(prompts: prompts,
+                                                                  loginHint: loginHint,
+                                                                  nonce: nonce,
+                                                                  accountsSkipIntro: accountsSkipIntro,
+                                                                  accountsTalkLoginVisible: accountsTalkLoginVisible,
+                                                                  completion:completion)
+    }
+    
     
     /// 사용자에 대한 다양한 정보를 얻을 수 있습니다.
     /// - seealso: `PartnerUser`
