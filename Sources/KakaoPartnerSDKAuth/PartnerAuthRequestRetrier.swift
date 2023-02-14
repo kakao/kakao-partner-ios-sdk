@@ -17,6 +17,8 @@ import Alamofire
 import KakaoSDKCommon
 import KakaoSDKAuth
 
+/// :nodoc:
+@available(iOSApplicationExtension, unavailable)
 public class PartnerAuthRequestRetrier : RequestInterceptor {
         
     private var errorLock = NSLock()

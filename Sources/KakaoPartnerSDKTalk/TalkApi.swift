@@ -36,7 +36,7 @@ extension TalkApi  {
                         order: Order? = nil,
                         completion:@escaping (Chats?, Error?) -> Void) {
         
-                            AUTH.responseData(.get,
+                            AUTH_API.responseData(.get,
                                               Urls.compose(path:PartnerPaths.chatList),
                                               parameters:["filter": filters?.map({ $0.parameterValue }).joined(separator: ","),
                                                           "offset": offset,
@@ -65,7 +65,7 @@ extension TalkApi  {
                             token: String? = nil,
                             completion:@escaping (ChatMembers?, Error?) -> Void) {
         
-        AUTH.responseData(.get,
+        AUTH_API.responseData(.get,
                           Urls.compose(path:PartnerPaths.chatMembers),
                           parameters: ["chat_id":chatId,
                                          "friends_only": friendsOnly,
@@ -94,7 +94,7 @@ extension TalkApi  {
         
         let castedReceiverIds = receiverIds.map { (ids) -> String in "\(ids)" }
         
-        AUTH.responseData(.post,
+        AUTH_API.responseData(.post,
                           Urls.compose(path:PartnerPaths.defaultMessage),
                           parameters: ["receiver_id_type":receiverIdType.rawValue,
                                          "template_object":templatable.toJsonObject()?.toJsonString(),
@@ -124,7 +124,7 @@ extension TalkApi  {
         //포맷통일
         let castedReceiverIds = receiverIds.map { (ids) -> String in "\(ids)" }
         
-        AUTH.responseData(.post,
+        AUTH_API.responseData(.post,
                             Urls.compose(path:PartnerPaths.customMessage),
                             parameters: ["receiver_id_type":receiverIdType.rawValue,
                                            "receiver_ids":castedReceiverIds.toJsonString(),
@@ -156,7 +156,7 @@ extension TalkApi  {
         //포맷통일
         let castedReceiverIds = receiverIds.map { (ids) -> String in "\(ids)" }
         
-        AUTH.responseData(.post,
+        AUTH_API.responseData(.post,
                            Urls.compose(path:PartnerPaths.scrapMessage),
                            parameters: ["receiver_id_type":receiverIdType.rawValue,
                                           "receiver_ids":castedReceiverIds.toJsonString(),
@@ -189,7 +189,7 @@ extension TalkApi  {
                                   countryCodes: [String]? = nil,
                                   completion:@escaping (Friends<PartnerFriend>?, Error?) -> Void) {
         
-        AUTH.responseData(.get,
+        AUTH_API.responseData(.get,
                             Urls.compose(path:PartnerPaths.friends),
                             parameters: ["friend_type":friendType?.rawValue,
                                           "friend_filter":friendFilter?.rawValue,

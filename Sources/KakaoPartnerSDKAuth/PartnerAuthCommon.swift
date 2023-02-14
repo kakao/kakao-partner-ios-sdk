@@ -17,13 +17,18 @@ import Alamofire
 import KakaoSDKCommon
 import KakaoSDKAuth
 
-public let PARTNER_AUTH = PartnerAuth.shared
+/// :nodoc:
+@available(iOSApplicationExtension, unavailable)
+public let PARTNER_AUTH_API = PartnerAuthCommon.shared
 
-public class PartnerAuth {
+/// :nodoc:
+@available(iOSApplicationExtension, unavailable)
+public class PartnerAuthCommon {
     
-    static public let shared = PartnerAuth()
+    static public let shared = PartnerAuthCommon()
     
     public init() {
+        AUTH.checkMigration()
         initSession()
     }
     

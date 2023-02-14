@@ -15,27 +15,26 @@
 import Foundation
 import KakaoSDKCommon
 
-///:nodoc:
-extension ApprovalType {
-    public convenience init(type:String) {
-        self.init()
-        self.type = type
-    }
-}
 
-extension SdkIdentifier {        
-    public convenience init(infos customInfos:[String:String]? = nil) {
-        var tempIdentifier : String? = nil
-        if let customInfos = customInfos {
-            customInfos.keys.forEach { key in
-                tempIdentifier = tempIdentifier != nil ? "\(tempIdentifier!) \(key)/\(customInfos[key]!)" : "\(key)/\(customInfos[key]!)"
-            }
-            self.init(tempIdentifier)
-            SdkLog.d("customIdentifier: \(customIdentifier!)")
+let PhaseKey = "com.kakao.sdk.partner.phase"
+
+/// :nodoc:
+extension Properties {
+    public static func phase() -> Phase? {
+        if let phaseString = UserDefaults.standard.string(forKey: PhaseKey) {
+            return Phase(rawValue: phaseString)
         }
         else {
-            self.init(nil)
+            return nil
         }
     }
+    
+    public static func setPhase(_ phase:Phase) {
+        UserDefaults.standard.set(phase.rawValue, forKey: PhaseKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    public static func deletePhase() {
+        UserDefaults.standard.removeObject(forKey: PhaseKey)        
+    }
 }
-

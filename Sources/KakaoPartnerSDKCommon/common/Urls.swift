@@ -76,6 +76,7 @@ extension Hosts {
     }
 }
 
+/// :nodoc:
 public class PartnerPaths {
     public static let chatList = "/v1/api/talk/chat/list"
     public static let chatMembers = "/v1/api/talk/members"

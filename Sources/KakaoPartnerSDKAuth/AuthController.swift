@@ -19,8 +19,12 @@ import KakaoSDKCommon
 import KakaoSDKAuth
 import KakaoPartnerSDKCommon
 
+/// :nodoc:
+@available(iOSApplicationExtension, unavailable)
 let AUTH_CONTROLLER = AuthController.shared
 
+/// :nodoc:
+@available(iOSApplicationExtension, unavailable)
 extension AuthController {
     
     /// :nodoc:

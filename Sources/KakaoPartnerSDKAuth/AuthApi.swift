@@ -49,27 +49,4 @@ extension AuthApi {
                             completion(nil, SdkError())
                         }
     }
-    
-    ///연령인증을 요청합니다.
-    /// - seealso: `signup`
-    /// - parameters:
-    ///   - authLevel 연령인증 레벨 (1차 인증 : 실명/생년월일 인증, 2차 인증 : 휴대폰 본인 인증을 통한 통신사 명의자 인증)
-    ///   - ageLimit 연령제한 (만 나이 기준)
-    ///   - skipTerms  동의 화면 출력 여부
-    ///   - adultsOnly 서비스에서 청소년유해매체물 인증 필요 여부
-    ///   - authFrom   요청 서비스 구분
-    ///   - underAge   연령인증 페이지 구분
-    public func verifyAge(authLevel: AuthLevel? = nil,
-                              ageLimit: Int? = nil,
-                              skipTerms: Bool? = false,
-                              adultsOnly: Bool? = false,
-                              underAge: Bool? = false,
-                              completion: @escaping (Error?) -> Void) {
-        AuthController.shared.verifyAgeWithAuthenticationSession(authLevel: authLevel,
-                                                                 ageLimit: ageLimit,
-                                                                 skipTerms: skipTerms,
-                                                                 adultsOnly: adultsOnly,
-                                                                 underAge: underAge,
-                                                                 completion: completion)
-    }
 }
