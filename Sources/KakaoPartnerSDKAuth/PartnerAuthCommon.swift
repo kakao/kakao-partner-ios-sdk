@@ -36,7 +36,7 @@ public class PartnerAuthCommon {
         let interceptor = Interceptor(adapters: [AuthRequestAdapter()], retriers: [AuthRequestRetrier(), PartnerAuthRequestRetrier()])
         
         let sessionConfiguration : URLSessionConfiguration = URLSessionConfiguration.default
-        sessionConfiguration.tlsMinimumSupportedProtocol = .tlsProtocol12
+        sessionConfiguration.tlsMinimumSupportedProtocolVersion = .TLSv12
         API.addSession(type: .PartnerAuthApi, session: Session(configuration: sessionConfiguration, interceptor: interceptor ))
     }
     

@@ -1,6 +1,6 @@
-# KakaoPartnerSDKAuth
+# KakaoPartnerSDKFriend
 
-파트너용 사용자 인증 및 토큰 관리 모듈입니다.
+파트너용 피커 인터페이스 모듈입니다.
 
 ## Requirements
 - Xcode 11.0
@@ -9,17 +9,17 @@
 - CocoaPods 1.8.0
 
 ## Dependencies
-- KakaoSDKAuth
+- KakaoSDKFriend
 - KakaoPartnerSDKCommon
 
 ## Installation
 ```
-pod 'KakaoPartnerSDKAuth'
+pod 'KakaoPartnerSDKFriend'
 ```
 
 ## Import
 ```
-import KakaoPartnerSDKAuth
+import KakaoPartnerSDKFriend
 ```
 
 ## Usage

@@ -39,7 +39,7 @@ extension AuthController {
             (callbackUrl:URL?, error:Error?) in
             
             guard let callbackUrl = callbackUrl else {
-                if #available(iOS 12.0, *), let error = error as? ASWebAuthenticationSessionError {
+                if let error = error as? ASWebAuthenticationSessionError {
                     if error.code == ASWebAuthenticationSessionError.canceledLogin {
                         SdkLog.e("The authentication session has been canceled by user.")
                         completion(SdkError(reason: .Cancelled, message: "The authentication session has been canceled by user."))
@@ -49,11 +49,8 @@ extension AuthController {
                         completion(SdkError(reason: .Unknown, message: "An error occurred on executing authentication session."))
                         return
                     }
-                } else if let error = error as? SFAuthenticationError, error.code == SFAuthenticationError.canceledLogin {
-                    SdkLog.e("The authentication session has been canceled by user.")
-                    completion(SdkError(reason: .Cancelled, message: "The authentication session has been canceled by user."))
-                    return
-                } else {
+                }
+                else {
                     SdkLog.e("An unknown authentication session error occurred.")
                     completion(SdkError(reason: .Unknown, message: "An unknown authentication session error occurred."))
                     return
@@ -104,22 +101,13 @@ extension AuthController {
             SdkLog.d("\n===================================================================================================")
             SdkLog.d("request: \n url:\(url)\n parameters: \(parameters) \n")
             
-            if #available(iOS 12.0, *) {
-                let authenticationSession = ASWebAuthenticationSession.init(url: url,
-                                                                             callbackURLScheme: (try! KakaoSDK.shared.scheme()),
-                                                                             completionHandler:authenticationSessionCompletionHandler)
-                if #available(iOS 13.0, *) {
-                    authenticationSession.presentationContextProvider = AUTH_CONTROLLER.presentationContextProvider as? ASWebAuthenticationPresentationContextProviding
-                }
-                AUTH_CONTROLLER.authenticationSession = authenticationSession
-                (AUTH_CONTROLLER.authenticationSession as? ASWebAuthenticationSession)?.start()
-            }
-            else {
-                AUTH_CONTROLLER.authenticationSession = SFAuthenticationSession.init(url: url,
-                                                                          callbackURLScheme: (try! KakaoSDK.shared.scheme()),
-                                                                          completionHandler:authenticationSessionCompletionHandler)
-                (AUTH_CONTROLLER.authenticationSession as? SFAuthenticationSession)?.start()
-            }
+            
+            let authenticationSession = ASWebAuthenticationSession.init(url: url,
+                                                                         callbackURLScheme: (try! KakaoSDK.shared.scheme()),
+                                                                         completionHandler:authenticationSessionCompletionHandler)
+            authenticationSession.presentationContextProvider = AUTH_CONTROLLER.presentationContextProvider as? ASWebAuthenticationPresentationContextProviding
+            AUTH_CONTROLLER.authenticationSession = authenticationSession
+            AUTH_CONTROLLER.authenticationSession?.start()
         }
     }
 }
