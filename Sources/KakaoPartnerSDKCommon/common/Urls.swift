@@ -47,7 +47,8 @@ extension Hosts {
                       talkLink: "alphalink",
                       talkLinkVersion: "alphatalk-5.9.7",
                       sharerLink: "alpha-sharer.devel.kakao.com",
-                      universalLink: "alpha-talk-apps.kakao.com")
+                      universalLink: "alpha-talk-apps.kakao.com",
+                      cert:"")
         case .Sandbox:
             self.init(kapi: "sandbox-kapi.kakao.com",
                       dapi: "sandbox-dapi.kakao.com",
@@ -58,7 +59,8 @@ extension Hosts {
                       talkLink: "alphalink",
                       talkLinkVersion: "alphatalk-5.9.7",
                       sharerLink: "sandbox-sharer.devel.kakao.com",
-                      universalLink: "sandbox-talk-apps.kakao.com")
+                      universalLink: "sandbox-talk-apps.kakao.com",
+                      cert:"sign-papi.sandbox.onkakao.net")
         case .Cbt:
             self.init(kapi: "beta-kapi.kakao.com",
                       dapi: "beta-dapi.kakao.com",
@@ -69,7 +71,8 @@ extension Hosts {
                       talkLink: "kakaolink",
                       talkLinkVersion: "kakaotalk-5.9.7",
                       sharerLink: "beta-sharer.devel.kakao.com",
-                      universalLink: "beta-talk-apps.kakao.com")
+                      universalLink: "beta-talk-apps.kakao.com",
+                      cert:"cbt-cert-sign-papi.kakao.com")
         default:
             self.init()
         }
