@@ -18,7 +18,8 @@ import KakaoSDKFriend
 /// 파트너용으로 제공되는 클래스로 챗방/챗멤버피커, 탭피커를 호출합니다.
 extension PickerApi  {
     /// 여러 명의 친구를 선택(멀티 피커)할 수 있는 친구 피커를 화면 전체에 표시합니다.
-    /// - seealso: `PickerFriendRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerFriendRequestParams``
     public func selectFriends(params:PickerFriendRequestParams, completion:@escaping (SelectedUsers?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -33,7 +34,8 @@ extension PickerApi  {
     }
     
     /// 여러 명의 친구를 선택(멀티 피커)할 수 있는 친구 피커를 팝업 형태로 표시합니다.
-    /// - seealso: `PickerFriendRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerFriendRequestParams``
     public func selectFriendsPopup(params:PickerFriendRequestParams, completion:@escaping (SelectedUsers?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -48,7 +50,8 @@ extension PickerApi  {
     }
     
     /// 한 명의 친구만 선택(싱글 피커)할 수 있는 친구 피커를 화면 전체에 표시합니다.
-    /// - seealso: `PickerFriendRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerFriendRequestParams``
     public func selectFriend(params:PickerFriendRequestParams, completion:@escaping (SelectedUsers?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -63,7 +66,8 @@ extension PickerApi  {
     }
     
     /// 한 명의 친구만 선택(싱글 피커)할 수 있는 친구 피커를 팝업 형태로 표시합니다.
-    /// - seealso: `PickerFriendRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerFriendRequestParams``
     public func selectFriendPopup(params:PickerFriendRequestParams, completion:@escaping (SelectedUsers?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -78,7 +82,8 @@ extension PickerApi  {
     }
     
     /// 채팅방 피커를 화면 전체에 표시합니다.
-    /// - seealso: `PickerChatRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerChatRequestParams``
     public func selectChat(params:PickerChatRequestParams, completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -93,7 +98,8 @@ extension PickerApi  {
     }
     
     /// 채팅방 피커를 팝업 형태로 표시합니다.
-    /// - seealso: `PickerChatRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerChatRequestParams``
     public func selectChatPopup(params:PickerChatRequestParams, completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -108,7 +114,8 @@ extension PickerApi  {
     }
     
     /// 친구 피커와 채팅방 피커를 탭 구조로 제공하는 탭 피커를 화면 전체에 표시합니다.
-    /// - seealso: `PickerTabRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerTabRequestParams``
     public func select(params:PickerTabRequestParams, completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -123,7 +130,8 @@ extension PickerApi  {
     }
     
     /// 친구 피커와 채팅방 피커를 탭 구조로 제공하는 탭 피커를 팝업 형태로 표시합니다.
-    /// - seealso: `PickerTabRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerTabRequestParams``
     public func selectPopup(params:PickerTabRequestParams, completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {

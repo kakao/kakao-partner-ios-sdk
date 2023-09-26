@@ -17,11 +17,11 @@ import Alamofire
 import KakaoSDKCommon
 import KakaoSDKAuth
 
-/// :nodoc:
+@_documentation(visibility: private)
 @available(iOSApplicationExtension, unavailable)
 public let PARTNER_AUTH_API = PartnerAuthCommon.shared
 
-/// :nodoc:
+@_documentation(visibility: private)
 @available(iOSApplicationExtension, unavailable)
 public class PartnerAuthCommon {
     

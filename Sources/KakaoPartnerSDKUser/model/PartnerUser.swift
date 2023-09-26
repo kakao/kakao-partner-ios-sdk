@@ -21,7 +21,8 @@ public struct PartnerUser : Codable {
     public let id: Int64?
     public let properties: [String:String]?
     /// 카카오계정 정보
-    /// - seealso: `PartnerAccount`
+    /// ## SeeAlso
+    /// - ``PartnerAccount``
     public let kakaoAccount: PartnerAccount?
     public let groupUserToken: String?
     
@@ -32,7 +33,8 @@ public struct PartnerUser : Codable {
     /// 사용자가 앱에 연결되어 있는지 여부를 나타냅니다. **자동 연결** 설정이 활성화되어 있는 경우 값이 내려오지 않으므로 앱에 연결되어 있다고 가정해도 무방합니다.
     public let hasSignedUp: Bool?
     /// 파트너용 사용자 정보
-    /// - seealso: `ForPartner`
+    /// ## SeeAlso 
+    /// - ``ForPartner``
     public let forPartner: ForPartner?
 }
 
@@ -49,7 +51,8 @@ public struct PartnerAccount : Codable {
     public let profileImageNeedsAgreement: Bool?
     
     /// 카카오계정에 등록한 프로필 정보
-    /// - seealso: `Profile`
+    /// ## SeeAlso 
+    /// - ``Profile``
     public let profile: Profile?
     
     /// 카카오계정 이름에 대한 사용자 동의 필요 여부
@@ -69,7 +72,8 @@ public struct PartnerAccount : Codable {
     /// ageRange 제공에 대한 사용자 동의 필요 여부
     public let ageRangeNeedsAgreement: Bool?
     /// 연령대
-    /// - seealso: `AgeRange`
+    /// ## SeeAlso 
+    /// - ``AgeRange``
     public let ageRange: AgeRange?
     /// birthyear 제공에 대한 사용자 동의 필요 여부
     public let birthyearNeedsAgreement: Bool?
@@ -85,7 +89,8 @@ public struct PartnerAccount : Codable {
     /// gender 제공에 대한 사용자의 동의 필요 여부
     public let genderNeedsAgreement: Bool?
     /// 성별
-    /// - seealso: `Gender`
+    /// ## SeeAlso 
+    /// - ``Gender``
     public let gender: Gender?
     
     /// phoneNumber 제공에 대한 사용자 동의 필요 여부

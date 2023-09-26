@@ -15,7 +15,7 @@
 import Foundation
 import KakaoSDKCommon
 
-/// :nodoc:
+@_documentation(visibility: private)
 extension ApprovalType {
     public convenience init(type:String) {
         self.init()
@@ -23,7 +23,7 @@ extension ApprovalType {
     }
 }
 
-/// :nodoc:
+@_documentation(visibility: private)
 extension SdkIdentifier {        
     public convenience init(infos customInfos:[String:String]? = nil) {
         var tempIdentifier : String? = nil

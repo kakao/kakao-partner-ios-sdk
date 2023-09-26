@@ -15,14 +15,16 @@
 import Foundation
 
 /// 채팅방 멤버 조회 API 응답 클래스
-/// - seealso: `TalkApi.chatMembers(chatId:friendsOnly:includeProfile:secureResource:offset:limit:order:)`
+/// ## SeeAlso 
+/// - ``TalkApi/chatMembers(chatId:friendsOnly:includeProfile:secureResource:offset:limit:order:)``
 public struct ChatMembers : Codable {
     
     /// 채팅방 타입. "Direct", "Multi"
     public let type: String     // TODO: enum
     
     /// 멤버 목록
-    /// - seealso: `Member`
+    /// ## SeeAlso 
+    /// - ``Member``
     public let members: [Member]?
     
     /// 내려받은 멤버 목록의 수 (최대 500)
@@ -59,7 +61,8 @@ public struct Member : Codable {
         case thumbnailImageUrl = "thumbnailImage"
     }
     
-    /// :nodoc: Decodable
+    @_documentation(visibility: private) 
+    /// Decodable
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         

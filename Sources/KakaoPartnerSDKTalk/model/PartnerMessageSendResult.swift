@@ -15,10 +15,10 @@
 import Foundation
 
 /// 메시지 전송 API 호출 결과
-/// - seealso:
-/// `TalkApi.sendDefaultMessage(templatable:receiverUuids:)`<br>
-/// `TalkApi.sendScrapMessage(requestUrl:templateId:templateArgs:receiverUuids:)`<br>
-/// `TalkApi.sendCustomMessage(templateId:templateArgs:receiverUuids:)`
+/// ## SeeAlso
+/// - ``TalkApi/sendDefaultMessage(templatable:receiverUuids:)``
+/// - ``TalkApi/sendScrapMessage(requestUrl:templateId:templateArgs:receiverUuids:)``
+/// - ``TalkApi/sendCustomMessage(templateId:templateArgs:receiverUuids:)``
 public struct PartnerMessageSendResult : Codable {
     
     // MARK: Fields
@@ -39,7 +39,8 @@ public struct PartnerMessageSendResult : Codable {
 }
 
 /// 복수의 친구를 대상으로 메시지 전송 API 호출 시 대상 중 일부가 실패한 경우 오류 정보를 제공합니다.
-/// - seealso: `MessageSendResult.failureInfos`
+/// ## SeeAlso 
+/// - ``MessageSendResult/failureInfos``
 public struct PartnerMessageFailureInfo : Codable {
     
     // MARK: Fields

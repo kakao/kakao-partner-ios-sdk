@@ -17,7 +17,7 @@ import Alamofire
 import KakaoSDKCommon
 import KakaoSDKAuth
 
-/// :nodoc:
+@_documentation(visibility: private)
 @available(iOSApplicationExtension, unavailable)
 public class PartnerAuthRequestRetrier : RequestInterceptor {
         

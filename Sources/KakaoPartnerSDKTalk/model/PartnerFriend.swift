@@ -96,7 +96,8 @@ public enum ChatFilter {
 }
 
 /// 파트너용으로 제공되는 친구 정보입니다. 보다 자세한 사용법은 Open SDK의 Friends 문서를 참고해주세요.
-/// - seealso: `TalkApi.friendsForPartner(friendType:friendFilter:friendOrder:secureResource:offset:limit:order:)`
+/// ## SeeAlso
+/// - ``KakaoSDKTalk/TalkApi/friendsForPartner(friendType:friendFilter:friendOrder:offset:limit:order:countryCodes:completion:)``
 public struct PartnerFriend : Codable {
     
     /// 사용자의 현재 앱 가입 여부
@@ -126,7 +127,8 @@ public struct PartnerFriend : Codable {
     public let allowedMsg: Bool?
     
     /// 현재 사용자와의 친구 상태
-    /// - seealso: `FriendRelation`
+    /// ## SeeAlso 
+    /// - ``FriendRelation``
     public let relation: FriendRelation?
     
     /// 즐겨찾기 추가 여부
@@ -136,7 +138,8 @@ public struct PartnerFriend : Codable {
         case id, serviceUserId, uuid, appRegistered, profileNickname, profileThumbnailImage, talkOs, allowedMsg, relation, favorite
     }
     
-    /// :nodoc: Decodable
+    @_documentation(visibility: private) 
+    /// Decodable
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -167,7 +170,8 @@ public enum FriendRelationType : String, Codable {
 }
 
 /// 카카오톡이나 카카오스토리의 친구 추가 상태를 나타냅니다.
-/// - seealso: `FriendRelationType`
+/// ## SeeAlso 
+/// - ``FriendRelationType``
 public struct FriendRelation : Codable {
     
     /// 카카오톡 친구 추가 상태
@@ -178,7 +182,8 @@ public struct FriendRelation : Codable {
 }
 
 /// 친구 목록 조회 컨텍스트
-/// - seealso: `TalkApi.friendsForPartner(partnerFriendContext:)`
+/// ## SeeAlso
+/// - ``KakaoSDKTalk/TalkApi/friendsForPartner(context:completion:)``
 public struct PartnerFriendsContext {
     public let friendType : FriendType?
     public let friendFilter : FriendFilter?

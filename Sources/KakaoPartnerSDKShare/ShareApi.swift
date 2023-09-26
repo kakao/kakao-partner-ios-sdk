@@ -22,7 +22,7 @@ import KakaoSDKTemplate
 /// 카카오톡 공유 호출을 담당하는 클래스입니다.
 extension ShareApi {
     
-    ///:nodoc:
+    @_documentation(visibility: private)
     func shareDefault(targetAppKey:String,
                      templateObjectJsonString:String? = nil,
                      serverCallbackArgs:[String:String]? = nil,
@@ -58,7 +58,9 @@ extension ShareApi {
     
     /// 기본 템플릿을 카카오톡으로 공유합니다.
     /// 원하는 앱의 네이티브 앱 키를 "targetAppKey"로 전달해 말풍선 출처 영역에 출력할 앱 정보를 지정할 수 있습니다.
-    /// - seealso: [Template](../../KakaoSDKTemplate/Protocols/Templatable.html) <br> `SharingResult`
+    /// ## SeeAlso 
+    /// - ``Templatable``
+    /// - ``SharingResult``
     public func shareDefault(targetAppKey:String,
                             templatable: Templatable,
                             serverCallbackArgs:[String:String]? = nil,
@@ -72,7 +74,8 @@ extension ShareApi {
     
     /// 기본 템플릿을 카카오톡으로 공유합니다.
     /// 원하는 앱의 네이티브 앱 키를 "targetAppKey"로 전달해 말풍선 출처 영역에 출력할 앱 정보를 지정할 수 있습니다.
-    /// - seealso: `SharingResult`
+    /// ## SeeAlso 
+    /// - ``SharingResult``
     public func shareDefault(targetAppKey:String,
                             templateObject:[String:Any],
                             serverCallbackArgs:[String:String]? = nil,
@@ -86,7 +89,8 @@ extension ShareApi {
     
     /// 지정된 URL을 스크랩하여 만들어진 템플릿을 카카오톡으로 공유합니다.
     /// 원하는 앱의 네이티브 앱 키를 "targetAppKey"로 전달해 말풍선 출처 영역에 출력할 앱 정보를 지정할 수 있습니다.
-    /// - seealso: `SharingResult`
+    /// ## SeeAlso 
+    /// - ``SharingResult``
     public func shareScrap(targetAppKey:String,
                           requestUrl:String,
                           templateId:Int64? = nil,
@@ -125,9 +129,10 @@ extension ShareApi {
         }
     }
     
-    /// 카카오 디벨로퍼스에서 생성한 메시지 템플릿을 카카오톡으로 공유합니다. 템플릿을 생성하는 방법은 https://developers.kakao.com/docs/latest/ko/message/ios#create-message 을 참고하시기 바랍니다.
+    /// 카카오 디벨로퍼스에서 생성한 메시지 템플릿을 카카오톡으로 공유합니다. 템플릿을 생성하는 방법은 [https://developers.kakao.com/docs/latest/ko/message/ios#create-message](https://developers.kakao.com/docs/latest/ko/message/ios#create-message) 을 참고하시기 바랍니다.
     /// 원하는 앱의 네이티브 앱 키를 "targetAppKey"로 전달해 말풍선 출처 영역에 출력할 앱 정보를 지정할 수 있습니다.
-    /// - seealso: `SharingResult`
+    /// ## SeeAlso 
+    /// - ``SharingResult``
     public func shareCustom(targetAppKey:String,
                            templateId:Int64,
                            templateArgs:[String:String]? = nil,

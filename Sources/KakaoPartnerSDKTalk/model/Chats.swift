@@ -15,14 +15,16 @@
 import Foundation
 
 /// 카카오톡 채팅방 목록 조회 API 응답 클래스입니다.
-/// - seealso: `TalkApi.chatList(secureResource:offset:limit:order:)`
+/// ## SeeAlso
+/// - ``KakaoSDKTalk/TalkApi/chatList(filters:offset:limit:order:completion:)``
 public struct Chats : Codable {
     
     /// 전체 채팅방 수
     public let totalCount: Int
     
     /// 채팅방 목록
-    /// - seealso: `Chat`
+    /// ## SeeAlso 
+    /// - ``Chat``
     public let elements: [Chat]?
     
     /// 채팅방 목록 현재 페이지의 이전 페이지 URL

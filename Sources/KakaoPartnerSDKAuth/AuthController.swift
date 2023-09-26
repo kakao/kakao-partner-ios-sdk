@@ -19,15 +19,15 @@ import KakaoSDKCommon
 import KakaoSDKAuth
 import KakaoPartnerSDKCommon
 
-/// :nodoc:
+@_documentation(visibility: private)
 @available(iOSApplicationExtension, unavailable)
 let AUTH_CONTROLLER = AuthController.shared
 
-/// :nodoc:
+@_documentation(visibility: private)
 @available(iOSApplicationExtension, unavailable)
 extension AuthController {
     
-    /// :nodoc:
+    @_documentation(visibility: private)
     public func verifyAgeWithAuthenticationSession(authLevel: AuthLevel? = nil,
                                                    ageLimit: Int? = nil,
                                                    skipTerms: Bool? = false,
@@ -112,7 +112,7 @@ extension AuthController {
     }
 }
 
-/// :nodoc:
+@_documentation(visibility: private)
 extension URL {
     public func ageOauthResult() -> Error? {
         var parameters = [String: String]()
@@ -178,7 +178,7 @@ public enum AgeAuthFailureReason : Int {
     case Error = -500
 }
 
-/// :nodoc:
+@_documentation(visibility: private)
 extension AgeAuthError {
     public init(status : Int?, message:String? = nil) {
         switch status {

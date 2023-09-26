@@ -17,6 +17,8 @@ import KakaoSDKCommon
 
 /// 카카오 내부 Deployment Phase를 나타냅니다.
 public enum Phase : String {
+    /// Omega
+    case Omega
     
     /// Alpha (Dev)
     case Dev
@@ -33,10 +35,22 @@ public enum Phase : String {
 
 /// API 호출을 위한 호스트 정보를 갖고 있습니다. 내부 phase 용 인스턴스를 생성할 수 있습니다.
 extension Hosts {
-    
+    @_documentation(visibility: public)
     /// 원하는 phase에 대한 호스트 정보를 생성합니다.
     public convenience init(phase:Phase) {
         switch phase {
+        case .Omega:
+            self.init(kapi: "omega-kapi.kakao.com",
+                      dapi: "alpha-dapi.kakao.com",
+                      auth: "omega-auth.kakao.com",
+                      kauth: "omega-kauth.kakao.com",
+                      talkAuth: "alphakompassauth",
+                      channel: "alpha-pf.kakao.com",
+                      talkLink: "alphalink",
+                      talkLinkVersion: "alphatalk-5.9.7",
+                      sharerLink: "alpha-sharer.devel.kakao.com",
+                      universalLink: "alpha-talk-apps.kakao.com",
+                      cert:"")
         case .Dev:
             self.init(kapi: "alpha-kapi.kakao.com",
                       dapi: "alpha-dapi.kakao.com",
@@ -48,7 +62,8 @@ extension Hosts {
                       talkLinkVersion: "alphatalk-5.9.7",
                       sharerLink: "alpha-sharer.devel.kakao.com",
                       universalLink: "alpha-talk-apps.kakao.com",
-                      cert:"")
+                      cert:"",
+                      plusFriend: "alphaplus")
         case .Sandbox:
             self.init(kapi: "sandbox-kapi.kakao.com",
                       dapi: "sandbox-dapi.kakao.com",
@@ -60,7 +75,8 @@ extension Hosts {
                       talkLinkVersion: "alphatalk-5.9.7",
                       sharerLink: "sandbox-sharer.devel.kakao.com",
                       universalLink: "sandbox-talk-apps.kakao.com",
-                      cert:"sign-papi.sandbox.onkakao.net")
+                      cert:"sign-papi.sandbox.onkakao.net",
+                      plusFriend: "alphaplus")
         case .Cbt:
             self.init(kapi: "beta-kapi.kakao.com",
                       dapi: "beta-dapi.kakao.com",
@@ -72,14 +88,15 @@ extension Hosts {
                       talkLinkVersion: "kakaotalk-5.9.7",
                       sharerLink: "beta-sharer.devel.kakao.com",
                       universalLink: "beta-talk-apps.kakao.com",
-                      cert:"cbt-cert-sign-papi.kakao.com")
+                      cert:"cbt-cert-sign-papi.kakao.com",
+                      plusFriend: "kakaoplus")
         default:
             self.init()
         }
     }
 }
 
-/// :nodoc:
+@_documentation(visibility: private)
 public class PartnerPaths {
     public static let chatList = "/v1/api/talk/chat/list"
     public static let chatMembers = "/v1/api/talk/members"
@@ -94,7 +111,7 @@ public class PartnerPaths {
     public static let userUpgradeScopes = "/v2/user/upgrade/scopes"
     
     public static let ageAuth = "/ageauths/main.html"
-    public static let ageAuthInfo = "/v1/user/age_auth"
+    public static let ageAuthInfo = "/v2/user/age_auth"
     
     public static let selectFriends = "/v1/friends/sdk"
     public static let userScpoes = "/v2/user/scopes/sdk"
