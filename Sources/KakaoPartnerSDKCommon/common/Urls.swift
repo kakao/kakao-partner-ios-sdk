@@ -33,9 +33,11 @@ public enum Phase : String {
     case Production
 }
 
+#if swift(>=5.8)
+@_documentation(visibility: public)
+#endif
 /// API 호출을 위한 호스트 정보를 갖고 있습니다. 내부 phase 용 인스턴스를 생성할 수 있습니다.
 extension Hosts {
-    @_documentation(visibility: public)
     /// 원하는 phase에 대한 호스트 정보를 생성합니다.
     public convenience init(phase:Phase) {
         switch phase {
@@ -96,7 +98,9 @@ extension Hosts {
     }
 }
 
+#if swift(>=5.8)
 @_documentation(visibility: private)
+#endif
 public class PartnerPaths {
     public static let chatList = "/v1/api/talk/chat/list"
     public static let chatMembers = "/v1/api/talk/members"

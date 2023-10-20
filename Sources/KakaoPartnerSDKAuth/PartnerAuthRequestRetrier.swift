@@ -17,7 +17,9 @@ import Alamofire
 import KakaoSDKCommon
 import KakaoSDKAuth
 
+#if swift(>=5.8)
 @_documentation(visibility: private)
+#endif
 @available(iOSApplicationExtension, unavailable)
 public class PartnerAuthRequestRetrier : RequestInterceptor {
         

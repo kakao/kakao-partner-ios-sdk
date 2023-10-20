@@ -20,9 +20,7 @@ import KakaoSDKShare
 import KakaoSDKTemplate
 
 /// 카카오톡 공유 호출을 담당하는 클래스입니다.
-extension ShareApi {
-    
-    @_documentation(visibility: private)
+extension ShareApi {    
     func shareDefault(targetAppKey:String,
                      templateObjectJsonString:String? = nil,
                      serverCallbackArgs:[String:String]? = nil,

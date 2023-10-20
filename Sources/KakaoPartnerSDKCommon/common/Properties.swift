@@ -18,7 +18,9 @@ import KakaoSDKCommon
 
 let PhaseKey = "com.kakao.sdk.partner.phase"
 
+#if swift(>=5.8)
 @_documentation(visibility: private)
+#endif
 extension Properties {
     public static func phase() -> Phase? {
         if let phaseString = UserDefaults.standard.string(forKey: PhaseKey) {

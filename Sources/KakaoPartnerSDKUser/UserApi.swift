@@ -33,13 +33,17 @@ public enum AgeCriteria: String {
 extension UserApi {
     // MARK: Login with Kakao Account
 
+#if swift(>=5.8)
     @_documentation(visibility: private)
+#endif
     public func loginWithKakaoAccount(accountParameters: [String:String]? = nil, completion: @escaping (OAuthToken?, Error?) -> Void) {
         AuthController.shared._authorizeWithAuthenticationSession(accountParameters: accountParameters,
                                                                   completion:completion)
     }
     
+#if swift(>=5.8)
     @_documentation(visibility: private)
+#endif
     public func loginWithKakaoAccount(prompts : [Prompt]? = nil,
                                       loginHint: String? = nil,
                                       nonce: String? = nil,
