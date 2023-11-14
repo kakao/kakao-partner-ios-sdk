@@ -18,30 +18,6 @@ import KakaoSDKTalk
 
 // MARK: Enumerations
 
-/// 친구를 가져올 서비스 선택
-public enum FriendType : String, Codable {
-    
-    /// 카카오톡 친구만 조회
-    case Talk = "talk"
-    
-    /// 카카오스토리 친구만 조회
-    case Story = "story"
-    
-    /// 카카오톡 친구와 카카오스토리 친구를 모두 조회
-    case TalkAndStory = "talkstory"
-    
-//    public var parameterValue: String {
-//        switch self {
-//        case .Talk:
-//            return "talk"
-//        case .Story:
-//            return "story"
-//        case .TalkAndStory:
-//            return "talkstory"
-//        }
-//    }
-}
-
 /// 친구 목록 필터링
 public enum FriendFilter : String, Codable {
     
@@ -97,7 +73,7 @@ public enum ChatFilter {
 
 /// 파트너용으로 제공되는 친구 정보입니다. 보다 자세한 사용법은 Open SDK의 Friends 문서를 참고해주세요.
 /// ## SeeAlso
-/// - ``KakaoSDKTalk/TalkApi/friendsForPartner(friendType:friendFilter:friendOrder:offset:limit:order:countryCodes:completion:)``
+/// - ``KakaoSDKTalk/TalkApi/friendsForPartner(friendFilter:friendOrder:offset:limit:order:countryCodes:completion:)``
 public struct PartnerFriend : Codable {
     
     /// 사용자의 현재 앱 가입 여부
@@ -171,23 +147,19 @@ public enum FriendRelationType : String, Codable {
     case NA = "N/A"
 }
 
-/// 카카오톡이나 카카오스토리의 친구 추가 상태를 나타냅니다.
+/// 카카오톡 추가 상태를 나타냅니다.
 /// ## SeeAlso 
 /// - ``FriendRelationType``
 public struct FriendRelation : Codable {
     
     /// 카카오톡 친구 추가 상태
     public let talk: FriendRelationType?
-    
-    /// 카카오스토리 친구 추가 상태
-    public let story: FriendRelationType?
 }
 
 /// 친구 목록 조회 컨텍스트
 /// ## SeeAlso
 /// - ``KakaoSDKTalk/TalkApi/friendsForPartner(context:completion:)``
 public struct PartnerFriendsContext {
-    public let friendType : FriendType?
     public let friendFilter : FriendFilter?
     public let friendOrder : FriendOrder?
     public let offset : Int?
@@ -195,14 +167,12 @@ public struct PartnerFriendsContext {
     public let order : Order?
     public let countryCodes : [String]?
    
-    public init(friendType : FriendType? = nil,
-                friendFilter : FriendFilter? = nil,
+    public init(friendFilter : FriendFilter? = nil,
                 friendOrder : FriendOrder? = nil,
                 offset: Int? = nil,
                 limit: Int? = nil,
                 order: Order? = nil,
                 countryCodes : [String]? = nil) {
-        self.friendType = friendType
         self.friendFilter = friendFilter
         self.friendOrder = friendOrder
         self.offset = offset
@@ -212,8 +182,7 @@ public struct PartnerFriendsContext {
     }
     
     public init?(_ url:URL?) {
-        if let params = url?.params() {
-            if let friendType = params["friend_type"] as? String { self.friendType = FriendType(rawValue: friendType) ?? .Talk } else { self.friendType = nil }
+        if let params = url?.params() {            
             if let friendFilter = params["friend_filter"] as? String { self.friendFilter = FriendFilter(rawValue: friendFilter) ?? .None } else { self.friendFilter = nil }
             if let friendOrder = params["friend_order"] as? String { self.friendOrder = FriendOrder(rawValue: friendOrder) ?? .Favorite } else { self.friendOrder = nil }
             if let offset = params["offset"] as? String { self.offset = Int(offset) ?? 0 } else { self.offset = nil }

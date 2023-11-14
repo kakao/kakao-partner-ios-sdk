@@ -183,8 +183,7 @@ extension TalkApi  {
     /// 카카오톡 친구 목록을 조회합니다. Open SDK의 확장으로 앱에 가입되지 않은 친구도 조회할 수 있습니다.
     /// ## SeeAlso 
     /// - ``PartnerFriend``
-    public func friendsForPartner(friendType: FriendType? = nil,
-                                  friendFilter: FriendFilter? = nil,
+    public func friendsForPartner(friendFilter: FriendFilter? = nil,
                                   friendOrder: FriendOrder? = nil,
                                   offset: Int? = nil,
                                   limit: Int? = nil,
@@ -194,8 +193,7 @@ extension TalkApi  {
         
         AUTH_API.responseData(.get,
                             Urls.compose(path:PartnerPaths.friends),
-                            parameters: ["friend_type":friendType?.rawValue,
-                                          "friend_filter":friendFilter?.rawValue,
+                            parameters: ["friend_filter":friendFilter?.rawValue,
                                           "friend_order": friendOrder?.rawValue,
                                           "offset":offset,
                                           "limit":limit,
@@ -222,8 +220,7 @@ extension TalkApi  {
     public func friendsForPartner(context: PartnerFriendsContext?,
                                   completion:@escaping (Friends<PartnerFriend>?, Error?) -> Void) {
         
-        friendsForPartner(friendType: context?.friendType,
-                          friendFilter: context?.friendFilter,
+        friendsForPartner(friendFilter: context?.friendFilter,
                           friendOrder: context?.friendOrder,
                           offset: context?.offset,
                           limit: context?.limit,
