@@ -35,6 +35,24 @@ public struct Chats : Codable {
     
 }
 
+/// 선택한 채팅방의 종류
+public enum ChatRoomType : String, Codable {
+    ///메모 챗방
+    case MemoChat
+    
+    ///1:1 일반 챗방
+    case DirectChat //기존 regular
+    
+    ///그룹 일반 챗방
+    case MultiChat //기존 regular
+    
+    ///1:1 오픈 챗방
+    case OpenDirectChat //기존 open
+    
+    ///그룹 오픈 챗방
+    case OpenMultiChat //기존 open
+}
+
 /// 카카오톡 채팅방을 나타냅니다.
 public struct Chat : Codable {
     
@@ -53,13 +71,13 @@ public struct Chat : Codable {
     /// 화면에 표시할 대표 멤버 이미지 URL 목록
     public let displayMemberImages: [URL]?
     
-    /// 채팅방의 종류(오픈채팅(open), 일반채팅(regular))
-    public let chatType: String
+    /// 채팅방의 종류
+    public let roomType: ChatRoomType
     
     public let titleSource: String
     
     enum CodingKeys : String, CodingKey {
-        case id, title, imageUrl, memberCount, displayMemberImages, chatType, titleSource
+        case id, title, imageUrl, memberCount, displayMemberImages, roomType = "chatRoomType", titleSource
     }
     
     public init(from decoder: Decoder) throws {
@@ -76,7 +94,7 @@ public struct Chat : Codable {
             displayMemberImages = nil
         }
         
-        chatType = try values.decode(String.self, forKey: .chatType)
-        titleSource = try values.decode(String.self, forKey: .titleSource)        
+        roomType = try values.decode(ChatRoomType.self, forKey: .roomType)
+        titleSource = try values.decode(String.self, forKey: .titleSource)
     }
 }

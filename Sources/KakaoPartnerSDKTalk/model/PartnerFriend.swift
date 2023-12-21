@@ -82,9 +82,6 @@ public struct PartnerFriend : Codable {
     /// 사용자 아이디. appRegistered가 false이면 nil이 됩니다.
     public let id: Int64?
     
-    /// 서비스 유저 아이디
-    public let serviceUserId: Int64?
-    
     /// 메시지를 전송하기 위한 고유 아이디
     ///
     /// 카카오 서비스의 회원임을 앱내에서 식별 할 수 있지만, 사용자의 계정 상태에 따라 이 정보는 바뀔 수 있습니다. 앱내의 사용자 식별자로 저장 사용되는 것은 권장하지 않습니다.
@@ -111,7 +108,7 @@ public struct PartnerFriend : Codable {
     public let favorite: Bool?
     
     enum CodingKeys : String, CodingKey {
-        case id, serviceUserId, uuid, appRegistered, profileNickname, profileThumbnailImage, talkOs, allowedMsg, relation, favorite
+        case id, uuid, appRegistered, profileNickname, profileThumbnailImage, talkOs, allowedMsg, relation, favorite
     }
     
 #if swift(>=5.8)
@@ -122,7 +119,6 @@ public struct PartnerFriend : Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
         id = try? values.decode(Int64.self, forKey: .id)
-        serviceUserId = try? values.decode(Int64.self, forKey: .serviceUserId)
         uuid = try values.decode(String.self, forKey: .uuid)
         appRegistered = try? values.decode(Bool.self, forKey: .appRegistered)
         profileNickname = try? values.decode(String.self, forKey: .profileNickname)

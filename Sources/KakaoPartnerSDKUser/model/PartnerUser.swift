@@ -131,11 +131,7 @@ public struct PartnerAccount : Codable {
     /// 카카오 계정 가입 일자
     public let accountCreationDate : String?
 
-    //for partner 전용.
-    
-    ///레거시 회원번호
-    public let serviceUserId : Int64?
-    
+    //for partner 전용.   
     ///통합계정 여부
     public let unificationStatus : Bool?
     
