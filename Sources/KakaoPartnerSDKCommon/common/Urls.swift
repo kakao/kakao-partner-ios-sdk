@@ -126,4 +126,7 @@ public class PartnerPaths {
     
     public static let selectChats = "/v1/api/talk/chat/list/sdk"
     public static let selectChatMembers = "/v1/api/talk/members/sdk"
+    
+    public static let createAddress = "/user/create/address"
+    public static let editAddress = "/user/edit/address"
 }

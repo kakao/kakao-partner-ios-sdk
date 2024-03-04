@@ -182,4 +182,19 @@ extension UserApi {
                                                                  underAge: underAge,
                                                                  completion: completion)
     }
+    
+    /// 배송지 추가하기
+    public func createShippingAddress(completion: @escaping (Int64?, Error?) -> Void) {
+        self._requestShippingAddress(continuePath: PartnerPaths.createAddress,
+                                     completion: completion)
+    }
+    
+    /// 배송지 수정하기
+    /// - parameters:
+    ///   - addressId: 배송지 ID
+    public func updateShippingAddress(addressId: Int64, completion: @escaping (Int64?, Error?) -> Void) {
+        self._requestShippingAddress(continuePath: PartnerPaths.editAddress,
+                                     addressId: addressId, 
+                                     completion: completion)
+    }
 }
