@@ -14,28 +14,34 @@
 
 import Foundation
 
-/// 카카오톡 채팅방 목록 조회 API 응답 클래스입니다.
+/// 채팅방 목록 \
+/// List of chats
 /// ## SeeAlso
 /// - ``KakaoSDKTalk/TalkApi/chatList(filters:offset:limit:order:completion:)``
 public struct Chats : Codable {
     
-    /// 전체 채팅방 수
+    /// 채팅방 수 \
+    /// Number of chats
     public let totalCount: Int
     
-    /// 채팅방 목록
+    /// 채팅방 목록 \
+    /// List of chats
     /// ## SeeAlso 
     /// - ``Chat``
     public let elements: [Chat]?
     
-    /// 채팅방 목록 현재 페이지의 이전 페이지 URL
+    /// 이전 페이지 URL \
+    /// URL for the prior page
     public let beforeUrl : URL?
     
-    /// 채팅방 목록 현재 페이지의 다음 페이지 URL
+    /// 다음 페이지 URL \
+    /// URL for the next page
     public let afterUrl : URL?
     
 }
 
-/// 선택한 채팅방의 종류
+/// 채팅방 타입 \
+/// Type of the chat
 public enum ChatRoomType : String, Codable {
     ///메모 챗방
     case MemoChat
@@ -53,27 +59,36 @@ public enum ChatRoomType : String, Codable {
     case OpenMultiChat //기존 open
 }
 
-/// 카카오톡 채팅방을 나타냅니다.
+/// 채팅방 정보 \
+/// Chat information
 public struct Chat : Codable {
     
-    /// 채팅방 아이디
+    /// 채팅방 ID \
+    /// Chat ID
     public let id: Int64
     
-    /// 채팅방 이름
+    /// 채팅방 이름 \
+    /// Title of the chat
     public let title: String?
     
-    /// 이미지 URL
+    /// 채팅방 이미지 URL \
+    /// Image URL for the chat
     public let imageUrl: URL?
     
-    /// 참여한 멤버 수
+    /// 채팅방 멤버 수 \
+    /// Number of chat members
     public let memberCount: Int?
     
-    /// 화면에 표시할 대표 멤버 이미지 URL 목록
+    /// 채팅방 멤버 썸네일 이미지 목록(최대 5명) \
+    /// List of thumbnail image of chat members (Maximum: 5)
     public let displayMemberImages: [URL]?
     
-    /// 채팅방의 종류
+    /// 채팅방 타입 \
+    /// Type of the chat
     public let roomType: ChatRoomType
     
+    /// 채팅방 이름 타입(`user`: 사용자 설정 | `chat`: 채팅방 생성 시 설정 | `default`: 별도 설정 없음) \
+    /// Type of the chat title (`user`: user set | `chat`: set upon creation | `default`: no setting)
     public let titleSource: String
     
     enum CodingKeys : String, CodingKey {

@@ -15,20 +15,35 @@ import KakaoSDKAuth
 import KakaoSDKTalk
 import KakaoSDKTemplate
 
-/// 카카오톡 API 호출을 담당하는 클래스입니다.
+/// [카카오톡 채널](https://developers.kakao.com/internal-docs/latest/ko/kakaotalk-channel/common), [카카오톡 소셜](https://developers.kakao.com/internal-docs/latest/ko/kakao-social/common), [카카오톡 메시지](https://developers.kakao.com/internal-docs/latest/ko/kakaotalk-message/common) API 클래스 \
+/// Class for the [Kakao Talk Channel](https://developers.kakao.com/internal-docs/latest/ko/kakaotalk-channel/common), [Kakao Talk Social](https://developers.kakao.com/internal-docs/latest/ko/kakao-social/common), [Kakao Talk Message](https://developers.kakao.com/internal-docs/latest/ko/kakaotalk-message/common) APIs
 extension TalkApi  {
         
-    /// 수신자 아이디 타입 열거형
+    /// 수신자 ID 타입 \
+    /// Type of receiver IDs
     public enum ReceiverIdType : String {
-        /// Uuid
+        /// 고유 ID \
+        /// Unique ID
         case Uuid = "uuid"
-        /// 유저 아이디
+        /// 회원번호 \
+        /// Service user ID
         case UserId = "user_id"
-        /// 채팅방 아이디
+        /// 채팅방 ID \
+        /// Chat ID
         case ChatId = "chat_id"
     }
     
-    /// 카카오톡 채팅방 목록을 가져옵니다.
+    /// 채팅방 목록 가져오기 \
+    /// Retrieve list of chats
+    /// - parameters:
+    ///   - filters: 필터링 설정 \
+    ///              Filtering options
+    ///   - offset: 채팅방 목록 시작 지점 \
+    ///             Start point of the chat list
+    ///   - limit: 페이지당 결과 수 \
+    ///            Number of results in a page
+    ///   - order: 정렬 방식 \
+    ///            Sorting method
     /// ## SeeAlso 
     /// - ``Chats``
     public func chatList(filters: [ChatFilter]? = nil,
@@ -58,7 +73,17 @@ extension TalkApi  {
                             }
     }
     
-    /// 사용자의 카카오톡 채팅방에 속한 멤버를 조회합니다. 채팅방 아이디를 기준으로 조회하며 친구인 멤버만 조회할지 여부를 선택할 수 있습니다.
+    /// 채팅방 멤버 가져오기 \
+    /// Retrieve list if chat members
+    /// - parameters:
+    ///   - chatId: 채팅방 ID \
+    ///             Chat ID
+    ///   - friendsOnly: 카카오톡 친구 여부 필터링 설정 \
+    ///                  Whether to retrieve only friends
+    ///   - includeProfile: 멤버 프로필 포함 여부 \
+    ///                     Whether to retrieve the profile
+    ///   - token: 요청에 대한 토큰 정보 \
+    ///            Token for the request
     /// ## SeeAlso 
     /// - ``ChatMembers``
     public func chatMembers(chatId:Int64,
@@ -88,7 +113,18 @@ extension TalkApi  {
         }
     }
     
-    /// 기본 템플릿을 사용하여, 조회한 친구를 대상으로 카카오톡으로 메시지를 전송합니다.
+    /// 기본 템플릿으로 메시지 보내기 \
+    /// Send message with default template
+    /// - parameters:
+    ///    - templatable: 메시지 템플릿 객체 \
+    ///                   An object of a message template
+    ///    - receiverIdType: 수신자 ID 타입 \
+    ///                      Type of receiver IDs
+    ///    - receiverIds: 수신자 ID 목록 \
+    ///                   List of receiver IDs
+    /// ## SeeAlso
+    /// - [`Templatable`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKTemplate/documentation/kakaosdktemplate/templatable)
+    /// - ``PartnerMessageSendResult``
     public func sendDefaultMessageForPartner(templatable:Templatable,
                                              receiverIdType:ReceiverIdType,
                                              receiverIds:[Any],
@@ -116,7 +152,19 @@ extension TalkApi  {
         }
     }
     
-    /// 개발자사이트에서 생성한 메시지 템플릿을 사용하여, 조회한 친구를 대상으로 카카오톡으로 메시지를 전송합니다. 템플릿을 생성하는 방법은 [https://developers.kakao.com/docs/latest/ko/message/ios#create-message](https://developers.kakao.com/docs/latest/ko/message/ios#create-message) 을 참고하시기 바랍니다.
+    /// 사용자 정의 템플릿으로 메시지 보내기 \
+    /// Send message with custom template
+    /// - parameters:
+    ///    - templateId: 메시지 템플릿 ID \
+    ///                  Message template ID
+    ///    - templateArgs: 사용자 인자 \
+    ///                    User arguments
+    ///    - receiverIdType: 수신자 ID 타입 \
+    ///                      Type of receiver IDs
+    ///    - receiverIds: 수신자 ID 목록 \
+    ///                   List of receiver IDs
+    /// ## SeeAlso
+    /// - ``PartnerMessageSendResult``
     public func sendCustomMessageForPartner(templateId: Int64,
                                             templateArgs:[String:Any]? = nil,
                                             receiverIdType:ReceiverIdType,
@@ -147,7 +195,21 @@ extension TalkApi  {
         }
     }
     
-    /// 지정된 URL을 스크랩하여, 조회한 친구를 대상으로 카카오톡으로 메시지를 전송합니다. 스크랩 커스텀 템플릿 가이드를 참고하여 템플릿을 직접 만들고 스크랩 메시지 전송에 이용할 수도 있습니다.
+    /// 스크랩 메시지 보내기 \
+    /// Send scrape message
+    /// - parameters:
+    ///    - requestUrl: 스크랩할 URL \
+    ///                   URL to scrape
+    ///    - templateId: 메시지 템플릿 ID \
+    ///                  Message template ID
+    ///    - templateArgs: 사용자 인자 \
+    ///                    User arguments
+    ///    - receiverIdType: 수신자 ID 타입 \
+    ///                      Type of receiver IDs
+    ///    - receiverIds: 수신자 ID 목록 \
+    ///                   List of receiver IDs
+    /// ## SeeAlso
+    /// - ``PartnerMessageSendResult``
     public func sendScrapMessageForPartner(requestUrl: String,
                                            templateId: Int64? = nil,
                                            templateArgs:[String:Any]? = nil,
@@ -180,7 +242,21 @@ extension TalkApi  {
           }
     }
     
-    /// 카카오톡 친구 목록을 조회합니다. Open SDK의 확장으로 앱에 가입되지 않은 친구도 조회할 수 있습니다.
+    /// 친구 목록 가져오기 \
+    /// Retrieve list of friends
+    /// - parameters:
+    ///   - friendFilter: 친구 목록 필터링 설정 \
+    ///                   Filtering options for the friend list
+    ///   - friendOrder: 친구 정렬 방식 \
+    ///                  Method to sort the friend list
+    ///   - offset: 친구 목록 시작 지점 \
+    ///             Start point of the friend list
+    ///   - limit: 페이지당 결과 수 \
+    ///            Number of results in a page
+    ///   - order: 정렬 방식 \
+    ///            Sorting method
+    ///   - countryCodes: 국가 코드 필터링 설정 \
+    ///                   Options for filtering by country codes
     /// ## SeeAlso 
     /// - ``PartnerFriend``
     public func friendsForPartner(friendFilter: FriendFilter? = nil,
@@ -214,9 +290,11 @@ extension TalkApi  {
         }
     }
     
-    /// 카카오톡 친구 목록을 FriendContext를 파라미터로 조회합니다. Open SDK의 확장으로 앱에 가입되지 않은 친구도 조회할 수 있습니다.
+    /// 친구 목록 가져오기 \
+    /// Retrieve list of friends
     /// ## SeeAlso 
     /// - ``PartnerFriendsContext``
+    /// - ``PartnerFriend``
     public func friendsForPartner(context: PartnerFriendsContext?,
                                   completion:@escaping (Friends<PartnerFriend>?, Error?) -> Void) {
         

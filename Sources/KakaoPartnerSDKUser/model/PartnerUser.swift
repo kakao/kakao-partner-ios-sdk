@@ -15,145 +15,208 @@
 import Foundation
 import KakaoSDKUser
 
-/// 사용자 정보 조회 API 응답으로 제공되는 사용자 정보 최상위 클래스입니다. 보다 자세한 내용은 Open SDK 용 User 문서를 참고해주세요.
+/// 사용자 정보 가져오기 응답 \
+/// Response for Retrieve user information
 public struct PartnerUser : Codable {
     
+    /// 회원번호 \
+    /// Service user ID
     public let id: Int64?
+    
+    /// 사용자 프로퍼티 \
+    /// User properties
     public let properties: [String:String]?
-    /// 카카오계정 정보
+    
+    /// 카카오계정 정보 \
+    /// Kakao Account information
     /// ## SeeAlso
     /// - ``PartnerAccount``
     public let kakaoAccount: PartnerAccount?
+    
+    /// 그룹에서 맵핑 정보로 사용할 수 있는 값 \
+    /// Token to map users in the group apps
     public let groupUserToken: String?
     
+    /// 서비스에 연결 완료된 시각, UTC \
+    /// Time connected to the service, UTC
     public let connectedAt : Date?
+    
+    /// 카카오싱크 간편가입을 통해 로그인한 시각, UTC \
+    /// Time logged in through Kakao Sync Simple Signup, UTC
     public let synchedAt : Date?
     
-    //for partner 전용.
-    /// 사용자가 앱에 연결되어 있는지 여부를 나타냅니다. **자동 연결** 설정이 활성화되어 있는 경우 값이 내려오지 않으므로 앱에 연결되어 있다고 가정해도 무방합니다.
+    // for partner 전용
+    /// 연결하기 호출의 완료 여부 \
+    /// Whether the user is completely linked with the app
     public let hasSignedUp: Bool?
-    /// 파트너용 사용자 정보
+    
+    /// 카카오 및 공동체, 제휴 앱에만 제공되는 추가 정보 \
+    /// Additional user information for Kakao and partners
     /// ## SeeAlso 
     /// - ``ForPartner``
     public let forPartner: ForPartner?
 }
 
-///카카오계정에 등록된 사용자 개인정보를 제공합니다. (파트너 전용)
+/// 카카오 및 공동체, 제휴 앱에만 제공되는 카카오계정 추가 정보 \
+/// Additional Kakao Account information for Kakao and partners
 public struct PartnerAccount : Codable {
     
     // MARK: Fields
     
-    /// profile 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 프로필 제공 가능 여부 \
+    /// Whether ``profile`` can be provided under user consent
     public let profileNeedsAgreement: Bool?
-    /// profile 닉네임 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 닉네임 제공 가능 여부 \
+    /// Whether ``profileNickname`` can be provided under user consent
     public let profileNicknameNeedsAgreement: Bool?
-    /// profile 이미지 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 프로필 사진 제공 가능 여부 \
+    /// Whether ``profileImage`` can be provided under user consent
     public let profileImageNeedsAgreement: Bool?
     
-    /// 카카오계정에 등록한 프로필 정보
+    /// 프로필 정보 \
+    /// Profile information
     /// ## SeeAlso 
-    /// - ``Profile``
+    /// - [`Profile`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKUser/documentation/kakaosdkuser/profile)
     public let profile: Profile?
     
-    /// 카카오계정 이름에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 이름 제공 가능 여부 \
+    /// Whether ``name`` can be provided under user consent
     public let nameNeedsAgreement: Bool?
-    /// 카카오계정 이름
+    /// 카카오계정 이름 \
+    /// Name of Kakao Account
     public let name: String?
     
-    /// email 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 카카오계정 대표 이메일 제공 가능 여부 \
+    /// Whether ``email`` can be provided under user consent
     public let emailNeedsAgreement: Bool?
-    /// 카카오계정에 등록된 이메일의 유효성
+    /// 이메일 유효 여부 \
+    /// Whether email address is valid
     public let isEmailValid: Bool?
-    /// 카카오계정에 이메일 등록 시 이메일 인증을 받았는지 여부
+    /// 이메일 인증 여부 \
+    /// Whether email address is verified
     public let isEmailVerified: Bool?
-    /// 카카오계정에 등록된 이메일
+    /// 카카오계정 대표 이메일 \
+    /// Representative email of Kakao Account
     public let email: String?
     
-    /// ageRange 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 연령대 제공 가능 여부 \
+    /// Whether ``ageRange``  can be provided under user consent
     public let ageRangeNeedsAgreement: Bool?
-    /// 연령대
+    /// 연령대 \
+    /// Age range
     /// ## SeeAlso 
-    /// - ``AgeRange``
+    /// - [`AgeRange`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKUser/documentation/kakaosdkuser/agerange)
     public let ageRange: AgeRange?
-    /// birthyear 제공에 대한 사용자 동의 필요 여부
+    
+    /// 사용자 동의 시 출생 연도 제공 가능 여부 \
+    /// Whether ``birthyear``  can be provided under user consent
     public let birthyearNeedsAgreement: Bool?
-    /// 출생 연도 (YYYY)
+    /// 출생 연도, YYYY 형식 \
+    /// Birthyear in YYYY format
     public let birthyear: String?
-    /// birthday 제공에 대한 사용자 동의 필요 여부
+    
+    /// 사용자 동의 시 생일 제공 가능 여부 \
+    /// Whether ``birthday`` can be provided under user consent
     public let birthdayNeedsAgreement: Bool?
-    /// 생일 (MMDD)
+    /// 생일, MMDD 형식 \
+    /// Birthday in MMDD format
     public let birthday: String?
-    /// 생일의 양력/음력
+    /// 생일 타입 \
+    /// Birthday type
+    /// ## SeeAlso
+    /// - [`BirthdayType`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKUser/documentation/kakaosdkuser/birthdaytype)
     public let birthdayType: BirthdayType?
     
-    /// gender 제공에 대한 사용자의 동의 필요 여부
+    /// 사용자 동의 시 전화번호 제공 가능 여부 \
+    /// Whether ``gender`` can be provided under user consent
     public let genderNeedsAgreement: Bool?
-    /// 성별
+    /// 성별 \
+    /// Gender
     /// ## SeeAlso 
-    /// - ``Gender``
+    /// - [`Gender`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKUser/documentation/kakaosdkuser/birthdaytype/rawrepresentable-implementations)
     public let gender: Gender?
     
-    /// phoneNumber 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 전화번호 제공 가능 여부 \
+    /// Whether ``phoneNumber`` can be provided under user consent
     public let phoneNumberNeedsAgreement: Bool?
-    /// 카카오톡에서 인증한 전화번호
+    /// 카카오계정의 전화번호 \
+    /// Phone number of Kakao Account
     public let phoneNumber: String?
     
-    /// ci 제공에 대한 사용자의 동의 필요 여부
+    /// 사용자 동의 시 연계정보 제공 가능 여부 \
+    /// Whether ``ci`` can be provided under user consent
     public let ciNeedsAgreement: Bool?
-    /// 암호화된 사용자 확인값
+    /// 연계정보 \
+    /// Connecting Information(CI)
     public let ci: String?
-    /// ci 발급시간
+    /// CI 발급시간 \
+    /// CI issuance time
     public let ciAuthenticatedAt: Date?
     
-    /// legalName 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 실명 제공 가능 여부 \
+    /// Whether ``legalName`` can be provided under user consent
     public let legalNameNeedsAgreement : Bool?
-    /// 실명
+    /// 실명 \
+    /// Legal name
     public let legalName : String?
     
-    /// legalBirthDate 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 법정 생년월일 제공 가능 여부 \
+    /// Whether ``isKorean`` can be provided under user consent
     public let legalBirthDateNeedsAgreement : Bool?
-    /// 법정생년월일
+    /// 법정 생년월일, yyyyMMDD 형식 \
+    /// Legal birth date in yyyyMMDD format
     public let legalBirthDate : String?
     
-    /// legalGender 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 법정 성별 제공 가능 여부 \
+    /// Whether ``legalGender`` can be provided under user consent
     public let legalGenderNeedsAgreement : Bool?
-    /// 법정성별
+    /// 법정 성별 \
+    /// Legal gender
     public let legalGender : Gender?
     
-    ///한국인 여부 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 내외국인 제공 가능 여부 \
+    /// Whther ``isKorean`` can be provided under user consent
     public let isKoreanNeedsAgreement : Bool?
-    ///한국인 여부
+    /// 본인인증을 거친 내국인 여부 \
+    /// Whether the user is Korean
     public let isKorean : Bool?
     
-    /// 카카오 계정 가입 일자 제공에 대한 사용자 동의 필요 여부
+    /// 사용자 동의 시 카카오계정 가입일자 제공 가능 여부 \
+    /// Whether ``accountCreationDate`` can be provided under user consent
     public let accountCreationDateNeedsAgreement : Bool?
-    
-    /// 카카오 계정 가입 일자
+    /// 카카오계정 가입일자 \
+    /// Kakao Account creation date
     public let accountCreationDate : String?
 
-    //for partner 전용.   
-    ///통합계정 여부
+    // for partner 전용
+    /// 카카오계정 통합 여부 \
+    /// Whether the Kakao Account is unified
     public let unificationStatus : Bool?
     
-    /// 카카오톡 사용자인지 여부를 나타냅니다.
+    /// 카카오톡 가입 여부 \
+    /// Whether the user is using Kakao Talk
     public let isKakaotalkUser: Bool?
-    /// 화면에 표시하기 위해 마스킹처리된 카카오계정의 이메일 또는 전화번호 값입니다.
+    
+    /// 카카오계정 대표 정보, 이메일 또는 전화번호 \
+    /// Display ID, email or phone number
     public let displayId: String?
     
 }
 
-/// 파트너용으로 제공되는 추가 정보입니다.
+/// 카카오 및 공동체, 제휴 앱에만 제공되는 추가 정보 \
+/// Additional user information for Kakao and partners
 public struct ForPartner : Codable {
     
-    /// 메시지를 전송하기 위한 고유 아이디
-    ///
-    /// 카카오 서비스의 회원임을 앱내에서 식별 할 수 있지만, 사용자의 계정 상태에 따라 이 정보는 바뀔 수 있습니다. 앱내의 사용자 식별자로 저장 사용되는 것은 권장하지 않습니다.
+    /// 다른 사용자의 친구 정보에서 보여지는 해당 사용자의 고유 ID \
+    /// Unique ID for the friend information
     public let uuid: String?
     
-    /// 남아 있는 초대 메시지 전송 가능 횟수
+    /// 남은 일별 초대 메시지 전송 횟수 \
+    /// Remaining invitation message count per day
     public let remainingInviteCount: Int?
     
-    /// 남아있는 그룹 메시지 전송 가능 횟수
+    /// 남은 일별 그룹 메시지 전송 횟수 \
+    /// Remaining group message count per day
     public let remainingGroupMsgCount: Int?
 }
 

@@ -15,11 +15,14 @@
 import Foundation
 import KakaoSDKFriend
 
-/// 파트너용으로 제공되는 클래스로 챗방/챗멤버피커, 탭피커를 호출합니다.
+/// [피커](https://developers.kakao.com/internal-docs/latest/ko/kakao-social/common) API 클래스 \
+/// Class for the [picker](https://developers.kakao.com/internal-docs/latest/ko/kakao-social/common) APIs
 extension PickerApi  {
-    /// 여러 명의 친구를 선택(멀티 피커)할 수 있는 친구 피커를 화면 전체에 표시합니다.
-    /// ## SeeAlso 
-    /// - ``PickerFriendRequestParams``
+    /// 풀 스크린 형태의 멀티 피커 요청 \
+    /// Requests a multi-picker in full-screen view
+    /// ## SeeAlso
+    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     public func selectFriends(params:PickerFriendRequestParams, completion:@escaping (SelectedUsers?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -33,9 +36,11 @@ extension PickerApi  {
         }
     }
     
-    /// 여러 명의 친구를 선택(멀티 피커)할 수 있는 친구 피커를 팝업 형태로 표시합니다.
+    /// 팝업 형태의 멀티 피커 요청 \
+    /// Requests a multi-picker in pop-up view
     /// ## SeeAlso 
-    /// - ``PickerFriendRequestParams``
+    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     public func selectFriendsPopup(params:PickerFriendRequestParams, completion:@escaping (SelectedUsers?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -49,9 +54,11 @@ extension PickerApi  {
         }
     }
     
-    /// 한 명의 친구만 선택(싱글 피커)할 수 있는 친구 피커를 화면 전체에 표시합니다.
+    /// 풀 스크린 형태의 싱글 피커 요청 \
+    /// Requests a single picker in full-screen view
     /// ## SeeAlso 
-    /// - ``PickerFriendRequestParams``
+    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     public func selectFriend(params:PickerFriendRequestParams, completion:@escaping (SelectedUsers?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -65,9 +72,11 @@ extension PickerApi  {
         }
     }
     
-    /// 한 명의 친구만 선택(싱글 피커)할 수 있는 친구 피커를 팝업 형태로 표시합니다.
+    /// 팝업 형태의 싱글 피커 요청 \
+    /// Requests a single picker in pop-up view
     /// ## SeeAlso 
-    /// - ``PickerFriendRequestParams``
+    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     public func selectFriendPopup(params:PickerFriendRequestParams, completion:@escaping (SelectedUsers?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -81,9 +90,12 @@ extension PickerApi  {
         }
     }
     
-    /// 채팅방 피커를 화면 전체에 표시합니다.
+    /// 풀 스크린 형태의 채팅방 피커 요청 \
+    /// Requests a chat picker in full-screen view
     /// ## SeeAlso 
-    /// - ``PickerChatRequestParams``
+    /// - [`PickerChatRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerchatrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
+    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
     public func selectChat(params:PickerChatRequestParams, completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -97,9 +109,12 @@ extension PickerApi  {
         }
     }
     
-    /// 채팅방 피커를 팝업 형태로 표시합니다.
+    /// 팝업 형태의 채팅방 피커 요청 \
+    /// Requests a chat picker in pop-up view
     /// ## SeeAlso 
-    /// - ``PickerChatRequestParams``
+    /// - [`PickerChatRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerchatrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
+    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
     public func selectChatPopup(params:PickerChatRequestParams, completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -113,9 +128,12 @@ extension PickerApi  {
         }
     }
     
-    /// 친구 피커와 채팅방 피커를 탭 구조로 제공하는 탭 피커를 화면 전체에 표시합니다.
+    /// 풀 스크린 형태의 탭 피커 요청 \
+    /// Requests a tap picker in full-screen view
     /// ## SeeAlso 
-    /// - ``PickerTabRequestParams``
+    /// - [`PickerTabRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickertabrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
+    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
     public func select(params:PickerTabRequestParams, completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
@@ -129,9 +147,12 @@ extension PickerApi  {
         }
     }
     
-    /// 친구 피커와 채팅방 피커를 탭 구조로 제공하는 탭 피커를 팝업 형태로 표시합니다.
+    /// 팝업 형태의 탭 피커 요청 \
+    /// Requests a tap picker in pop-up view
     /// ## SeeAlso 
-    /// - ``PickerTabRequestParams``
+    /// - [`PickerTabRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickertabrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
+    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
     public func selectPopup(params:PickerTabRequestParams, completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {

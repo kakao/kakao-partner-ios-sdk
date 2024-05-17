@@ -19,8 +19,20 @@ import KakaoSDKCommon
 import KakaoSDKShare
 import KakaoSDKTemplate
 
-/// 카카오톡 공유 호출을 담당하는 클래스입니다.
-extension ShareApi {    
+/// [카카오톡 공유](https://developers.kakao.com/docs/latest/ko/message/common) API 클래스 \
+/// Class for the [Kakao Talk Sharing](https://developers.kakao.com/docs/latest/ko/message/common) APIs
+extension ShareApi {
+    /// 기본 템플릿으로 메시지 보내기 \
+    /// Send message with default template
+    /// - parameters:
+    ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
+    ///                   Native app key of the service app displayed on the source area
+    ///   - templateObjectJsonString: 기본 템플릿 객체를 JSON 형식으로 변환한 문자열 \
+    ///                               String converted in JSON format from a default template
+    ///   - serverCallbackArgs: 카카오톡 공유 전송 성공 알림에 포함할 키와 값 \
+    ///                         Keys and values for the Kakao Talk Sharing success callback
+    /// ## SeeAlso
+    /// - [`SharingResult`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKShare/documentation/kakaosdkshare/sharingresult)
     func shareDefault(targetAppKey:String,
                      templateObjectJsonString:String? = nil,
                      serverCallbackArgs:[String:String]? = nil,
@@ -54,11 +66,18 @@ extension ShareApi {
         }
     }
     
-    /// 기본 템플릿을 카카오톡으로 공유합니다.
-    /// 원하는 앱의 네이티브 앱 키를 "targetAppKey"로 전달해 말풍선 출처 영역에 출력할 앱 정보를 지정할 수 있습니다.
+    /// 기본 템플릿으로 메시지 보내기 \
+    /// Send message with default template
+    /// - parameters:
+    ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
+    ///                   Native app key of the service app displayed on the source area
+    ///   - templatable: 기본 템플릿으로 변환 가능한 객체 \
+    ///                  Object to convert to a default template
+    ///   - serverCallbackArgs: 카카오톡 공유 전송 성공 알림에 포함할 키와 값 \
+    ///                         Keys and values for the Kakao Talk Sharing success callback
     /// ## SeeAlso 
-    /// - ``Templatable``
-    /// - ``SharingResult``
+    /// - [`Templatable`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKTemplate/documentation/kakaosdktemplate/templatable)
+    /// - [`SharingResult`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKShare/documentation/kakaosdkshare/sharingresult)
     public func shareDefault(targetAppKey:String,
                             templatable: Templatable,
                             serverCallbackArgs:[String:String]? = nil,
@@ -70,10 +89,17 @@ extension ShareApi {
                           completion: completion)
     }
     
-    /// 기본 템플릿을 카카오톡으로 공유합니다.
-    /// 원하는 앱의 네이티브 앱 키를 "targetAppKey"로 전달해 말풍선 출처 영역에 출력할 앱 정보를 지정할 수 있습니다.
+    /// 기본 템플릿으로 메시지 보내기 \
+    /// Send message with default template
+    /// - parameters:
+    ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
+    ///                   Native app key of the service app displayed on the source area
+    ///   - templateObject: 기본 템플릿 객체 \
+    ///                     Default template object
+    ///   - serverCallbackArgs: 카카오톡 공유 전송 성공 알림에 포함할 키와 값 \
+    ///                         Keys and values for the Kakao Talk Sharing success callback
     /// ## SeeAlso 
-    /// - ``SharingResult``
+    /// -  [`SharingResult`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKShare/documentation/kakaosdkshare/sharingresult)
     public func shareDefault(targetAppKey:String,
                             templateObject:[String:Any],
                             serverCallbackArgs:[String:String]? = nil,
@@ -85,10 +111,21 @@ extension ShareApi {
                          completion: completion)
     }
     
-    /// 지정된 URL을 스크랩하여 만들어진 템플릿을 카카오톡으로 공유합니다.
-    /// 원하는 앱의 네이티브 앱 키를 "targetAppKey"로 전달해 말풍선 출처 영역에 출력할 앱 정보를 지정할 수 있습니다.
-    /// ## SeeAlso 
-    /// - ``SharingResult``
+    /// 스크랩 메시지 보내기 \
+    /// Send scrape message
+    /// - parameters:
+    ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
+    ///                   Native app key of the service app displayed on the source area
+    ///   - requestUrl: 스크랩할 URL \
+    ///                 URL to scrape
+    ///   - templateId: 사용자 정의 템플릿 ID \
+    ///                 Custom template ID
+    ///   - templateArgs: 사용자 인자 키와 값 \
+    ///                   Keys and values of the user argument
+    ///   - serverCallbackArgs: 카카오톡 공유 전송 성공 알림에 포함할 키와 값 \
+    ///                         Keys and values for the Kakao Talk Sharing success callback
+    /// ## SeeAlso
+    /// - [`SharingResult`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKShare/documentation/kakaosdkshare/sharingresult)
     public func shareScrap(targetAppKey:String,
                           requestUrl:String,
                           templateId:Int64? = nil,
@@ -127,10 +164,19 @@ extension ShareApi {
         }
     }
     
-    /// 카카오 디벨로퍼스에서 생성한 메시지 템플릿을 카카오톡으로 공유합니다. 템플릿을 생성하는 방법은 [https://developers.kakao.com/docs/latest/ko/message/ios#create-message](https://developers.kakao.com/docs/latest/ko/message/ios#create-message) 을 참고하시기 바랍니다.
-    /// 원하는 앱의 네이티브 앱 키를 "targetAppKey"로 전달해 말풍선 출처 영역에 출력할 앱 정보를 지정할 수 있습니다.
+    /// 사용자 정의 템플릿으로 메시지 보내기 \
+    /// Send message with custom template
+    /// - parameters:
+    ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
+    ///                   Native app key of the service app displayed on the source area
+    ///   - templateId: 사용자 정의 템플릿 ID \
+    ///                 Custom template ID
+    ///   - templateArgs: 사용자 인자 키와 값 \
+    ///                   Keys and values of the user argument
+    ///   - serverCallbackArgs: 카카오톡 공유 전송 성공 알림에 포함할 키와 값 \
+    ///                         Keys and values for the Kakao Talk Sharing success callback
     /// ## SeeAlso 
-    /// - ``SharingResult``
+    /// - [`SharingResult`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKShare/documentation/kakaosdkshare/sharingresult)
     public func shareCustom(targetAppKey:String,
                            templateId:Int64,
                            templateArgs:[String:String]? = nil,

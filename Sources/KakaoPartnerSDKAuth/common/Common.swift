@@ -14,12 +14,19 @@
 
 import Foundation
 
+/// 연령인증 레벨 \
+/// Age verification level
 public enum AuthLevel : String, Codable {
-    /// 1차인증
+    /// 1차, 연령인증 \
+    /// Level 1, age verification
     case Level1 = "AUTH_LEVEL1"
-    /// 2차인증
+    /// 2차, 본인인증 \
+    /// Level 2, identity verification
     case Level2 = "AUTH_LEVEL2"
     
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
     public var parameterValue: String {
         switch self {
         case .Level1:

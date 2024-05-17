@@ -18,16 +18,20 @@ import KakaoSDKTalk
 
 // MARK: Enumerations
 
-/// 친구 목록 필터링
+/// 친구 목록 필터링 설정 \
+/// Filtering options for the friend list
 public enum FriendFilter : String, Codable {
     
-    /// 필터링하지 않음
+    /// 필터링하지 않음 \
+    /// Do not filter
     case None = "none"
     
-    /// 앱에 가입된 친구만 조회
+    /// 앱과 연결된 친구 \
+    /// Friends linked to the app
     case Registered = "registered"
     
-    /// 앱에 가입되지 않은 친구만 조회
+    /// 앱과 연결되지 않은 친구, 초대 가능 \
+    /// Friends not linked to the app, available to invite
     case Invitable = "invitable"
     
 //    public var parameterValue: String {
@@ -42,19 +46,24 @@ public enum FriendFilter : String, Codable {
 //    }
 }
 
-/// 채팅방 목록 필터링 옵션
+/// 채팅방 필터링 설정 \
+/// Filtering options for the chat
 public enum ChatFilter {
     
-    /// 1:1 채팅방만 필터링하여 결과에 포함시킨다.
+    /// 1:1 채팅방만 포함 \
+    /// Includes 1:1 chats only
     case Direct
     
-    /// 그룹 채팅방만 필터링하여 결과에 포함시킨다.
+    /// 그룹 채팅방만 포함 \
+    /// Includes group chats only
     case Multi
     
-    /// 일반 채팅방만 필터링하여 결과에 포함시킨다.
+    /// 일반 채팅방만 포함 \
+    /// Includes regular chats only
     case Regular
     
-    /// 오픈 채팅방만 필터링하여 결과에 포함시킨다.
+    /// 오픈채팅방만 포함 \
+    /// Includes open chats only
     case Open
 
     public var parameterValue: String {
@@ -71,40 +80,46 @@ public enum ChatFilter {
     }
 }
 
-/// 파트너용으로 제공되는 친구 정보입니다. 보다 자세한 사용법은 Open SDK의 Friends 문서를 참고해주세요.
+/// 친구 정보 \
+/// Friend information
 /// ## SeeAlso
 /// - ``KakaoSDKTalk/TalkApi/friendsForPartner(friendFilter:friendOrder:offset:limit:order:countryCodes:completion:)``
 public struct PartnerFriend : Codable {
     
-    /// 사용자의 현재 앱 가입 여부
+    /// 앱 연결 여부 \
+    /// Whether linked to the app
     public let appRegistered: Bool?
     
-    /// 사용자 아이디. appRegistered가 false이면 nil이 됩니다.
+    /// 회원번호 \
+    /// Service user ID
     public let id: Int64?
     
-    /// 메시지를 전송하기 위한 고유 아이디
-    ///
-    /// 카카오 서비스의 회원임을 앱내에서 식별 할 수 있지만, 사용자의 계정 상태에 따라 이 정보는 바뀔 수 있습니다. 앱내의 사용자 식별자로 저장 사용되는 것은 권장하지 않습니다.
+    /// 고유 ID \
+    /// Unique ID
     public let uuid: String
     
-    /// 친구의 대표 프로필 닉네임. 앱 가입친구의 경우 앱에서 설정한 닉네임. 미가입친구의 경우 톡 또는 스토리의 닉네임
+    /// 프로필 닉네임 \
+    /// Profile nickname
     public let profileNickname: String?
     
-    /// 친구의 썸네일 이미지 URL
+    /// 프로필 썸네일 이미지 \
+    /// Profile thumbnail image
     public let profileThumbnailImage: URL?
     
-    /// 톡에 가입된 기기의 os 정보 (android / ios)
+    /// 카카오톡 가입 기기 OS \
+    /// Filtering options for the OS of the device used to sign up for Kakao Talk
     public let talkOs: String?
     
-    ///  메시지 수신이 허용되었는지 여부. 앱가입 친구의 경우는 feed msg에 해당. 앱미가입친구는 invite msg에 해당
+    /// 메시지 수신 허용 여부 \
+    /// Whether to allow receiving messages
     public let allowedMsg: Bool?
     
-    /// 현재 사용자와의 친구 상태
-    /// ## SeeAlso 
-    /// - ``FriendRelation``
+    /// 사용자와 친구의 관계 \
+    /// Relationship between user and friend
     public let relation: FriendRelation?
     
-    /// 즐겨찾기 추가 여부
+    /// 즐겨찾기 친구 여부 \
+    /// Whether a favorite friend
     public let favorite: Bool?
     
     enum CodingKeys : String, CodingKey {
@@ -130,7 +145,8 @@ public struct PartnerFriend : Codable {
     }
 }
 
-/// 친구 추가 상태 열거형
+/// 카카오톡 사용자와 친구의 관계 \
+/// Relation between the user and the friend
 public enum FriendRelationType : String, Codable {
     
     /// 친구인 상태
@@ -143,7 +159,8 @@ public enum FriendRelationType : String, Codable {
     case NA = "N/A"
 }
 
-/// 카카오톡 추가 상태를 나타냅니다.
+/// 카카오톡 사용자와 친구의 관계 \
+/// Relation between the user and the friend
 /// ## SeeAlso 
 /// - ``FriendRelationType``
 public struct FriendRelation : Codable {
@@ -152,15 +169,28 @@ public struct FriendRelation : Codable {
     public let talk: FriendRelationType?
 }
 
-/// 친구 목록 조회 컨텍스트
+/// 친구 목록 조회 설정 \
+/// Context for retrieving friend list
 /// ## SeeAlso
 /// - ``KakaoSDKTalk/TalkApi/friendsForPartner(context:completion:)``
 public struct PartnerFriendsContext {
+    /// 친구 목록 필터링 설정 \
+    /// Filtering options for the friend list
     public let friendFilter : FriendFilter?
+    /// 친구 정렬 방식 \
+    /// Method to sort the friend list
     public let friendOrder : FriendOrder?
+    /// 친구 목록 시작 지점 \
+    /// Start point of the friend list
     public let offset : Int?
+    /// 페이지당 결과 수 \
+    /// Number of results in a page
     public let limit : Int?
+    /// 정렬 방식 \
+    /// Sorting method
     public let order : Order?
+    /// 국가 코드 필터링 설정 \
+    /// Options for filtering by country codes
     public let countryCodes : [String]?
    
     public init(friendFilter : FriendFilter? = nil,

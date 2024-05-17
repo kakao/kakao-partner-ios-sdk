@@ -139,46 +139,56 @@ extension URL {
     }
 }
 
-/// 연령인증 에러
+/// 연령인증 에러 \
+/// Errors for age verification
 public enum AgeAuthError : Error {
+    /// 연령인증 실패 \
+    /// Failed to verify the user's age
     case AgeAuthFailed(reason:AgeAuthFailureReason, errorMessage:String?)
 }
 
-/// 연령인증(실명/본인/성인 인증) 에러 종류 입니다.
+/// 연령인증 에러 원인 \
+/// Reasons of age verification errors
 public enum AgeAuthFailureReason : Int {
-    /// 알수 없는 에러
+    /// 알 수 없음 \
+    /// Unknown
     case Unknown = -9999
     
-    /// 파라미터 형식이 잘못됨
+    /// 잘못된 파라미터를 전달한 경우 \
+    /// Passed wrong parameters
     case BadParameters = -440
     
-    /// 인증되지 않은 사용자일 경우
+    /// 인증되지 않은 사용자인 경우 \
+    /// Unauthorized user
     case Unauthorized = -401
     
-    /// 연령인증이 되지 않아서 연령인증이 필요한 상황
-    /// (보통 사용자가 외부 연령인증 페이지까지 갔다가 잘못된 정보를 입력하거나 취소하는 경우 발생할 수 있음)
+    /// 연령인증이 완료되지 않아 다시 연령인증이 필요한 경우 \
+    /// Age verification is required due to the incomplete process
     case NotAuthorizedAge = -450
     
-    /// 현재 앱의 연령제한보다 사용자의 연령이 낮은 경우
-    /// 대부분 만 14세 이상이지만 앱의 제한연령보다는 낮은 나이로 인증받은 경우 계정 DB에 인증 정보는 저장되지만, 서비스 이용은 불가하다는 페이지가 노출됩니다.
-    /// *만 14세 미만은 인증 자체가 불가하도록 막았으므로, 이 오류코드가 리턴되지 않음.
+    /// 사용자 연령이 앱의 제한연령보다 낮은 경우, 만 14세 미만인 경우 제외 \
+    /// User's age is lower than the app's age limit, except for the age under 14
     case LowerAgeLimit = -451
     
-    /// 이미 연령인증이 되었습니다.
-    /// (2차인증이 완료되어 있는 상황에서, 1차인증을 시도했을 경우에도 발생)
+    /// 이미 사용자가 동일하거나 더 높은 레벨의 연령인증을 완료한 경우 \
+    /// User already completed the same or higher level of age verification
     case AlreadyAgeAuthorized = -452
     
-    /// 연령인증 횟수 초과
+    /// 연령인증 횟수 초과 \
+    /// Exceeded the attempts of age verification
     case ExceedAgeCheckLimit = -453
     
-    /// 이전에 인증했던 정보와 불일치 (생일)
-    /// (기존 BIRTHDAY_MISMATCH 에서 수정됨)
+    // 기존 BIRTHDAY_MISMATCH 에서 수정됨
+    /// 기존 연령인증 정보와 일치하지 않는 경우 \
+    /// Mismatched with the previous age verification result
     case AgeAuthResultMismatch = -480
     
-    /// CI 정보가 불일치할 경우
+    /// CI가 일치하지 않는 경우 \
+    /// CI mismatched
     case CIResultMismatch = -481
     
-    /// 기타 서버 에러
+    /// 기타 서버 에러 \
+    /// Miscellaneous server error
     case Error = -500
 }
 

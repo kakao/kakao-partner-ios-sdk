@@ -14,46 +14,57 @@
 
 import Foundation
 
-/// 채팅방 멤버 조회 API 응답 클래스
+/// 채팅방 멤버 목록 \
+/// List of chat members
 /// ## SeeAlso 
-/// - ``TalkApi/chatMembers(chatId:friendsOnly:includeProfile:secureResource:offset:limit:order:)``
+/// - ``KakaoSDKTalk/TalkApi/chatMembers(chatId:friendsOnly:includeProfile:token:completion:)``
 public struct ChatMembers : Codable {
     
-    /// 채팅방 타입. "Direct", "Multi"
+    /// 채팅방 타입 \
+    /// Type of the chat
     public let type: String     // TODO: enum
     
-    /// 멤버 목록
+    /// 채팅방 멤버 목록 \
+    /// List of chat members
     /// ## SeeAlso 
     /// - ``Member``
     public let members: [Member]?
     
-    /// 내려받은 멤버 목록의 수 (최대 500)
+    /// 채팅방 내 멤버 수(최대:500) \
+    /// Number of chat members (Maximum: 500)
     public let activeMembersCount: Int?
     
-    /// 내려받은 멤버 중 친구의 수
+    /// 채팅방 내 친구 수, `friendsOnly`를 `true`로 요청한 경우에만 응답에 포함(최대:500) \
+    /// Number of friends in the chat room, only included in the response if `friendsOnly` is requested as `true` (Maximum: 500)
     public let activeFriendsCount: Int?
 }
 
-/// 채팅방 멤버
+/// 채팅방 멤버 \
+/// Member of the cat
 public struct Member : Codable {
     
-    /// 사용자의 현재 앱 가입 여부
+    /// 앱 연결 여부 \
+    /// Whether linked to the app
     public let appRegistered: Bool?
 
-    /// 사용자 아이디. appRegistered가 false이면 값이 nil이 됩니다.
+    /// 회원번호 \
+    /// Service user ID
     public let id: Int64?
     
-    /// 메시지를 전송하기 위한 고유 아이디
-    ///
-    /// 카카오 서비스의 회원임을 앱내에서 식별 할 수 있지만, 사용자의 계정 상태에 따라 이 정보는 바뀔 수 있습니다. 앱내의 사용자 식별자로 저장 사용되는 것은 권장하지 않습니다.
+    /// 고유 ID \
+    /// Unique ID
     public let uuid: String
     
-    /// 카카오톡 닉네임
+    /// 프로필 닉네임 \
+    /// Profile nickname
     public let nickname: String?
     
-    /// 카카오톡 썸네일 이미지 URL
+    /// 프로필 썸네일 이미지 \
+    /// Profile thumbnail image
     public let thumbnailImageUrl: URL?
     
+    /// 메시지 수신 허용 여부 \
+    /// Whether to allow receiving messages
     public let msgBlocked: Bool?
     
     enum CodingKeys : String, CodingKey {

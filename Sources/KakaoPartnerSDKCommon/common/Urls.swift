@@ -15,21 +15,27 @@
 import Foundation
 import KakaoSDKCommon
 
-/// 카카오 내부 Deployment Phase를 나타냅니다.
+/// 페이즈 \
+/// Phase
 public enum Phase : String {
+    /// 오메가 \
     /// Omega
     case Omega
     
-    /// Alpha (Dev)
+    /// 알파 \
+    /// Alpha
     case Dev
     
+    /// 샌드박스 \
     /// Sandbox
     case Sandbox
     
-    /// Beta (Cbt)
+    /// 베타, CBT \
+    /// Beta, CBT
     case Cbt
     
-    /// Real (Production)
+    /// 리얼, 프로덕션 \
+    /// Real, Production
     case Production
 }
 
@@ -47,6 +53,7 @@ extension Hosts {
                       auth: "omega-auth.kakao.com",
                       kauth: "omega-kauth.kakao.com",
                       talkAuth: "alphakompassauth",
+                      talkCert: "alphatalk",
                       channel: "alpha-pf.kakao.com",
                       talkLink: "alphalink",
                       talkLinkVersion: "alphatalk-5.9.7",
@@ -60,6 +67,7 @@ extension Hosts {
                       auth: "alpha-auth.kakao.com",
                       kauth: "alpha-kauth.kakao.com",
                       talkAuth: "alphakompassauth",
+                      talkCert: "alphatalk",
                       channel: "alpha-pf.kakao.com",
                       talkLink: "alphalink",
                       talkLinkVersion: "alphatalk-5.9.7",
@@ -74,6 +82,7 @@ extension Hosts {
                       auth: "sandbox-auth.kakao.com",
                       kauth: "sandbox-kauth.kakao.com",
                       talkAuth: "alphakompassauth",
+                      talkCert: "alphatalk",
                       channel: "sandbox-pf.kakao.com",
                       talkLink: "alphalink",
                       talkLinkVersion: "alphatalk-5.9.7",
@@ -88,6 +97,7 @@ extension Hosts {
                       auth: "beta-auth.kakao.com",
                       kauth: "beta-kauth.kakao.com",
                       talkAuth: "kakaokompassauth",
+                      talkCert: "kakaotalk",
                       channel: "beta-pf.kakao.com",
                       talkLink: "kakaolink",
                       talkLinkVersion: "kakaotalk-5.9.7",

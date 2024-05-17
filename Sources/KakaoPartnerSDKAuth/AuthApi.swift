@@ -18,12 +18,17 @@ import KakaoPartnerSDKCommon
 import KakaoSDKCommon
 import KakaoSDKAuth
 
-/// 카카오 로그인 확장 모듈입니다. 확장 모듈이므로 KakaoSDKAuth 모듈에 대한 의존성이 필요합니다.
-///
+/// [카카오 로그인](https://developers.kakao.com/internal-docs/latest/ko/kakaologin/common) 인증 및 토큰 관리 클래스 \
+/// Class for the authentication and token management through [Kakao Login](https://developers.kakao.com/internal-docs/latest/ko/kakaologin/common)
 extension AuthApi {
     
-    /// 그룹 내 다른 앱의 refreshToken으로 사용자를 인증하여 현재 앱의 토큰을 발급 받습니다.
-    /// 이 기능을 사용하더라도 사용자 인증에 사용하는 refreshToken 값을 앱 사이에 공유하지 않으며, 현재 앱을 위한 새로운 OAuthToken 세트가 발급됩니다.
+    /// 인가 코드로 토큰 발급 \
+    /// Issues tokens with the authorization code
+    /// - parameters:
+    ///   - groupRefreshToken: 그룹 앱의 리프레시 토큰 \
+    ///                        Refresh token of a group app
+    /// ## SeeAlso
+    /// - [`OAuthToken`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKAuth/documentation/kakaosdkauth/oauthtoken)
     public func token(groupRefreshToken: String? = nil,
                       completion:@escaping (OAuthToken?, Error?) -> Void) {
         API.responseData(.post,

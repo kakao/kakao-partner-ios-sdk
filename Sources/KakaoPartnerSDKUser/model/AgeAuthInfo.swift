@@ -15,28 +15,36 @@
 import Foundation
 import KakaoPartnerSDKAuth
 
-///사용자의 연령인증 정보를 제공합니다.
+/// 사용자 연령인증 정보 \
+/// User age verification information
 public struct AgeAuthInfo : Codable {
     
-    ///id 인증 여부를 확인하는 user의 id
+    /// 회원번호 \
+    /// Service user ID
     public let id : Int64?
     
-    ///auth_level 유저가 받은 인증레벨. AUTH_LEVEL1, AUTH_LEVEL2 중 하나.
+    /// 연령인증 레벨 \
+    /// Age verification level
     public let authLevel : AuthLevel?
     
-    ///authLevelCode 1 (auth_level : AUTH_LEVEL1) / 2 (auth_level : AUTH_LEVEL2)
+    /// 연령인증 레벨 비교 편의를 위한 코드(`1`: `AUTH_LEVEL1` | `2`: `AUTH_LEVEL2`) \
+    /// Reference code to compare the age verification level (`1`: `AUTH_LEVEL1` | `2`: `AUTH_LEVEL2`)
     public let authLevelCode: Int?
     
-    ///bypassAgeLimit true : 인증 받은 연령이 제한 나이 이상 / false : 인증 받은 연령이 제한 나이 미만
+    /// 제한 연령 만족 여부 \
+    /// Whether the user is satisfied age limit
     public let bypassAgeLimit : Bool?
     
-    ///authenticatedAt 인증 받은 시각. RFC3339 internet date/time format
+    /// 인증 시각, RFC3339 Internet date/time format \
+    /// Authentication time, RFC3339 Internet date/time format
     public let authenticatedAt : Date?
     
-    ///ciNeedsAgreement 사용자 동의를 받으면 ci를 가지고 갈 수 있는지 여부
+    /// 사용자 동의 시 연계정보 제공 가능 여부 \
+    /// Whether ``ci`` can be provided under user consent
     public let ciNeedsAgreement : Bool?
     
-    ///ci 인증후 받은 CI 값
+    /// 연계정보 \
+    /// Connecting Information(CI)
     public let ci : String?
     
 }

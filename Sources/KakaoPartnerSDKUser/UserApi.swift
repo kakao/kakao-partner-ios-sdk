@@ -20,16 +20,20 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoPartnerSDKAuth
 
-///제한 연령 만족 여부(bypassAgeLimit) 계산 기준
+/// 제한 연령 만족 여부 계산 기준 \
+/// Criteria to determine whether the user meets the age limit
 public enum AgeCriteria: String {
-    ///만 나이, 0에서 시작해 생일마다 1살씩 증가하는 값
+    /// 만 나이, 0에서 생일마다 1씩 증가하는 값 \
+    /// International age
     case International = "international"
     
-    ///연 나이, 현재 연도에서 출생연도를 뺀 값
+    /// 연 나이, 현재 연도에서 출생연도를 뺀 값 \
+    /// Year age
     case Year = "year"
 }
 
-/// 사용자관리 API 호출을 담당하는 클래스입니다.
+/// [카카오 로그인](https://developers.kakao.com/internal-docs/latest/ko/kakaologin/common) API 클래스 \
+/// Class for the [Kakao Login](https://developers.kakao.com/internal-docs/latest/ko/kakaologin/common) APIs
 extension UserApi {
     // MARK: Login with Kakao Account
 
@@ -59,7 +63,13 @@ extension UserApi {
     }
     
     
-    /// 사용자에 대한 다양한 정보를 얻을 수 있습니다.
+    /// 사용자 정보 가져오기 \
+    /// Retrieve user information
+    /// - parameters:
+    ///   - propertyKeys: 사용자 프로퍼티 키 목록 \
+    ///                   List of user property keys to retrieve
+    ///   - secureResource: 이미지 URL 값 HTTPS 여부 \
+    ///                     Whether to use HTTPS for the image URL
     /// ## SeeAlso
     /// - ``PartnerUser``
     public func meForPartner(propertyKeys: [String]? = nil,
@@ -83,7 +93,11 @@ extension UserApi {
         }
     }
     
-    /// 앱 연결 상태가 **PREREGISTER** 상태의 사용자에 대하여 앱 연결 요청을 합니다. **자동연결** 설정을 비활성화한 앱에서 사용합니다. 요청에 성공하면 회원번호가 반환됩니다.
+    /// 연결하기 \
+    /// Manual signup
+    /// - parameters:
+    ///   - properties: 사용자 프로퍼티 \
+    ///                 User properties
     public func signupForPartner(properties: [String:String]? = nil,
                                  completion:@escaping (Int64?, Error?) -> Void) {
         PARTNER_AUTH_API.responseData(.post,
@@ -108,11 +122,17 @@ extension UserApi {
         }
     }
     
-    /// 연령인증이 필요한 시점(예를 들어, 인증후 90일 초과 시점, 결제전)에 인증여부/정보(인증 방식/제한나이 이상여부/인증날짜/CI값...)를 확인하기 위해 호출합니다.
+    /// 연령인증 정보 확인하기 \
+    /// Check age verification information
     /// - parameters:
-    ///   - ageLimit: 연령제한 (만 나이 기준)
-    ///   - ageCriteria: 응답의 제한 연령 만족 여부(bypassAgeLimit) 계산 기준, ageLimit 파라미터 사용 시 필수
-    ///   - propertyKeys: 추가 동의를 필요로 하는 인증 정보를 응답에 포함하고 싶은 경우, 해당 키 리스트
+    ///   - ageLimit: 제한 연령 만족 여부를 판단하는 기준 제한 연령 \
+    ///               Age to determine whether the user is satisfied age limit
+    ///   - ageCriteria: 제한 연령 만족 여부 계산 기준 \
+    ///                  Criteria to determine whether the user is satisfied age limit
+    ///   - propertyKeys: 카카오계정 CI 값 대조가 필요한 경우 사용 \
+    ///                   Used to compare CI of Kakao Account
+    /// ## SeeAlso
+    /// - ``AgeAuthInfo``
     public func ageAuthInfo(ageLimit: Int? = nil, ageCriteria: AgeCriteria? = nil, propertyKeys: [String]? = nil, completion:@escaping (AgeAuthInfo?, Error?) -> Void) {
         AUTH_API.responseData(.get,
                           Urls.compose(path:PartnerPaths.ageAuthInfo),
@@ -133,12 +153,15 @@ extension UserApi {
     }
     
     
-    /// 요청한 동의 항목(Scope)을 사용자가 동의한 동의 항목으로 추가합니다.
-    /// 사용자로부터 동의를 받는 주체가 공동체이고 명시적인 제3자 제공 동의 화면을 제공하지 않을 경우, 동의 항목 추가하기 API가 아닌 추가 항목 동의 받기 API를 사용할 것을 권장합니다.
-    /// 이 API는 권한이 필요하므로 권한: 인하우스 앱 또는 권한: 공동체 앱을 참고합니다.
+    /// 동의항목 동의 처리하기 \
+    /// Upgrade scopes
     /// - parameters:
-    ///   - scopes: 추가할 동의 항목 ID 목록
-    ///   - guardianToken: 14세 미만 사용자인 경우 필수. 14세 미만 사용자의 동의 항목을 추가하기 위해 필요한 보호자인증 토큰
+    ///   - scopes: 동의항목 ID 목록 \
+    ///             Scope IDs
+    ///   - guardianToken: 14세 미만 사용자의 동의항목을 추가하기 위해 필요한 보호자인증 토큰 \
+    ///                    Parental authorization token to upgrade scope for the users under 14 years old
+    /// ## SeeAlso
+    /// - [`ScopeInfo`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKUser/documentation/kakaosdkuser/scopeinfo)
     public func upgradeScopes(scopes:[String], guardianToken: String? = nil, completion:@escaping (ScopeInfo?, Error?) -> Void) {
         AUTH_API.responseData(.post,
                           Urls.compose(path:PartnerPaths.userUpgradeScopes),
@@ -159,16 +182,21 @@ extension UserApi {
     }
     
     
-    ///연령인증을 요청합니다.
-    /// ## SeeAlso 
-    ///  - ``signup``
+    /// 연령인증 페이지 호출하기 \
+    /// Request age verification
     /// - parameters:
-    ///   - authLevel: 연령인증 레벨 (1차 인증 : 실명/생년월일 인증, 2차 인증 : 휴대폰 본인 인증을 통한 통신사 명의자 인증)
-    ///   - ageLimit: 연령제한 (만 나이 기준)
-    ///   - skipTerms:  동의 화면 출력 여부
-    ///   - adultsOnly: 서비스에서 청소년유해매체물 인증 필요 여부
-    ///   - authFrom:  요청 서비스 구분
-    ///   - underAge:  연령인증 페이지 구분
+    ///   - authLevel: 연령인증 레벨 \
+    ///                Age verification level
+    ///   - ageLimit: 제한 연령 \
+    ///               Age limit
+    ///   - skipTerms: 동의 화면 출력 여부 \
+    ///                Whether to display the consent screen
+    ///   - adultsOnly: 서비스의 청소년유해매체물 인증 필요 여부 \
+    ///                 Whetherthe service requires age verification due to the media harmful to youth
+    ///   - underAge: 연령인증 페이지 구분 여부(기본값: `false`) \
+    ///               Whether to separate age verification pages (default: `false`)
+    /// ## SeeAlso
+    ///  - ``signupForPartner(properties:completion:)``
     public func verifyAge(authLevel: AuthLevel? = nil,
                               ageLimit: Int? = nil,
                               skipTerms: Bool? = false,
@@ -183,15 +211,18 @@ extension UserApi {
                                                                  completion: completion)
     }
     
-    /// 배송지 추가하기
+    /// 배송지 추가하기 \
+    /// Create shipping address
     public func createShippingAddress(completion: @escaping (Int64?, Error?) -> Void) {
         self._requestShippingAddress(continuePath: PartnerPaths.createAddress,
                                      completion: completion)
     }
     
-    /// 배송지 수정하기
+    /// 배송지 수정하기 \
+    /// Update shipping address
     /// - parameters:
-    ///   - addressId: 배송지 ID
+    ///   - addressId: 배송지 ID \
+    ///                Shipping address ID
     public func updateShippingAddress(addressId: Int64, completion: @escaping (Int64?, Error?) -> Void) {
         self._requestShippingAddress(continuePath: PartnerPaths.editAddress,
                                      addressId: addressId, 
