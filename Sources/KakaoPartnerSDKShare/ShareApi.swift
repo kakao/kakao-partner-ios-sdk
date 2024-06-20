@@ -19,6 +19,106 @@ import KakaoSDKCommon
 import KakaoSDKShare
 import KakaoSDKTemplate
 
+
+extension ShareApi {
+    // MARK: Using Web Sharer
+    
+    /// 기본 템플릿을 카카오톡으로 공유하기 위한 URL 생성 \
+    /// Creates a URL to share a default template via Kakao Talk
+    /// - parameters:
+    ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
+    ///                   Native app key of the service app displayed on the source area
+    ///   - templatable: 기본 템플릿으로 변환 가능한 객체 \
+    ///                   Object to convert to a default template
+    ///   - serverCallbackArgs: 카카오톡 공유 전송 성공 알림에 포함할 키와 값 \
+    ///                          Keys and values for the Kakao Talk Sharing success callback
+    /// ## SeeAlso
+    /// - [Template](javascript:window.location.href=window.location.pathname.split\('KakaoSDKShare'\)[0].concat\('KakaoSDKTemplate/documentation/kakaosdktemplate/templatable'\))
+    public func makeDefaultUrl(targetAppKey:String,
+                               templatable:Templatable,
+                               serverCallbackArgs:[String:String]? = nil) -> URL? {
+        return self._makeSharerUrl(url: Urls.compose(.SharerLink, path:Paths.sharerLink),
+                                   action:"default",
+                                   parameters:["link_ver":"4.0",
+                                               "template_object":templatable.toJsonObject()].filterNil(),
+                                   serverCallbackArgs:serverCallbackArgs,
+                                   targetAppKey:targetAppKey)
+    }
+    
+    /// 기본 템플릿을 카카오톡으로 공유하기 위한 URL 생성 \
+    /// Creates a URL to share a default template via Kakao Talk
+    /// - parameters:
+    ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
+    ///                   Native app key of the service app displayed on the source area
+    ///   - templateObject: 기본 템플릿 객체 \
+    ///                     Default template object
+    ///   - serverCallbackArgs: 카카오톡 공유 전송 성공 알림에 포함할 키와 값 \
+    ///                          Keys and values for the Kakao Talk Sharing success callback
+    public func makeDefaultUrl(targetAppKey:String,
+                               templateObject:[String:Any],
+                               serverCallbackArgs:[String:String]? = nil) -> URL? {
+        return self._makeSharerUrl(url: Urls.compose(.SharerLink, path:Paths.sharerLink),
+                                   action:"default",
+                                   parameters:["link_ver":"4.0",
+                                               "template_object":templateObject].filterNil(),
+                                   serverCallbackArgs:serverCallbackArgs,
+                                   targetAppKey:targetAppKey)
+    }
+    
+    /// 스크랩 정보로 구성된 메시지 템플릿을 카카오톡으로 공유하기 위한 URL 생성 \
+    /// Creates a URL to share a scrape message via Kakao Talk
+    /// - parameters:
+    ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
+    ///                   Native app key of the service app displayed on the source area
+    ///   - requestUrl: 스크랩할 URL \
+    ///                 URL to scrape
+    ///   - templateId: 사용자 정의 템플릿 ID \
+    ///                 Custom template ID
+    ///   - templateArgs: 사용자 인자 키와 값 \
+    ///                   Keys and values of the user argument
+    ///   - serverCallbackArgs: 카카오톡 공유 전송 성공 알림에 포함할 키와 값 \
+    ///                          Keys and values for the Kakao Talk Sharing success callback
+    public func makeScrapUrl(targetAppKey:String,
+                             requestUrl:String,
+                             templateId:Int64? = nil,
+                             templateArgs:[String:String]? = nil,
+                             serverCallbackArgs:[String:String]? = nil) -> URL? {
+        return self._makeSharerUrl(url: Urls.compose(.SharerLink, path:Paths.sharerLink),
+                                   action:"scrap",
+                                   parameters:["link_ver":"4.0",
+                                               "request_url":requestUrl,
+                                               "template_id":templateId,
+                                               "template_args":templateArgs].filterNil(),
+                                   serverCallbackArgs:serverCallbackArgs,
+                                   targetAppKey:targetAppKey)
+    }
+    
+    /// 사용자 정의 템플릿을 카카오톡으로 공유하기 위한 URL 생성 \
+    /// Creates a URL to share a custom template via Kakao Talk
+    /// - parameters:
+    ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
+    ///                   Native app key of the service app displayed on the source area
+    ///   - templateId: 사용자 정의 템플릿 ID \
+    ///                 Custom template ID
+    ///   - templateArgs: 사용자 인자 키와 값 \
+    ///                   Keys and values of the user argument
+    ///   - serverCallbackArgs: 카카오톡 공유 전송 성공 알림에 포함할 키와 값 \
+    ///                          Keys and values for the Kakao Talk Sharing success callback
+    public func makeCustomUrl(targetAppKey:String,
+                              templateId:Int64,
+                              templateArgs:[String:String]? = nil,
+                              serverCallbackArgs:[String:String]? = nil) -> URL? {
+        return self._makeSharerUrl(url: Urls.compose(.SharerLink, path:Paths.sharerLink),
+                                   action:"custom",
+                                   parameters:["link_ver":"4.0",
+                                               "template_id":templateId,
+                                               "template_args":templateArgs].filterNil(),
+                                   serverCallbackArgs:serverCallbackArgs,
+                                   targetAppKey:targetAppKey)
+    }
+}
+
+
 /// [카카오톡 공유](https://developers.kakao.com/docs/latest/ko/message/common) API 클래스 \
 /// Class for the [Kakao Talk Sharing](https://developers.kakao.com/docs/latest/ko/message/common) APIs
 extension ShareApi {
