@@ -37,6 +37,10 @@ public struct ChatMembers : Codable {
     /// 채팅방 내 친구 수, `friendsOnly`를 `true`로 요청한 경우에만 응답에 포함(최대:500) \
     /// Number of friends in the chat room, only included in the response if `friendsOnly` is requested as `true` (Maximum: 500)
     public let activeFriendsCount: Int?
+    
+    /// 요청에 대한 토큰 정보 \
+    /// Token for the request
+    public let token: Int64?
 }
 
 /// 채팅방 멤버 \

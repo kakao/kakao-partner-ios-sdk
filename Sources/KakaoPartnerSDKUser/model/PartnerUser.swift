@@ -143,16 +143,6 @@ public struct PartnerAccount : Codable {
     /// Phone number of Kakao Account
     public let phoneNumber: String?
     
-    /// 사용자 동의 시 연계정보 제공 가능 여부 \
-    /// Whether ``ci`` can be provided under user consent
-    public let ciNeedsAgreement: Bool?
-    /// 연계정보 \
-    /// Connecting Information(CI)
-    public let ci: String?
-    /// CI 발급시간 \
-    /// CI issuance time
-    public let ciAuthenticatedAt: Date?
-    
     /// 사용자 동의 시 실명 제공 가능 여부 \
     /// Whether ``legalName`` can be provided under user consent
     public let legalNameNeedsAgreement : Bool?

@@ -39,12 +39,4 @@ public struct AgeAuthInfo : Codable {
     /// Authentication time, RFC3339 Internet date/time format
     public let authenticatedAt : Date?
     
-    /// 사용자 동의 시 연계정보 제공 가능 여부 \
-    /// Whether ``ci`` can be provided under user consent
-    public let ciNeedsAgreement : Bool?
-    
-    /// 연계정보 \
-    /// Connecting Information(CI)
-    public let ci : String?
-    
 }
