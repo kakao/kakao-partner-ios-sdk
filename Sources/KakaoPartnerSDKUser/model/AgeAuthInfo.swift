@@ -39,4 +39,8 @@ public struct AgeAuthInfo : Codable {
     /// Authentication time, RFC3339 Internet date/time format
     public let authenticatedAt : Date?
     
+    /// CI 값 보유 여부 \
+    /// Whether the user has a CI value
+    public let hasCi: Bool?
+    
 }
