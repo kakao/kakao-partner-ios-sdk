@@ -44,13 +44,13 @@ public class PartnerAuthCommon {
         API.addSession(type: .PartnerAuthApi, session: Session(configuration: sessionConfiguration, interceptor: interceptor ))
     }
     
-    public func responseData(_ HTTPMethod: Alamofire.HTTPMethod,
+    public func responseData(_ kHTTPMethod: KHTTPMethod,
                              _ url: String,
                              parameters: [String: Any]? = nil,
                              headers: [String: String]? = nil,
                              apiType: ApiType,
                              completion: @escaping (HTTPURLResponse?, Data?, Error?) -> Void) {
         
-        API.responseData(HTTPMethod, url, parameters: parameters, headers: headers, sessionType: .PartnerAuthApi, apiType: apiType, completion: completion)
+        API.responseData(kHTTPMethod, url, parameters: parameters, headers: headers, sessionType: .PartnerAuthApi, apiType: apiType, completion: completion)
     }
 }
