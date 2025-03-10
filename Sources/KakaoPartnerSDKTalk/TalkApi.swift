@@ -87,7 +87,7 @@ extension TalkApi  {
     /// ## SeeAlso 
     /// - ``ChatMembers``
     public func chatMembers(chatId:Int64,
-                            friendsOnly:Bool,
+                            friendsOnly:Bool? = nil,
                             includeProfile: Bool? = nil,
                             token: String? = nil,
                             completion:@escaping (ChatMembers?, Error?) -> Void) {

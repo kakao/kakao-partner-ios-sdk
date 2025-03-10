@@ -126,6 +126,9 @@ public struct PartnerAccount : Codable {
     /// ## SeeAlso
     /// - [`BirthdayType`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKUser/documentation/kakaosdkuser/birthdaytype)
     public let birthdayType: BirthdayType?
+    /// 생일의 윤달 여부\
+    /// Whether the birthday falls on a leap month
+    public let isLeapMonth: Bool?
     
     /// 사용자 동의 시 전화번호 제공 가능 여부 \
     /// Whether ``gender`` can be provided under user consent

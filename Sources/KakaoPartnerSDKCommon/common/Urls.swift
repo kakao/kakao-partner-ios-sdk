@@ -18,10 +18,6 @@ import KakaoSDKCommon
 /// 페이즈 \
 /// Phase
 public enum Phase : String {
-    /// 오메가 \
-    /// Omega
-    case Omega
-    
     /// 알파 \
     /// Alpha
     case Dev
@@ -47,20 +43,6 @@ extension Hosts {
     /// 원하는 phase에 대한 호스트 정보를 생성합니다.
     public convenience init(phase:Phase) {
         switch phase {
-        case .Omega:
-            self.init(kapi: "omega-kapi.kakao.com",
-                      dapi: "alpha-dapi.kakao.com",
-                      auth: "omega-auth.kakao.com",
-                      kauth: "omega-kauth.kakao.com",
-                      talkAuth: "alphakompassauth",
-                      talkCert: "alphatalk",
-                      channel: "alpha-pf.kakao.com",
-                      talkLink: "alphalink",
-                      talkLinkVersion: "alphatalk-5.9.7",
-                      sharerLink: "alpha-sharer.devel.kakao.com",
-                      universalLink: "alpha-talk-apps.kakao.com",
-                      cert:"",
-                      apps:"alpha-apps.kakao.com")
         case .Dev:
             self.init(kapi: "alpha-kapi.kakao.com",
                       dapi: "alpha-dapi.kakao.com",
