@@ -13,7 +13,37 @@
 //  limitations under the License.
 
 import Foundation
-import KakaoSDKCommon
+
+/// 친구 피커 요청을 위한 설정 정보
+public class ConfigInfo {
+    public static let shared = ConfigInfo()
+    
+    /// 카카오 API 호스트
+    public var kapiHost: String {
+        guard let kapiHost = _kapiHost else {
+            fatalError("KapiHost is not set.")
+        }
+        
+        return kapiHost
+    }
+    
+    /// API 요청을 위한 헤더 정보
+    public var kaHeader: String {
+        guard let kaHeader = _kaHeader else {
+            fatalError("KaHeader is not set.")
+        }
+        
+        return kaHeader
+    }
+    
+    private var _kapiHost: String?
+    private var _kaHeader: String?
+    
+    public func updateConfig(kapiHost: String, kaHeader: String) {
+        _kapiHost = kapiHost
+        _kaHeader = kaHeader
+    }
+}
 
 /// 서비스 앱 정보
 public struct TargetInfo {
@@ -23,26 +53,30 @@ public struct TargetInfo {
     let bundleId: String
     /// 서비스 앱의 accessToken
     let accessToken: String
-    /// 카카오 API 호스트
-    let kapiHost: String
-    let kaHeader: String
     /// 서비스 앱의 헤더 정보
-    var targetKaHeader: String!
+    let targetKaHeader: String
     
     public init(appKey: String, bundleId: String, accessToken: String) {
         self.appKey = appKey
         self.bundleId = bundleId
         self.accessToken = accessToken
-        self.kapiHost = KakaoSDK.shared.hosts().kapi
-        self.kaHeader = Constants.kaHeader
         
-        targetKaHeader = createTargetKaHeader()
+        targetKaHeader = TargetInfo.createTargetKaHeader(for: bundleId)
     }
     
-    private mutating func createTargetKaHeader() -> String {
-        var currentKaHeader = kaHeader
+    public init(appKey: String, bundleId: String, accessToken: String, originBundleId: String? = nil) {
+        self.appKey = appKey
+        self.bundleId = bundleId
+        self.accessToken = accessToken
         
-        if let originAppBundleId = Bundle.main.bundleIdentifier {
+        targetKaHeader = TargetInfo.createTargetKaHeader(for: bundleId, originBundleId: originBundleId)
+    }
+    
+    private static func createTargetKaHeader(for bundleId: String, originBundleId: String? = nil) -> String {
+        var currentKaHeader = ConfigInfo.shared.kaHeader
+        var originBundleId = originBundleId ?? Bundle.main.bundleIdentifier
+        
+        if let originAppBundleId = originBundleId {
             let replaceKey = "origin/\(originAppBundleId)"
             currentKaHeader = currentKaHeader.replacingOccurrences(of: replaceKey, with: "origin/\(bundleId)")
         }

@@ -16,7 +16,6 @@
  
 
 import Foundation
-import KakaoSDKCommon
 @_exported import KakaoSDKFriendCore
 
 extension KFPaths {
@@ -77,27 +76,28 @@ extension PickerApi {
                             token: String? = nil,
                             completion:@escaping (ChatMembers?, Error?) -> Void) {
         setup(targetInfo: targetInfo)
+        let parameters = makeParameters(parameters: [
+            "chat_id": chatId,
+            "friends_only": friendsOnly,
+            "include_profile": includeProfile,
+            "token": token
+        ])
         
         CF.responseData(.get,
                         KFUrls.compose(path: KFPaths.chatMembers),
-                        parameters: [
-                            "chat_id": chatId,
-                            "friends_only": friendsOnly,
-                            "include_profile": includeProfile,
-                            "token": token
-                        ].filterNil()) { [weak self] (response, data, error) in
-                            if let error {
-                                completion(nil, self?.castSdkError(responseInfo: ResponseInfo(response, data), error: error))
-                                return
-                            }
-                            
-                            if let data {
-                                completion(try? SdkJSONDecoder.custom.decode(ChatMembers.self, from: data), nil)
-                                return
-                            }
-                            
-                            completion(nil, SdkError())
-                        }
+                        parameters: parameters) { [weak self] (response, data, error) in
+            if let error {
+                completion(nil, self?.castSdkError(responseInfo: ResponseInfo(response, data), error: error))
+                return
+            }
+            
+            if let data {
+                completion(try? KFJSONDecoder.custom.decode(ChatMembers.self, from: data), nil)
+                return
+            }
+            
+            completion(nil, KFSdkError())
+        }
     }
 }
 
@@ -239,21 +239,26 @@ extension PickerApi {
 
 extension PickerApi {
     private func setup(targetInfo: TargetInfo) {
-        updateSharingData(SharingData(kapiHost: targetInfo.kapiHost, kaHeader: targetInfo.targetKaHeader, appKey: targetInfo.appKey))
+        updateSharingData(SharingData(kapiHost: ConfigInfo.shared.kapiHost, kaHeader: targetInfo.targetKaHeader, appKey: targetInfo.appKey))
         updateAuth(accessToken: targetInfo.accessToken)
     }
     
     private func castSdkError(responseInfo:ResponseInfo?, error:Error?) -> Error? {
         if let kfSdkError = error as? KFSdkError {
-            return SdkError(fromKfSdkError: kfSdkError)
+            return kfSdkError
         }
         
-        if let responseInfo = responseInfo, let data = responseInfo.data, let response = responseInfo.response {
-            if let sdkError = SdkError(response: response, data: data, type: .KApi) {
-                return sdkError
+        if let responseInfo = responseInfo, let data = responseInfo.data, let response = responseInfo.response {            
+            if let apiSdkError = KFApiSdkError(response: response, data: data) {
+                return apiSdkError
             }
         }
         
         return error
+    }
+    
+    private func makeParameters(parameters: [String: Any?]) -> [String: Any]? {
+        let result = parameters.filter({ $0.value != nil }).mapValues({ $0! })
+        return result.isEmpty ? nil : result
     }
 }
