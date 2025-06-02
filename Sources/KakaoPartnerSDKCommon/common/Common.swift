@@ -18,16 +18,6 @@ import KakaoSDKCommon
 #if swift(>=5.8)
 @_documentation(visibility: private)
 #endif
-extension ApprovalType {
-    public convenience init(type:String) {
-        self.init()
-        self.type = type
-    }
-}
-
-#if swift(>=5.8)
-@_documentation(visibility: private)
-#endif
 extension SdkIdentifier {        
     public convenience init(infos customInfos:[String:String]? = nil) {
         var tempIdentifier : String? = nil

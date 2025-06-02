@@ -45,23 +45,6 @@ extension UserApi {
                                                                   completion:completion)
     }
     
-#if swift(>=5.8)
-    @_documentation(visibility: private)
-#endif
-    public func loginWithKakaoAccount(prompts : [Prompt]? = nil,
-                                      loginHint: String? = nil,
-                                      nonce: String? = nil,
-                                      accountsSkipIntro: Bool? = nil,
-                                      accountsTalkLoginVisible: Bool? = nil,
-                                      completion: @escaping (OAuthToken?, Error?) -> Void) {
-        AuthController.shared._authorizeWithAuthenticationSession(prompts: prompts,
-                                                                  loginHint: loginHint,
-                                                                  nonce: nonce,
-                                                                  accountsSkipIntro: accountsSkipIntro,
-                                                                  accountsTalkLoginVisible: accountsTalkLoginVisible,
-                                                                  completion:completion)
-    }
-    
     
     /// 사용자 정보 가져오기 \
     /// Retrieve user information

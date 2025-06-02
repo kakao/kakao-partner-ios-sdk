@@ -49,13 +49,13 @@ public struct KFErrorInfo: Codable {
 }
 
 public enum KFApiSdkError: Error {
-    case ApiFailed(reason: KFApiFailureReason, errorMessage: String?)
+    case ApiFailed(reason: KFApiFailureReason, errorInfo: KFErrorInfo?)
     
     public init?(response:HTTPURLResponse, data:Data) {
         if 200 ..< 300 ~= response.statusCode { return nil }
         
         if let errorInfo = try? KFJSONDecoder.custom.decode(KFErrorInfo.self, from: data) {
-            self = .ApiFailed(reason: errorInfo.code, errorMessage: errorInfo.msg)
+            self = .ApiFailed(reason: errorInfo.code, errorInfo: errorInfo)
         }
         else {
             return nil

@@ -27,18 +27,18 @@ extension PickerApi {
     public func singleFriendPickerView(
         params: PickerFriendRequestParams,
         targetInfo: TargetInfo,
-        selectedUuids: [String]? = nil,
+        selectedFavoriteUuids: [String]? = nil,
         customSection: CustomSection? = nil,
         completion: @escaping (PickerView?, Error?) -> Void
     ) {
         setup(targetInfo: targetInfo)
         
-        PickerApi.shared.____spv(params: params, customSection: customSection, selectedUuids: selectedUuids) { [weak self] pickerView, responseInfo, error in
+        PickerApi.shared.____spv(params: params, customSection: customSection, selectedUuids: selectedFavoriteUuids) { [weak self] pickerView, responseInfo, error in
             completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
         }
     }
     
-    ///  임베드 형태의 채팅방 멤버 피커 요청
+    ///  chatId로 임베드용 싱글 채팅방 멤버 피커 요청
     public func singleChatMemberPickerView(
         params: PickerChatMemberRequestParams,
         targetInfo: TargetInfo,
@@ -64,6 +64,22 @@ extension PickerApi {
         setup(targetInfo: targetInfo)
         
         PickerApi.shared.____mpv(params: params, customSection: customSection, selectedUuids: selectedUuids) { [weak self] pickerView, responseInfo, error in
+            completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
+        }
+    }
+    
+    /// chatId로 임베드용 멀티 채팅방 멤버 피커 요청 \
+    /// Request an embedded multi-chatroom member picker using a chatId.
+    public func multiChatMemberPickerView(
+        params: PickerChatMemberRequestParams,
+        targetInfo: TargetInfo,
+        chatId: Int64,
+        selectedUuids: [String]? = nil,
+        friendsOnly: Bool? = nil,
+        completion: @escaping (PickerView?, Error?) -> Void
+    ) {
+        setup(targetInfo: targetInfo)
+        PickerApi.shared.____mmv(params: params.toFriendRequestParams(), chatId: chatId, friendsOnly: friendsOnly, selectedUuids: selectedUuids) { [weak self] pickerView, responseInfo, error in
             completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
         }
     }
@@ -97,6 +113,38 @@ extension PickerApi {
             }
             
             completion(nil, KFSdkError())
+        }
+    }
+    
+
+    /// uuid로 임베드용 싱글 친구 피커 요청, 친구인 uuid 대상만 표시됨 \
+    /// Request an embedded single friend picker using a uuid. Displayed only for uuid targets that are friends.
+    public func singleChatMemberPickerViewByUuids(
+        params: PickerChatMemberRequestParams,
+        targetInfo: TargetInfo,
+        uuids: [String],
+        completion: @escaping (PickerView?, Error?) -> Void
+    ) {
+        setup(targetInfo: targetInfo)
+        
+        PickerApi.shared.____fspv(params: params.toFriendRequestParams(), uuids: uuids) { [weak self] pickerView, responseInfo, error in
+            completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
+        }
+    }
+    
+    /// uuid로 임베드용 멀티 친구 피커를 요청, 친구인 uuid 대상만 표시됨 \
+    /// Request an embedded multi-friend picker using a uuid. Displayed only for uuid targets that are friends.
+    public func multiChatMemberPickerViewByUuids(
+        params: PickerChatMemberRequestParams,
+        targetInfo: TargetInfo,
+        uuids: [String],
+        selectedUuids: [String]? = nil,
+        completion: @escaping (PickerView?, Error?) -> Void
+    ) {
+        setup(targetInfo: targetInfo)
+        
+        PickerApi.shared.____fmpv(params: params.toFriendRequestParams(), uuids: uuids, selectedUuids: selectedUuids) { [weak self] pickerView, responseInfo, error in
+            completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
         }
     }
 }
