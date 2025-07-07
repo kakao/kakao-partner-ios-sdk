@@ -22,24 +22,30 @@ import Foundation
 @_documentation(visibility: private)
 #endif
 public struct PickerChatMemberRequestParams {
-    let viewAppearance: ViewAppearance?
-    let orientation: PickerOrientation?
-    let enableSearch: Bool?
-    let disableSelectOptions: [DisableSelectOption]?
-    let displayAllProfile: Bool?
+    public let viewAppearance: ViewAppearance?
+    public let orientation: PickerOrientation?
+    public let enableSearch: Bool?
+    public let disableSelectOptions: [DisableSelectOption]?
+    public let displayAllProfile: Bool?
+    public var maxPickableCount: Int?
+    public var minPickableCount: Int?
     
     public init(
         viewAppearance: ViewAppearance? = nil,
         orientation: PickerOrientation? = nil,
         enableSearch: Bool? = nil,
         disableSelectOptions: [DisableSelectOption]? = nil,
-        displayAllProfile: Bool? = nil
+        displayAllProfile: Bool? = nil,
+        maxPickableCount: Int? = nil,
+        minPickableCount: Int? = nil
     ) {
         self.viewAppearance = viewAppearance
         self.orientation = orientation
         self.enableSearch = enableSearch
         self.disableSelectOptions = disableSelectOptions
         self.displayAllProfile = displayAllProfile
+        self.maxPickableCount = maxPickableCount ?? 30
+        self.minPickableCount = minPickableCount ?? 1
     }
     
     internal func toFriendRequestParams() -> PickerFriendRequestParams {
@@ -55,7 +61,9 @@ public struct PickerChatMemberRequestParams {
             showMyProfile: false,
             showFavorite: false,
             disableSelectOptions: disableSelectOptions,
-            displayAllProfile: displayAllProfile
+            displayAllProfile: displayAllProfile,
+            maxPickableCount: maxPickableCount,
+            minPickableCount: minPickableCount
         )
     }
 }

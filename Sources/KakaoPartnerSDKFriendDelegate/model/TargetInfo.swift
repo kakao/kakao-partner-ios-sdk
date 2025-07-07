@@ -15,7 +15,8 @@
 import Foundation
 
 /// 친구 피커 요청을 위한 설정 정보
-public class ConfigInfo {
+@objc(KakaoPartnersSDKFriendDelegate_ConfigInfo)
+public class ConfigInfo: NSObject {
     public static let shared = ConfigInfo()
     
     /// 카카오 API 호스트

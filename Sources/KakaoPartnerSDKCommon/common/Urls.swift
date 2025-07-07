@@ -97,7 +97,8 @@ extension Hosts {
 #if swift(>=5.8)
 @_documentation(visibility: private)
 #endif
-public class PartnerPaths {
+@objc(KakaoPartnerSDKCommon_PartnerPaths)
+public class PartnerPaths: NSObject {
     public static let chatList = "/v1/api/talk/chat/list"
     public static let chatMembers = "/v1/api/talk/members"
     
