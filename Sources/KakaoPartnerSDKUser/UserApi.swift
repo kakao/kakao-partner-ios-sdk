@@ -46,7 +46,7 @@ extension UserApi {
     }
     
     
-    /// 사용자 정보 가져오기 \
+    /// 사용자 정보 조회 \
     /// Retrieve user information
     /// - parameters:
     ///   - propertyKeys: 사용자 프로퍼티 키 목록 \
@@ -76,7 +76,7 @@ extension UserApi {
         }
     }
     
-    /// 연결하기 \
+    /// 수동 연결 \
     /// Manual signup
     /// - parameters:
     ///   - properties: 사용자 프로퍼티 \
@@ -105,7 +105,7 @@ extension UserApi {
         }
     }
     
-    /// 연령인증 정보 확인하기 \
+    /// 연령인증 정보 조회 \
     /// Check age verification information
     /// - parameters:
     ///   - ageLimit: 제한 연령 만족 여부를 판단하는 기준 제한 연령 \
@@ -136,7 +136,7 @@ extension UserApi {
     }
     
     
-    /// 동의항목 동의 처리하기 \
+    /// 동의항목 동의 처리 \
     /// Upgrade scopes
     /// - parameters:
     ///   - scopes: 동의항목 ID 목록 \
@@ -165,7 +165,7 @@ extension UserApi {
     }
     
     
-    /// 연령인증 페이지 호출하기 \
+    /// 연령인증 페이지 호출 \
     /// Request age verification
     /// - parameters:
     ///   - authLevel: 연령인증 레벨 \
@@ -175,7 +175,7 @@ extension UserApi {
     ///   - skipTerms: 동의 화면 출력 여부 \
     ///                Whether to display the consent screen
     ///   - adultsOnly: 서비스의 청소년유해매체물 인증 필요 여부 \
-    ///                 Whetherthe service requires age verification due to the media harmful to youth
+    ///                 Whether the service requires age verification due to the media harmful to youth
     ///   - underAge: 연령인증 페이지 구분 여부(기본값: `false`) \
     ///               Whether to separate age verification pages (default: `false`)
     /// ## SeeAlso
@@ -194,14 +194,14 @@ extension UserApi {
                                                                  completion: completion)
     }
     
-    /// 배송지 추가하기 \
+    /// 배송지 추가 \
     /// Create shipping address
     public func createShippingAddress(completion: @escaping (Int64?, Error?) -> Void) {
         self._requestShippingAddress(continuePath: PartnerPaths.createAddress,
                                      completion: completion)
     }
     
-    /// 배송지 수정하기 \
+    /// 배송지 수정 \
     /// Update shipping address
     /// - parameters:
     ///   - addressId: 배송지 ID \

@@ -82,7 +82,7 @@ public enum KFApiFailureReason: Int, Codable {
     
     /// 카카오계정이 제재되었거나, 카카오계정에 제한된 동작을 요청한 경우 \
     /// Requested by a blocked Kakao Account, or requested restricted actions to the Kakao Account
-    case Blocked = -4
+    case BlockedAccount = -4
     
     /// 앱에 사용 권한이 없는 API를 호출한 경우 \
     /// Requested an API using an app that does not have permission
@@ -95,6 +95,10 @@ public enum KFApiFailureReason: Int, Codable {
     /// 사용량 제한을 초과한 경우 \
     /// Exceeded the quota
     case ApiLimitExceed = -10
+    
+    /// 카카오디벨로퍼스 앱 또는 개발자 계정이 제재된 경우 \
+    /// Kakao Developers app or developer account has been suspended
+    case BlockedApp = -12
     
     /// 앱과 연결되지 않은 사용자가 요청한 경우 \
     /// Requested by a user who is not linked to the app

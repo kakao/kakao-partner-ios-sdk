@@ -15,7 +15,7 @@
 import Foundation
 import KakaoSDKUser
 
-/// 사용자 정보 가져오기 응답 \
+/// 사용자 정보 조회 응답 \
 /// Response for Retrieve user information
 public struct PartnerUser : Codable {
     
@@ -57,7 +57,7 @@ public struct PartnerUser : Codable {
     public let forPartner: ForPartner?
 }
 
-/// 카카오 및 공동체, 제휴 앱에만 제공되는 카카오계정 추가 정보 \
+/// 카카오 및 공동체, 제휴 앱에만 제공되는 카카오계정 추가 정보 \
 /// Additional Kakao Account information for Kakao and partners
 public struct PartnerAccount : Codable {
     
@@ -196,7 +196,7 @@ public struct PartnerAccount : Codable {
     
 }
 
-/// 카카오 및 공동체, 제휴 앱에만 제공되는 추가 정보 \
+/// 카카오 및 공동체, 제휴 앱에만 제공하는 추가 정보 \
 /// Additional user information for Kakao and partners
 public struct ForPartner : Codable {
     

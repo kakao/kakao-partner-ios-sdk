@@ -33,7 +33,7 @@ extension TalkApi  {
         case ChatId = "chat_id"
     }
     
-    /// 채팅방 목록 가져오기 \
+    /// 채팅방 목록 조회 \
     /// Retrieve list of chats
     /// - parameters:
     ///   - filters: 필터링 설정 \
@@ -73,7 +73,7 @@ extension TalkApi  {
                             }
     }
     
-    /// 채팅방 멤버 가져오기 \
+    /// 채팅방 멤버 조회 \
     /// Retrieve list if chat members
     /// - parameters:
     ///   - chatId: 채팅방 ID \
@@ -113,7 +113,7 @@ extension TalkApi  {
         }
     }
     
-    /// 기본 템플릿으로 메시지 보내기 \
+    /// 기본 템플릿으로 메시지 발송 \
     /// Send message with default template
     /// - parameters:
     ///    - templatable: 메시지 템플릿 객체 \
@@ -152,7 +152,7 @@ extension TalkApi  {
         }
     }
     
-    /// 사용자 정의 템플릿으로 메시지 보내기 \
+    /// 사용자 정의 템플릿으로 메시지 발송 \
     /// Send message with custom template
     /// - parameters:
     ///    - templateId: 메시지 템플릿 ID \
@@ -195,7 +195,7 @@ extension TalkApi  {
         }
     }
     
-    /// 스크랩 메시지 보내기 \
+    /// 스크랩 메시지 발송 \
     /// Send scrape message
     /// - parameters:
     ///    - requestUrl: 스크랩할 URL \
@@ -242,7 +242,7 @@ extension TalkApi  {
           }
     }
     
-    /// 친구 목록 가져오기 \
+    /// 친구 목록 조회 \
     /// Retrieve list of friends
     /// - parameters:
     ///   - friendFilter: 친구 목록 필터링 설정 \
@@ -290,7 +290,7 @@ extension TalkApi  {
         }
     }
     
-    /// 친구 목록 가져오기 \
+    /// 친구 목록 조회 \
     /// Retrieve list of friends
     /// ## SeeAlso 
     /// - ``PartnerFriendsContext``

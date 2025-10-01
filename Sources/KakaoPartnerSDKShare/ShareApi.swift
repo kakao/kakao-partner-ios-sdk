@@ -23,7 +23,7 @@ import KakaoSDKTemplate
 extension ShareApi {
     // MARK: Using Web Sharer
     
-    /// 기본 템플릿을 카카오톡으로 공유하기 위한 URL 생성 \
+    /// 기본 템플릿으로 카카오톡 공유 메시지 발송 URL 생성 \
     /// Creates a URL to share a default template via Kakao Talk
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -45,7 +45,7 @@ extension ShareApi {
                                    targetAppKey:targetAppKey)
     }
     
-    /// 기본 템플릿을 카카오톡으로 공유하기 위한 URL 생성 \
+    /// 기본 템플릿으로 카카오톡 공유 메시지 발송 URL 생성 \
     /// Creates a URL to share a default template via Kakao Talk
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -65,7 +65,7 @@ extension ShareApi {
                                    targetAppKey:targetAppKey)
     }
     
-    /// 스크랩 정보로 구성된 메시지 템플릿을 카카오톡으로 공유하기 위한 URL 생성 \
+    /// 스크랩 카카오톡 공유 메시지 발송 URL 생성 \
     /// Creates a URL to share a scrape message via Kakao Talk
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -93,7 +93,7 @@ extension ShareApi {
                                    targetAppKey:targetAppKey)
     }
     
-    /// 사용자 정의 템플릿을 카카오톡으로 공유하기 위한 URL 생성 \
+    /// 사용자 정의 템플릿으로 카카오톡 공유 메시지 발송 URL 생성 \
     /// Creates a URL to share a custom template via Kakao Talk
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -119,10 +119,10 @@ extension ShareApi {
 }
 
 
-/// [카카오톡 공유](https://developers.kakao.com/docs/latest/ko/message/common) API 클래스 \
-/// Class for the [Kakao Talk Sharing](https://developers.kakao.com/docs/latest/ko/message/common) APIs
+/// [카카오톡 공유](https://developers.kakao.com/docs/latest/ko/kakaotalk-share/common) API 클래스 \
+/// Class for the [Kakao Talk Sharing](https://developers.kakao.com/docs/latest/ko/kakaotalk-share/common) APIs
 extension ShareApi {
-    /// 기본 템플릿으로 메시지 보내기 \
+    /// 기본 템플릿으로 메시지 발송 \
     /// Send message with default template
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -166,7 +166,7 @@ extension ShareApi {
         }
     }
     
-    /// 기본 템플릿으로 메시지 보내기 \
+    /// 기본 템플릿으로 메시지 발송 \
     /// Send message with default template
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -189,7 +189,7 @@ extension ShareApi {
                           completion: completion)
     }
     
-    /// 기본 템플릿으로 메시지 보내기 \
+    /// 기본 템플릿으로 메시지 발송 \
     /// Send message with default template
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -211,7 +211,7 @@ extension ShareApi {
                          completion: completion)
     }
     
-    /// 스크랩 메시지 보내기 \
+    /// 스크랩 메시지 발송 \
     /// Send scrape message
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -264,7 +264,7 @@ extension ShareApi {
         }
     }
     
-    /// 사용자 정의 템플릿으로 메시지 보내기 \
+    /// 사용자 정의 템플릿으로 메시지 발송 \
     /// Send message with custom template
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \

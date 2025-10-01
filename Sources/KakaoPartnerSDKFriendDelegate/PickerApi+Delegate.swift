@@ -84,7 +84,7 @@ extension PickerApi {
         }
     }
     
-    /// 채팅방 멤버 가져오기
+    /// 채팅방 멤버 조회
     public func chatMembers(chatId:Int64,
                             targetInfo: TargetInfo,
                             friendsOnly: Bool? = nil,
@@ -151,73 +151,30 @@ extension PickerApi {
 
 // MARK: - Friend Picker
 extension PickerApi {
-    /// 풀 스크린 형태의 멀티 피커 요청 \
-    /// Requests a multi-picker in full-screen view
+    /// 친구 피커 \
+    /// Friends picker
     /// ## SeeAlso
     /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    public func selectFriends(
+    public func selectFriend(
         params: PickerFriendRequestParams,
         targetInfo: TargetInfo,
+        enableMulti: Bool = true,
+        viewType: ViewType,
         selectedUuids: [String]? = nil,
         customSection: CustomSection? = nil,
         completion:@escaping (SelectedUsers?, Error?) -> Void
     ) {
         setup(targetInfo: targetInfo)
         
-        ____sfs(params: params, needScopeRequest: false, customSection: customSection, selectedUuids: selectedUuids) { [weak self] users, responseInfo, error in
+        ____sf(params: params, needScopeRequest: false, enableMulti: enableMulti, viewType: viewType, customSection: customSection, selectedUuids: selectedUuids) { [weak self] users, responseInfo, error in
             completion(users, self?.castSdkError(responseInfo: responseInfo, error: error))
         }
     }
     
-    /// 팝업 형태의 멀티 피커 요청 \
-    /// Requests a multi-picker in pop-up view
-    /// ## SeeAlso
-    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
-    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    public func selectFriendsPopup(
-        params:PickerFriendRequestParams,
-        targetInfo: TargetInfo,
-        selectedUuids: [String]? = nil,
-        customSection: CustomSection? = nil,
-        completion:@escaping (SelectedUsers?, Error?) -> Void
-    ) {
-        setup(targetInfo: targetInfo)
-        ____sfsp(params: params, needScopeRequest: false, customSection: customSection, selectedUuids: selectedUuids) { [weak self] selectedUsers, responseInfo, error in
-            completion(selectedUsers, self?.castSdkError(responseInfo:responseInfo, error: error))
-        }
-    }
     
-    /// 풀 스크린 형태의 싱글 피커 요청 \
-    /// Requests a single picker in full-screen view
-    /// ## SeeAlso
-    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
-    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    public func selectFriend(
-        params:PickerFriendRequestParams,
-        targetInfo: TargetInfo,
-        completion:@escaping (SelectedUsers?, Error?) -> Void
-    ) {
-        setup(targetInfo: targetInfo)
-        ____sf(params: params, needScopeRequest: false) { [weak self] selectedUsers, responseInfo, error in
-            completion(selectedUsers, self?.castSdkError(responseInfo:responseInfo, error: error))
-        }
-    }
-    
-    /// 팝업 형태의 싱글 피커 요청 \
-    /// Requests a single picker in pop-up view
-    /// ## SeeAlso
-    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
-    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    public func selectFriendPopup(params:PickerFriendRequestParams, targetInfo: TargetInfo, completion:@escaping (SelectedUsers?, Error?) -> Void) {
-        setup(targetInfo: targetInfo)
-        ____sfp(params: params, needScopeRequest: false) { [weak self] selectedUsers, responseInfo, error in
-            completion(selectedUsers, self?.castSdkError(responseInfo:responseInfo, error: error))
-        }
-    }
-    
-    /// 풀 스크린 형태의 채팅방 피커 요청 \
-    /// Requests a chat picker in full-screen view
+    /// 채팅방 피커 \
+    /// Chat picker
     /// ## SeeAlso
     /// - [`PickerChatRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerchatrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
@@ -225,33 +182,18 @@ extension PickerApi {
     public func selectChat(
         params:PickerChatRequestParams,
         targetInfo: TargetInfo,
+        enableMulti: Bool = true,
+        viewType: ViewType,
         completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void
     ) {
         setup(targetInfo: targetInfo)
-        ____sc(params: params, needScopeRequest: false) { [weak self] selectedUsers, selectedChat, responseInfo, error in
+        ____sc(params: params, needScopeRequest: false, enableMulti: enableMulti, viewType: viewType) { [weak self] selectedUsers, selectedChat, responseInfo, error in
             completion(selectedUsers, selectedChat, self?.castSdkError(responseInfo:responseInfo, error: error))
         }
     }
     
-    /// 팝업 형태의 채팅방 피커 요청 \
-    /// Requests a chat picker in pop-up view
-    /// ## SeeAlso
-    /// - [`PickerChatRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerchatrequestparams)
-    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
-    public func selectChatPopup(
-        params:PickerChatRequestParams,
-        targetInfo: TargetInfo,
-        completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void
-    ) {
-        setup(targetInfo: targetInfo)
-        ____scp(params: params, needScopeRequest: false) { [weak self] selectedUsers, selectedChat, responseInfo, error in
-            completion(selectedUsers, selectedChat, self?.castSdkError(responseInfo:responseInfo, error: error))
-        }
-    }
-    
-    /// 풀 스크린 형태의 탭 피커 요청 \
-    /// Requests a tap picker in full-screen view
+    /// 탭 피커 \
+    /// Tab picker
     /// ## SeeAlso
     /// - [`PickerTabRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickertabrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
@@ -259,27 +201,12 @@ extension PickerApi {
     public func select(
         params:PickerTabRequestParams,
         targetInfo: TargetInfo,
+        enableMulti: Bool = true,
+        viewType: ViewType,
         completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void
     ) {
         setup(targetInfo: targetInfo)
-        ____s(params: params, needScopeRequest: false) { [weak self] selectedUsers, selectedChat, responseInfo, error in
-            completion(selectedUsers, selectedChat, self?.castSdkError(responseInfo:responseInfo, error: error))
-        }
-    }
-    
-    /// 팝업 형태의 탭 피커 요청 \
-    /// Requests a tap picker in pop-up view
-    /// ## SeeAlso
-    /// - [`PickerTabRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickertabrequestparams)
-    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
-    public func selectPopup(
-        params:PickerTabRequestParams,
-        targetInfo: TargetInfo,
-        completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void
-    ) {
-        setup(targetInfo: targetInfo)
-        ____sp(params: params, needScopeRequest: false) { [weak self] selectedUsers, selectedChat, responseInfo, error in
+        ____s(params: params, needScopeRequest: false, enableMulti: enableMulti, viewType: viewType) { [weak self] selectedUsers, selectedChat, responseInfo, error in
             completion(selectedUsers, selectedChat, self?.castSdkError(responseInfo:responseInfo, error: error))
         }
     }

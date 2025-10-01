@@ -15,6 +15,8 @@
 import Foundation
 import KakaoSDKCommon
 
+fileprivate var _currentPhase: Phase = .Production
+
 /// 페이즈 \
 /// Phase
 public enum Phase : String {
@@ -33,6 +35,19 @@ public enum Phase : String {
     /// 리얼, 프로덕션 \
     /// Real, Production
     case Production
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+extension KakaoSDK {
+    public func currentPhase() -> Phase {
+        return _currentPhase
+    }
+    
+    fileprivate func currentPhase(_ phase: Phase) {
+        _currentPhase = phase
+    }
 }
 
 #if swift(>=5.8)
@@ -91,6 +106,8 @@ extension Hosts {
         default:
             self.init()
         }
+        
+        KakaoSDK.shared.currentPhase(phase)
     }
 }
 
