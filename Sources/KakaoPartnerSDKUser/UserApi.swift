@@ -212,3 +212,127 @@ extension UserApi {
                                      completion: completion)
     }
 }
+
+extension UserApi {
+    /// SSO 시도 전, 접근하고자 하는 키체인 액세스 그룹 초기화 \
+    /// Initializes access group for keychain prior to SSO attempt
+    /// - parameters:
+    ///   - groupName: 사용할 액세스 그룹 이름 \
+    ///                access group name to use
+    public func prepareForSso(groupName: String) {
+        _storeHelper = SsoFactory.createSsoStore(groupName: groupName)
+    }
+    
+    /// SSO 기능 사용 가능 여부, 사용자의 카카오톡 로그인 여부와 무관 \
+    /// Whether SSO feature is available, regardless of user's Kakao Talk login.
+    public func isSsoLoginAvailable() -> Bool {
+        guard let storeHelper = _storeHelper as? SsoProvider else {
+            return false
+        }
+#if !targetEnvironment(simulator)
+        if UserApi.isKakaoTalkLoginAvailable() == false {
+            return false
+        }
+#endif
+
+        do {
+            let tokenInfos = try storeHelper.retriveTokenInfos()
+            SdkLog.d("ssoTokenInfos: \(String(describing: tokenInfos))")
+            
+            if tokenInfos == nil || tokenInfos?.isEmpty() == true {
+                return false
+            }
+        } catch let error {
+            SdkLog.d("Failed to retrive token infos OSStatus: \(error)")
+            return false
+        }
+        
+        return true
+    }
+    
+    /// 키체인에 등록된 카카오톡 사용자 정보 조회 (id, 이메일, 닉네임, 프로필 이미지, 통합 약관 동의 여부) \
+    /// Retrieves information of Kakao Talk accounts registered in keychain (id, email, nickname, profile image, wheter the user has agreed to unified terms of service)
+    public func getTalkUsers() -> [TalkUser] {
+        guard let storeHelper = _storeHelper as? SsoProvider else {
+            return []
+        }
+        
+        do {
+            let infos = try storeHelper.retriveTokenInfos()?.infos
+            let talkUsers = infos?.compactMap({ info in
+                return TalkUser(
+                    id: info.userId,
+                    name: info.user.nickName,
+                    displayId: info.user.displayId,
+                    thumbnailUrl: info.user.thumbnailUrl,
+                    isUnifiedTermsAgreed: info.isUnifiedTermsAgreed
+                )
+            })
+            
+            return talkUsers ?? []
+        } catch {
+            return []
+        }
+    }
+    
+    /// SSO 인증 \
+    /// SSO authentication
+    /// - parameters:
+    ///    - type: 로그인할 계정 타입 \
+    ///            Account type to login with
+    ///    - useUnifiedTerms: 통합 서비스 약관 사용 여부, 통합 서비스약관을 사용하는 서비스에서는 true 설정 \
+    ///                       Whether to use Kakao Comprehensive Terms of Service. Set to true if your service uses Kakao Comprehensive Terms of Service.
+    public func sso(_ type: SsoLoginType = .active, useUnifiedTerms: Bool = false, completion: @escaping (OAuthToken?, Error?) -> Void) {
+        guard let storeHelper = _storeHelper as? SsoProvider else {
+            completion(nil, SdkError(reason: .IllegalState, message: "SSO is not prepared"))
+            return
+        }
+        
+        guard let ssoInfo = storeHelper.appropriateInfo(type: type) else {
+            completion(nil, SdkError(reason: .IllegalState, message: "RefreshToken is not available"))
+            return
+        }
+        
+        if useUnifiedTerms == true && ssoInfo.isUnifiedTermsAgreed == false {
+            completion(nil, SdkError(reason: .IllegalState, message: "There are no accounts available for SSO."))
+        }
+        
+        requestSso(refreshToken: ssoInfo.refreshToken, completion: completion)
+    }
+    
+    /// 커스텀 SSO 인증 \
+    /// Custom SSO authentication
+    /// - parameters:
+    ///    - id: getTalkUsers()로 얻은 사용자 ID \
+    ///          User ID obtained via getTalkUsers()
+    public func sso(id: String, completion: @escaping (OAuthToken?, Error?) -> Void) {
+        guard let storeHelper = _storeHelper as? SsoProvider else {
+            completion(nil, SdkError(reason: .IllegalState, message: "SSO is not prepared"))
+            return
+        }
+        
+        do {
+            let infos = try storeHelper.retriveTokenInfos()?.infos
+            if let ssoInfo = infos?.first(where: { $0.userId == id }) {
+                requestSso(refreshToken: ssoInfo.refreshToken, completion: completion)
+                return
+            }
+            
+            completion(nil, SdkError(reason: .IllegalState, message: "No matching user id"))
+        } catch {
+            completion(nil, SdkError(reason: .IllegalState, message: "Failed to retrive token infos"))
+        }
+    }
+    
+    func requestSso(refreshToken: String, completion: @escaping (OAuthToken?, Error?) -> Void) {
+        AuthController.shared._authorizeWithRefreshToken(refreshToken: refreshToken) { code, error in
+            if let code {
+                AuthApi.shared.token(code: code, codeVerifier: AuthController.shared.codeVerifier, completion: completion)
+                return
+            }
+            
+            let resultError = error ?? SdkError()
+            completion(nil, resultError)
+        }
+    }
+}

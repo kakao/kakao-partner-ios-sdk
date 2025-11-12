@@ -112,6 +112,31 @@ extension AuthController {
             AUTH_CONTROLLER.authenticationSession?.start()
         }
     }
+    
+    public func _authorizeWithRefreshToken(refreshToken: String, completion: @escaping (String?, Error?) -> Void) {
+        var parameters = makeParameters()
+        parameters["prompt"] = "none"
+        
+        let headers = ["RT": refreshToken, "User-Agent": "Mobile \(KakaoSDK.shared.kaHeader())"]
+        
+        if let urlString = SdkUtils.makeUrlWithParameters(url: Urls.compose(.Kauth, path: Paths.authAuthorize), parameters: parameters)?.absoluteString {
+            API.responseLocation(.get, urlString, headers: headers, sessionType: .Auth, apiType: .KAuth) { _, data, error in
+                if let error {
+                    completion(nil, error)
+                    return
+                }
+                
+                if let data, let jsonStr = try? SdkJSONDecoder.default.decode([String:String].self, from: data) {
+                    if let code = jsonStr["code"] {
+                        completion(code, nil)
+                        return
+                    }
+                }
+                
+                completion(nil, SdkError(reason: .Unknown, message: "Failed to get authorization code."))
+            }
+        }
+    }
 }
 
 #if swift(>=5.8)
