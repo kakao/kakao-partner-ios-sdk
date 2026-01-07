@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import KakaoSDKCommon
 
 /// 카카오톡 사용자 정보 \
 ///  Kakao Talk user information
@@ -25,14 +26,18 @@ public struct TalkUser {
     public let thumbnailUrl: String?
     /// 카카오 통합서비스약관 동의 여부 \
     /// Whether the user has agreed to Kakao unified terms of service
-    public let isUnifiedTermsAgreed: Bool
+    public let isUnifiedTermsAgreed: Bool    
+    /// 카카오톡 계정 세션 만료 여부 \
+    /// Whether the Kakao Talk account session is expired
+    public let isExpired: Bool
     
-    init(id: String, name: String, displayId: String, thumbnailUrl: String?, isUnifiedTermsAgreed: Bool) {
+    init(id: String, name: String, displayId: String, thumbnailUrl: String?, isUnifiedTermsAgreed: Bool, isExpired: Bool) {
         self.id = id
         self.nickName = name
         self.displayId = displayId
         self.thumbnailUrl = thumbnailUrl
         self.isUnifiedTermsAgreed = isUnifiedTermsAgreed
+        self.isExpired = isExpired
     }
 }
 
@@ -62,6 +67,33 @@ struct SsoInfos: Codable {
     
     func isEmpty() -> Bool {
         return infos.isEmpty
+    }
+    
+    func getInfoByRT(_ refreshToken: String) -> SsoInfo? {
+        return infos.first { $0.refreshToken == refreshToken }
+    }
+}
+
+struct InvalidElements: Codable {
+    var elements: [String: String] = [:]
+    
+    mutating func append(_ info: SsoInfo) {
+        elements[info.userId] = info.refreshToken
+    }
+    
+    mutating func updateInvalidElements(ssoInfos: SsoInfos?) {
+        guard let ssoInfos = ssoInfos else { return }
+        for info in ssoInfos.infos {
+            if let savedRt = elements[info.userId] {
+                if savedRt != info.refreshToken {
+                    elements.removeValue(forKey: info.userId)
+                }
+            }
+        }
+    }
+    
+    func contains(_ userId: String) -> Bool {
+        return elements.keys.contains(userId)
     }
 }
 

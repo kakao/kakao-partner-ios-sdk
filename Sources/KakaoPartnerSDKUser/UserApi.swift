@@ -236,7 +236,7 @@ extension UserApi {
 #endif
 
         do {
-            let tokenInfos = try storeHelper.retriveTokenInfos()
+            let tokenInfos = try storeHelper.retrieveTokenInfos()
             SdkLog.d("ssoTokenInfos: \(String(describing: tokenInfos))")
             
             if tokenInfos == nil || tokenInfos?.isEmpty() == true {
@@ -258,14 +258,16 @@ extension UserApi {
         }
         
         do {
-            let infos = try storeHelper.retriveTokenInfos()?.infos
-            let talkUsers = infos?.compactMap({ info in
+            let infos = try storeHelper.retrieveTokenInfos()?.infos
+            let talkUsers = infos?
+                .compactMap({ info in
                 return TalkUser(
                     id: info.userId,
                     name: info.user.nickName,
                     displayId: info.user.displayId,
                     thumbnailUrl: info.user.thumbnailUrl,
-                    isUnifiedTermsAgreed: info.isUnifiedTermsAgreed
+                    isUnifiedTermsAgreed: info.isUnifiedTermsAgreed,
+                    isExpired: storeHelper.isValidToken(userId: info.userId) == false
                 )
             })
             
@@ -288,7 +290,7 @@ extension UserApi {
             return
         }
         
-        guard let ssoInfo = storeHelper.appropriateInfo(type: type) else {
+        guard let ssoInfo = storeHelper.ssoInfo(type: type) else {
             completion(nil, SdkError(reason: .IllegalState, message: "RefreshToken is not available"))
             return
         }
@@ -312,7 +314,7 @@ extension UserApi {
         }
         
         do {
-            let infos = try storeHelper.retriveTokenInfos()?.infos
+            let infos = try storeHelper.retrieveTokenInfos()?.infos
             if let ssoInfo = infos?.first(where: { $0.userId == id }) {
                 requestSso(refreshToken: ssoInfo.refreshToken, completion: completion)
                 return
@@ -325,10 +327,17 @@ extension UserApi {
     }
     
     func requestSso(refreshToken: String, completion: @escaping (OAuthToken?, Error?) -> Void) {
-        AuthController.shared._authorizeWithRefreshToken(refreshToken: refreshToken) { code, error in
+        AuthController.shared._authorizeWithRefreshToken(refreshToken: refreshToken) { [weak self] code, error in
             if let code {
                 AuthApi.shared.token(code: code, codeVerifier: AuthController.shared.codeVerifier, completion: completion)
                 return
+            }
+            
+            if let sdkError = error as? SdkError, sdkError.isAuthFailed {
+                let authError = sdkError.getAuthError()
+                if authError.reason == .LoginRequired {
+                    (self?._storeHelper as? SsoProvider)?.invalidateToken(refreshToken: refreshToken)
+                }
             }
             
             let resultError = error ?? SdkError()

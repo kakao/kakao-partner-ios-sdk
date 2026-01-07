@@ -13,22 +13,27 @@ import KakaoSDKCommon
 import KakaoPartnerSDKCommon
 
 final class SsoProvider {
-    let dataHelper: DataHelper
+    let dataHelper: DataHelper    
+    private var invalidateElementsCache: InvalidElements
     
     init(dataHelper: DataHelper) {
-        self.dataHelper = dataHelper        
+        self.dataHelper = dataHelper
+        invalidateElementsCache = dataHelper.invalidate() ?? InvalidElements()
     }
     
-    func retriveTokenInfos() throws -> SsoInfos? {
-        return try dataHelper.retriveInfos()
+    func retrieveTokenInfos() throws -> SsoInfos? {
+        let ssoInfos: SsoInfos? = try dataHelper.retrieveInfos()
+        invalidateElementsCache.updateInvalidElements(ssoInfos: ssoInfos)
+        
+        return ssoInfos
     }
     
-    func appropriateInfo(type: SsoLoginType) -> SsoInfo? {
+    func ssoInfo(type: SsoLoginType) -> SsoInfo? {
         do {
-            let ssoInfos = try retriveTokenInfos()
+            let ssoInfos = try retrieveTokenInfos()
             return selectSsoInfo(type: type, ssoInfos: ssoInfos)
         } catch let error {
-            print("Error refreshing token: \(error)")
+            SdkLog.d("Error refreshing token: \(error)")
             return nil
         }
     }
@@ -40,6 +45,28 @@ final class SsoProvider {
         }
         
         return ssoInfos?.infos.first
+    }
+    
+    func invalidateToken(refreshToken: String) {
+        do {
+            let infos = try retrieveTokenInfos()
+            if let invalidInfo = infos?.getInfoByRT(refreshToken) {
+                invalidateElementsCache.append(invalidInfo)
+            }
+                        
+            dataHelper.saveInvalidate(invalidateElementsCache)
+        } catch let error {
+            SdkLog.i("Failed to invalidate token: \(error)")
+            return
+        }
+    }
+    
+    func isValidToken(userId: String) -> Bool {
+        if invalidateElementsCache.contains(userId) {
+            return false
+        }
+        
+        return true
     }
 }
 

@@ -12,10 +12,14 @@ import Security
 import KakaoSDKCommon
 
 protocol DataHelper {
-    func retriveInfos() throws -> SsoInfos?
+    func retrieveInfos() throws -> SsoInfos?
+    func saveInvalidate(_ data: Codable)
+    func invalidate() -> InvalidElements?
 }
 
 final class SsoDataHelper: DataHelper {
+    private let invalidateKey = "com.kakao.sdk.sso.invalidate"
+    
     var serviceName: String?
     let groupName: String
     
@@ -23,10 +27,10 @@ final class SsoDataHelper: DataHelper {
         self.groupName = groupName
         self.serviceName = getServiceName()
         
-        SdkLog.d("#### log: \(groupName) \(serviceName)")
+        SdkLog.d("\(groupName) \(String(describing: serviceName))")
     }
     
-    func retriveInfos() throws -> SsoInfos? {
+    func retrieveInfos() throws -> SsoInfos? {
         guard let serviceName else { throw SdkError(reason: .IllegalState, message: "Sso service not prepared") }
         
         let keyChainQuery: CFDictionary = [
@@ -45,6 +49,15 @@ final class SsoDataHelper: DataHelper {
         }
         
         throw error ?? SdkError(reason: .Unknown, message: "Unknown error occurred while retrieving token infos from keychain" )
+    }
+    
+    func saveInvalidate(_ data: Codable) {
+        Properties.saveCodable(key: invalidateKey, data: data)
+    }
+    
+    func invalidate() -> InvalidElements? {
+        let elements: InvalidElements? = Properties.loadCodable(key: invalidateKey)
+        return elements
     }
 }
 
