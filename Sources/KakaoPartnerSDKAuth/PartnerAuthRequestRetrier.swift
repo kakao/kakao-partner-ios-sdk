@@ -21,9 +21,9 @@ import KakaoSDKAuth
 @_documentation(visibility: private)
 #endif
 @available(iOSApplicationExtension, unavailable)
-public class PartnerAuthRequestRetrier : RequestInterceptor {
+public final class PartnerAuthRequestRetrier : RequestInterceptor {
         
-    private var errorLock = NSLock()
+    private let errorLock = NSLock()
     
     private func getSdkError(error: Error) -> SdkError? {
         if let aferror = error as? AFError {

@@ -220,7 +220,7 @@ extension UserApi {
     ///   - groupName: 사용할 액세스 그룹 이름 \
     ///                access group name to use
     public func prepareForSso(groupName: String) {
-        _storeHelper = SsoFactory.createSsoStore(groupName: groupName)
+        _updateStoreHelper(SsoFactory.createSsoStore(groupName: groupName))
     }
     
     /// SSO 기능 사용 가능 여부, 사용자의 카카오톡 로그인 여부와 무관 \

@@ -70,7 +70,6 @@ extension Hosts {
                       talkLinkVersion: "alphatalk-5.9.7",
                       sharerLink: "alpha-sharer.devel.kakao.com",
                       universalLink: "alpha-talk-apps.kakao.com",
-                      cert:"",
                       plusFriend: "alphaplus",
                       apps:"alpha-apps.kakao.com")
         case .Sandbox:
@@ -85,7 +84,6 @@ extension Hosts {
                       talkLinkVersion: "alphatalk-5.9.7",
                       sharerLink: "sandbox-sharer.devel.kakao.com",
                       universalLink: "sandbox-talk-apps.kakao.com",
-                      cert:"sign-papi.sandbox.onkakao.net",
                       plusFriend: "alphaplus",
                       apps:"sandbox-apps.kakao.com")
         case .Cbt:
@@ -100,7 +98,6 @@ extension Hosts {
                       talkLinkVersion: "kakaotalk-5.9.7",
                       sharerLink: "beta-sharer.devel.kakao.com",
                       universalLink: "beta-talk-apps.kakao.com",
-                      cert:"cbt-cert-sign-papi.kakao.com",
                       plusFriend: "kakaoplus",
                       apps:"beta-apps.kakao.com")
         default:
