@@ -31,13 +31,17 @@ extension PickerApi {
         customSection: CustomSection? = nil,
         completion: @escaping (PickerView?, Error?) -> Void
     ) {
+        if let error = validateSelectionMode(params.selectParams.mode, expected: .single) {
+            completion(nil, error)
+            return
+        }
         setup(targetInfo: targetInfo)
-        
+
         PickerApi.shared.____spv(params: params, customSection: customSection, selectedUuids: selectedFavoriteUuids) { [weak self] pickerView, responseInfo, error in
             completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
         }
     }
-    
+
     ///  chatId로 임베드용 싱글 채팅방 멤버 피커 요청
     public func singleChatMemberPickerView(
         params: PickerChatMemberRequestParams,
@@ -46,13 +50,17 @@ extension PickerApi {
         friendsOnly: Bool? = nil,
         completion: @escaping (PickerView?, Error?) -> Void
     ) {
+        if let error = validateSelectionMode(params.selectParams.mode, expected: .single) {
+            completion(nil, error)
+            return
+        }
         setup(targetInfo: targetInfo)
-        
+
         PickerApi.shared.____smv(params: params.toFriendRequestParams(), chatId: chatId, friendsOnly: friendsOnly) { [weak self] pickerView, responseInfo, error in
             completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
         }
     }
-    
+
     /// 임베드 형태의 멀티 피커 요청
     public func multiFriendPickerView(
         params: PickerFriendRequestParams,
@@ -61,13 +69,17 @@ extension PickerApi {
         customSection: CustomSection? = nil,
         completion: @escaping (PickerView?, Error?) -> Void
     ) {
+        if let error = validateSelectionMode(params.selectParams.mode, expected: .multiple) {
+            completion(nil, error)
+            return
+        }
         setup(targetInfo: targetInfo)
-        
+
         PickerApi.shared.____mpv(params: params, customSection: customSection, selectedUuids: selectedUuids) { [weak self] pickerView, responseInfo, error in
             completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
         }
     }
-    
+
     /// chatId로 임베드용 멀티 채팅방 멤버 피커 요청 \
     /// Request an embedded multi-chatroom member picker using a chatId.
     public func multiChatMemberPickerView(
@@ -78,6 +90,10 @@ extension PickerApi {
         friendsOnly: Bool? = nil,
         completion: @escaping (PickerView?, Error?) -> Void
     ) {
+        if let error = validateSelectionMode(params.selectParams.mode, expected: .multiple) {
+            completion(nil, error)
+            return
+        }
         setup(targetInfo: targetInfo)
         PickerApi.shared.____mmv(params: params.toFriendRequestParams(), chatId: chatId, friendsOnly: friendsOnly, selectedUuids: selectedUuids) { [weak self] pickerView, responseInfo, error in
             completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
@@ -125,13 +141,17 @@ extension PickerApi {
         uuids: [String],
         completion: @escaping (PickerView?, Error?) -> Void
     ) {
+        if let error = validateSelectionMode(params.selectParams.mode, expected: .single) {
+            completion(nil, error)
+            return
+        }
         setup(targetInfo: targetInfo)
-        
+
         PickerApi.shared.____fspv(params: params.toFriendRequestParams(), uuids: uuids) { [weak self] pickerView, responseInfo, error in
             completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
         }
     }
-    
+
     /// uuid로 임베드용 멀티 친구 피커를 요청, 친구인 uuid 대상만 표시됨 \
     /// Request an embedded multi-friend picker using a uuid. Displayed only for uuid targets that are friends.
     public func multiChatMemberPickerViewByUuids(
@@ -141,8 +161,12 @@ extension PickerApi {
         selectedUuids: [String]? = nil,
         completion: @escaping (PickerView?, Error?) -> Void
     ) {
+        if let error = validateSelectionMode(params.selectParams.mode, expected: .multiple) {
+            completion(nil, error)
+            return
+        }
         setup(targetInfo: targetInfo)
-        
+
         PickerApi.shared.____fmpv(params: params.toFriendRequestParams(), uuids: uuids, selectedUuids: selectedUuids) { [weak self] pickerView, responseInfo, error in
             completion(pickerView, self?.castSdkError(responseInfo: responseInfo, error: error))
         }
@@ -159,7 +183,6 @@ extension PickerApi {
     public func selectFriend(
         params: PickerFriendRequestParams,
         targetInfo: TargetInfo,
-        enableMulti: Bool = true,
         viewType: ViewType,
         selectedUuids: [String]? = nil,
         customSection: CustomSection? = nil,
@@ -167,7 +190,7 @@ extension PickerApi {
     ) {
         setup(targetInfo: targetInfo)
         
-        ____sf(params: params, needScopeRequest: false, enableMulti: enableMulti, viewType: viewType, customSection: customSection, selectedUuids: selectedUuids) { [weak self] users, responseInfo, error in
+        ____sf(params: params, needScopeRequest: false, viewType: viewType, customSection: customSection, selectedUuids: selectedUuids) { [weak self] users, responseInfo, error in
             completion(users, self?.castSdkError(responseInfo: responseInfo, error: error))
         }
     }
@@ -182,13 +205,12 @@ extension PickerApi {
     public func selectChat(
         params:PickerChatRequestParams,
         targetInfo: TargetInfo,
-        enableMulti: Bool = true,
         viewType: ViewType,
-        completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void
+        completion:@escaping (SelectedUsers?, SelectedChats?, Error?) -> Void
     ) {
         setup(targetInfo: targetInfo)
-        ____sc(params: params, needScopeRequest: false, enableMulti: enableMulti, viewType: viewType) { [weak self] selectedUsers, selectedChat, responseInfo, error in
-            completion(selectedUsers, selectedChat, self?.castSdkError(responseInfo:responseInfo, error: error))
+        ____sc(params: params, needScopeRequest: false, viewType: viewType) { [weak self] selectedUsers, selectedChats, responseInfo, error in
+            completion(selectedUsers, selectedChats, self?.castSdkError(responseInfo:responseInfo, error: error))
         }
     }
     
@@ -201,13 +223,13 @@ extension PickerApi {
     public func select(
         params:PickerTabRequestParams,
         targetInfo: TargetInfo,
-        enableMulti: Bool = true,
         viewType: ViewType,
-        completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void
+        initialTab: PickerTabType = .friend,
+        completion:@escaping (SelectedUsers?, SelectedChats?, Error?) -> Void
     ) {
         setup(targetInfo: targetInfo)
-        ____s(params: params, needScopeRequest: false, enableMulti: enableMulti, viewType: viewType) { [weak self] selectedUsers, selectedChat, responseInfo, error in
-            completion(selectedUsers, selectedChat, self?.castSdkError(responseInfo:responseInfo, error: error))
+        ____s(params: params, needScopeRequest: false, viewType: viewType, initialTab: initialTab) { [weak self] selectedUsers, selectedChats, responseInfo, error in
+            completion(selectedUsers, selectedChats, self?.castSdkError(responseInfo:responseInfo, error: error))
         }
     }
 }
@@ -235,5 +257,18 @@ extension PickerApi {
     private func makeParameters(parameters: [String: Any?]) -> [String: Any]? {
         let result = parameters.filter({ $0.value != nil }).mapValues({ $0! })
         return result.isEmpty ? nil : result
+    }
+
+    private func validateSelectionMode(
+        _ actualMode: SelectionMode,
+        expected expectedMode: SelectionMode
+    ) -> Error? {
+        guard actualMode == expectedMode else {
+            let message = expectedMode == .single
+                ? "Use single selection mode with single picker method."
+                : "Use multiple selection mode with multi picker method."
+            return KFSdkError(reason: .BadParameter, message: message)
+        }
+        return nil
     }
 }

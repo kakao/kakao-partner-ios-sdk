@@ -23,13 +23,13 @@ extension PickerApi  {
     /// ## SeeAlso 
     /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    public func selectFriend(params:PickerFriendRequestParams, viewType: ViewType, enableMulti:Bool = true, completion:@escaping (SelectedUsers?, Error?) -> Void) {
+    public func selectFriend(params:PickerFriendRequestParams, viewType: ViewType, completion:@escaping (SelectedUsers?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
                 completion(nil, error)
             }
             else {
-                self?.____sf(params: params, enableMulti: enableMulti, viewType: viewType) { [weak self] selectedUsers, responseInfo, error in
+                self?.____sf(params: params, viewType: viewType) { [weak self] selectedUsers, responseInfo, error in
                     completion(selectedUsers, self?.castSdkError(responseInfo:responseInfo, error: error))
                 }
             }
@@ -42,14 +42,14 @@ extension PickerApi  {
     /// - [`PickerChatRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerchatrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
-    public func selectChat(params:PickerChatRequestParams, viewType: ViewType, enableMulti:Bool = true, completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void) {
+    public func selectChat(params:PickerChatRequestParams, viewType: ViewType, completion:@escaping (SelectedUsers?, SelectedChats?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
             if let error = error {
                 completion(nil, nil, error)
             }
             else {
-                self?.____sc(params: params, enableMulti: enableMulti, viewType: viewType) { [weak self] selectedUsers, selectedChat, responseInfo, error in
-                    completion(selectedUsers, selectedChat, self?.castSdkError(responseInfo:responseInfo, error: error))
+                self?.____sc(params: params, viewType: viewType) { [weak self] selectedUsers, selectedChats, responseInfo, error in
+                    completion(selectedUsers, selectedChats, self?.castSdkError(responseInfo:responseInfo, error: error))
                 }
             }
         }
@@ -61,15 +61,15 @@ extension PickerApi  {
     /// - [`PickerTabRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickertabrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
-    public func select(params:PickerTabRequestParams, viewType: ViewType, enableMulti:Bool = true, completion:@escaping (SelectedUsers?, SelectedChat?, Error?) -> Void) {
+    public func select(params:PickerTabRequestParams, viewType: ViewType, initialPickerTab: PickerTabType = .friend, completion:@escaping (SelectedUsers?, SelectedChats?, Error?) -> Void) {
         prepareCallPickerApi { [weak self] error in
-            if let error = error {
+            if let error {
                 completion(nil, nil, error)
+                return
             }
-            else {
-                self?.____s(params: params, enableMulti: enableMulti, viewType: viewType) { [weak self] selectedUsers, selectedChat, responseInfo, error in
-                    completion(selectedUsers, selectedChat, self?.castSdkError(responseInfo:responseInfo, error: error))
-                }
+
+            self?.____s(params: params, viewType: viewType, initialTab: initialPickerTab) { selectedUsers, selectedChats, responseInfo, error in
+                completion(selectedUsers, selectedChats, self?.castSdkError(responseInfo:responseInfo, error: error))
             }
         }
     }

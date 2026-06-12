@@ -22,38 +22,35 @@ import Foundation
 @_documentation(visibility: private)
 #endif
 public struct PickerChatMemberRequestParams {
-    public let viewAppearance: ViewAppearance?
-    public let orientation: PickerOrientation?
-    public let enableSearch: Bool?
+    public let viewAppearance: ViewAppearance
+    public let orientation: PickerOrientation
+    public let enableSearch: Bool
     public let disableSelectOptions: [DisableSelectOption]?
-    public let displayAllProfile: Bool?
-    public var maxPickableCount: Int?
-    public var minPickableCount: Int?
-    
+    public let displayAllProfile: Bool
+    public let selectParams: SelectParams
+
     public init(
-        viewAppearance: ViewAppearance? = nil,
-        orientation: PickerOrientation? = nil,
-        enableSearch: Bool? = nil,
+        viewAppearance: ViewAppearance = .auto,
+        orientation: PickerOrientation = .auto,
+        enableSearch: Bool = true,
         disableSelectOptions: [DisableSelectOption]? = nil,
-        displayAllProfile: Bool? = nil,
-        maxPickableCount: Int? = nil,
-        minPickableCount: Int? = nil
+        displayAllProfile: Bool = false,
+        selectParams: SelectParams
     ) {
         self.viewAppearance = viewAppearance
         self.orientation = orientation
         self.enableSearch = enableSearch
         self.disableSelectOptions = disableSelectOptions
         self.displayAllProfile = displayAllProfile
-        self.maxPickableCount = maxPickableCount ?? 30
-        self.minPickableCount = minPickableCount ?? 1
+        self.selectParams = selectParams
     }
     
     internal func toFriendRequestParams() -> PickerFriendRequestParams {
         PickerFriendRequestParams(
             title: nil,
-            friendFilter: nil,
+            friendFilter: .none,
             countryCodeFilters: nil,
-            usingOsFilter: nil,
+            usingOsFilter: .all,
             viewAppearance: viewAppearance,
             orientation: orientation,
             enableSearch: enableSearch,
@@ -62,8 +59,7 @@ public struct PickerChatMemberRequestParams {
             showFavorite: false,
             disableSelectOptions: disableSelectOptions,
             displayAllProfile: displayAllProfile,
-            maxPickableCount: maxPickableCount,
-            minPickableCount: minPickableCount
+            selectParams: selectParams
         )
     }
 }
