@@ -1,14 +1,16 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.8
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-// sdk-version:2.28.0
+// sdk-version:2.29.0
 
 import PackageDescription
+
+let openSdkPackageName = "kakao-ios-sdk"
 
 let package = Package(
     name: "KakaoPartnerSDK",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v15)
     ],
     products: [
         .library(
@@ -38,16 +40,14 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: "KakaoOpenSDK",
-                 url: "https://github.com/kakao/kakao-ios-sdk.git",
-                 .exact("2.28.0")
-                )
+        .package(url: "https://github.com/kakao/kakao-ios-sdk.git",
+                 exact: "2.29.0")
     ],
     targets: [
         .target(
             name: "KakaoPartnerSDKCommon",
             dependencies: [
-                .product(name: "KakaoSDKCommon", package: "KakaoOpenSDK"),
+                .product(name: "KakaoSDKCommon", package: openSdkPackageName),
             ],
             exclude: ["Info.plist", "README.md"]
         ),
@@ -55,7 +55,7 @@ let package = Package(
             name: "KakaoPartnerSDKAuth",
             dependencies: [
                 .target(name: "KakaoPartnerSDKCommon"),
-                .product(name: "KakaoSDKAuth", package: "KakaoOpenSDK"),
+                .product(name: "KakaoSDKAuth", package: openSdkPackageName),
             ],
             exclude: ["Info.plist", "README.md"]
         ),
@@ -63,7 +63,7 @@ let package = Package(
             name: "KakaoPartnerSDKUser",
             dependencies: [
                 .target(name: "KakaoPartnerSDKAuth"),
-                .product(name: "KakaoSDKUser", package: "KakaoOpenSDK"),
+                .product(name: "KakaoSDKUser", package: openSdkPackageName),
             ],
             exclude: ["Info.plist", "README.md"]
         ),
@@ -71,7 +71,7 @@ let package = Package(
             name: "KakaoPartnerSDKTalk",
             dependencies: [
                 .target(name: "KakaoPartnerSDKUser"),
-                .product(name: "KakaoSDKTalk", package: "KakaoOpenSDK"),
+                .product(name: "KakaoSDKTalk", package: openSdkPackageName),
             ],
             exclude: ["Info.plist", "README.md"]
         ),
@@ -79,7 +79,7 @@ let package = Package(
             name: "KakaoPartnerSDKFriend",
             dependencies: [
                 .target(name: "KakaoPartnerSDKCommon"),
-                .product(name: "KakaoSDKFriend", package: "KakaoOpenSDK"),
+                .product(name: "KakaoSDKFriend", package: openSdkPackageName),
             ],
             exclude: ["Info.plist", "README.md"]
         ),
@@ -87,14 +87,14 @@ let package = Package(
             name: "KakaoPartnerSDKShare",
             dependencies: [
                 .target(name: "KakaoPartnerSDKCommon"),
-                .product(name: "KakaoSDKShare", package: "KakaoOpenSDK"),
+                .product(name: "KakaoSDKShare", package: openSdkPackageName),
             ],
             exclude: ["Info.plist", "README.md"]
         ),
         .target(
             name: "KakaoPartnerSDKFriendDelegate",
             dependencies: [
-                .product(name: "KakaoSDKFriendCore", package: "KakaoOpenSDK")
+                .product(name: "KakaoSDKFriendCore", package: openSdkPackageName)
             ],
             exclude: ["Info.plist", "README.md"]
         )

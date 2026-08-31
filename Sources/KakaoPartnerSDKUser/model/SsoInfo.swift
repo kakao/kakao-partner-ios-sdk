@@ -30,14 +30,18 @@ public struct TalkUser {
     /// 카카오톡 계정 세션 만료 여부 \
     /// Whether the Kakao Talk account session is expired
     public let isExpired: Bool
-    
-    init(id: String, name: String, displayId: String, thumbnailUrl: String?, isUnifiedTermsAgreed: Bool, isExpired: Bool) {
+    /// 최근 카카오톡 계정 로그인 시각 \
+    /// Last Kakao Account Kakao Talk Account login time
+    public let lastLoginDate: Date
+
+    init(id: String, name: String, displayId: String, thumbnailUrl: String?, isUnifiedTermsAgreed: Bool, isExpired: Bool, lastLoginDate: Date) {
         self.id = id
         self.nickName = name
         self.displayId = displayId
         self.thumbnailUrl = thumbnailUrl
         self.isUnifiedTermsAgreed = isUnifiedTermsAgreed
         self.isExpired = isExpired
+        self.lastLoginDate = lastLoginDate
     }
 }
 

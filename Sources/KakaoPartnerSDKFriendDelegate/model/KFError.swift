@@ -28,9 +28,7 @@ public struct KFErrorInfo: Codable {
     /// Scopes that the user must agree to
     public let requiredScopes: [String]?
     
-#if swift(>=5.8)
     @_documentation(visibility: private)
-#endif
     /// API 종류 \
     /// API type
     public let apiType: String?

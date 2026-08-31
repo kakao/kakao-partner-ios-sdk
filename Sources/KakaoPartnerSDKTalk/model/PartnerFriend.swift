@@ -126,9 +126,7 @@ public struct PartnerFriend : Codable {
         case id, uuid, appRegistered, profileNickname, profileThumbnailImage, talkOs, allowedMsg, relation, favorite
     }
     
-#if swift(>=5.8)
     @_documentation(visibility: private)
-#endif 
     /// Decodable
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

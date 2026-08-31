@@ -3,19 +3,18 @@
 파트너용 카카오톡 API 모듈입니다. 
 
 ## Requirements
-- Xcode 11.0
-- iOS 13.0
-- Swift 5.0
-- CocoaPods 1.8.0
+- iOS 15.0
+- Swift 5.8
 
 ## Dependencies
 - KakaoSDKTalk
 - KakaoPartnerSDKUser
 
 ## Installation
+```swift
+.package(url: "https://github.com/kakao/kakao-partner-ios-sdk.git", from: "2.0.0")
 ```
-pod 'KakaoPartnerSDKTalk'
-```
+2.x.x 버전을 사용합니다. 타겟의 Dependencies에 `KakaoPartnerSDKTalk`을 추가합니다.
 
 ## Import
 ```

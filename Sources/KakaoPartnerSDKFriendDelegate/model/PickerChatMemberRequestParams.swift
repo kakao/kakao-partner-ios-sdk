@@ -13,14 +13,10 @@
 //  limitations under the License.
 
 import Foundation
-#if swift(>=5.8)
 @_documentation(visibility: private)
-#endif
 @_exported import KakaoSDKFriendCore
 
-#if swift(>=5.8)
 @_documentation(visibility: private)
-#endif
 public struct PickerChatMemberRequestParams {
     public let viewAppearance: ViewAppearance
     public let orientation: PickerOrientation
@@ -47,7 +43,6 @@ public struct PickerChatMemberRequestParams {
     
     internal func toFriendRequestParams() -> PickerFriendRequestParams {
         PickerFriendRequestParams(
-            title: nil,
             friendFilter: .none,
             countryCodeFilters: nil,
             usingOsFilter: .all,

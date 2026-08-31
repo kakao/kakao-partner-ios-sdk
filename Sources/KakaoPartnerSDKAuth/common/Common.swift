@@ -24,9 +24,7 @@ public enum AuthLevel : String, Codable {
     /// Level 2, identity verification
     case Level2 = "AUTH_LEVEL2"
     
-#if swift(>=5.8)
 @_documentation(visibility: private)
-#endif
     public var parameterValue: String {
         switch self {
         case .Level1:

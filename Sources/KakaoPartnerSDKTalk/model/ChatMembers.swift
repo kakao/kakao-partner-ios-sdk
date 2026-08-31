@@ -76,9 +76,7 @@ public struct Member : Codable {
         case thumbnailImageUrl = "thumbnailImage"
     }
     
-#if swift(>=5.8)
     @_documentation(visibility: private)
-#endif 
     /// Decodable
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

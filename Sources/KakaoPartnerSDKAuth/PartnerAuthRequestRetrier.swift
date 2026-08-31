@@ -17,14 +17,18 @@ import Alamofire
 import KakaoSDKCommon
 import KakaoSDKAuth
 
-#if swift(>=5.8)
 @_documentation(visibility: private)
-#endif
 @available(iOSApplicationExtension, unavailable)
 public final class PartnerAuthRequestRetrier : RequestInterceptor {
         
     private let errorLock = NSLock()
-    
+
+    private let retryLimit: Int
+
+    public init (retryLimit: Int = Auth.retryTokenRefreshCount) {
+        self.retryLimit = retryLimit
+    }
+
     private func getSdkError(error: Error) -> SdkError? {
         if let aferror = error as? AFError {
             switch aferror {
@@ -43,9 +47,6 @@ public final class PartnerAuthRequestRetrier : RequestInterceptor {
         return nil
     }
     
-    public init() {
-    }
-    
     public func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         errorLock.lock() ; defer { errorLock.unlock() }
         
@@ -60,6 +61,11 @@ public final class PartnerAuthRequestRetrier : RequestInterceptor {
 
             switch(sdkError.getApiError().reason) {
             case .RequiredAgeVerification:
+                guard request.retryCount < retryLimit else {
+                    completion(.doNotRetryWithError(error))
+                    return
+                }
+
                 logString = "\(logString)\n reason:\(error)\n token: \(String(describing: AUTH.tokenManager.getToken()))"
                 SdkLog.e("\(logString)\n\n")                
 
